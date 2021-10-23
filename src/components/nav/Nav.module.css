@@ -1,0 +1,16 @@
+.nav{
+    grid-area: n;
+    background-color:burlywood;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.nav>div{
+    padding: 15px 0px;
+    font-size: 1.3rem;
+}
+.nav a{
+    text-decoration: none;
+    color: dodgerblue;
+}

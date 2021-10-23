@@ -1,0 +1,10 @@
+.post{
+margin: 30px;
+}
+.block img{
+    width: 50px;
+    height: 50px;
+}
+.block .message{
+    margin-left: 20px;
+}

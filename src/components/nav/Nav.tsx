@@ -1,8 +1,8 @@
 import React from 'react';
-
+import o from './Nav.module.css'
 export function Nav() {
     return (
-        <nav className="nav">
+        <nav className={o.nav}>
             <div><a href="#">Profile</a></div>
             <div><a href="#">Messages</a></div>
             <div><a href="#">News</a></div>

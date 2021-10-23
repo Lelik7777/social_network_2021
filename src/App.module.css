@@ -1,0 +1,17 @@
+html,body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: floralwhite;
+  font-family: Roboto,sans-serif;
+}
+.AppWrapper{
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas: 'h h'  'n c';
+  width: 1200px;
+  margin: 0 auto;
+  gap: 3%;
+}
+
