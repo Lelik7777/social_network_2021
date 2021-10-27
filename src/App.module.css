@@ -14,4 +14,8 @@ html,body{
   margin: 0 auto;
   gap: 3%;
 }
+.content{
+  grid-area: c;
+  background-color: whitesmoke;
+}
 
