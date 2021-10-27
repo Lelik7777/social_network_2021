@@ -12,8 +12,11 @@ export function Posts() {
                 <button>add</button>
             </div>
 
-            <Post message={'hi,gays'} like={20}/>
-            <Post message={'it`s my post'} like={15}/>
+            <Post
+                message={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, harum!'}
+                like={20}/>
+            <Post
+                message={'Lorem ipsum dolor sit amet, consectetur adipisicing.'} like={15}/>
 
         </div>
     );

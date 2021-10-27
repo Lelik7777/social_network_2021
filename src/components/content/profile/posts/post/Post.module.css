@@ -1,10 +1,43 @@
-.post{
-margin: 30px;
+.post {
+    margin: 30px 0px 30px 200px;
+
 }
-.block img{
+
+.block {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.block img {
     width: 50px;
     height: 50px;
 }
-.block .message{
-    margin-left: 20px;
+
+.block .message {
+    margin-left: 50px;
+    background-color: cyan;
+    width: 400px;
+    height: 50px;
+    padding: 1%;
+    border-radius: 15px 36px 56px 0px;
+    text-align: center;
+}
+
+.like {
+    display: flex;
+    align-items: center;
+}
+
+.like img {
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+}
+
+.like span {
+    margin-left: 10px;
+    padding-bottom: 20px;
+    font-size: 1.2rem;
+    color: dodgerblue;
 }
