@@ -1,16 +1,26 @@
-.nav{
+.nav {
     grid-area: n;
-    background-color:burlywood;
+    background-color: snow;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 60vh;
+    box-shadow: -3px 0px 8px blue;
 }
-.nav>div{
+
+.nav > div {
     padding: 15px 0px;
     font-size: 1.3rem;
 }
-.nav a{
+
+.nav a {
     text-decoration: none;
     color: dodgerblue;
+}
+
+.nav .active {
+    color: lightskyblue;
+    font-size: 1.5rem;
+    font-weight: bold;
 }

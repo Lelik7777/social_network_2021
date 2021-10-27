@@ -1,8 +1,11 @@
 .profile {
-    background-color: yellow;
+    background-color:lightyellow;
+    height: 100%;
 }
 
 .profile img {
     width: 100%;
     height: 200px;
+    margin-bottom: 1%;
+    box-shadow: 5px 4px 15px gray;
 }

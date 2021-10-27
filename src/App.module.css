@@ -12,7 +12,7 @@ html,body{
   grid-template-areas: 'h h'  'n c';
   width: 1200px;
   margin: 0 auto;
-  gap: 3%;
+  gap: 4%;
 }
 .content{
   grid-area: c;

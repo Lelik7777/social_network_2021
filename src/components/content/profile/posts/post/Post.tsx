@@ -1,5 +1,6 @@
 import React from 'react';
 import o from './Post.module.css';
+import ava from './avatar.png';
 
 type PostType = {
     message: string;
@@ -12,7 +13,7 @@ export function Post(props: PostType) {
         <div className={o.post}>
             <div className={o.block}>
                 <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXFvNWcOVs77y34ELmdEE9wMytrj93SyIjYw&usqp=CAU"
+                    src={ava}
                     alt="avatar"/>
                 <span className={o.message}>{props.message}</span>
             </div>
