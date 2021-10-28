@@ -1,9 +1,19 @@
 import React from 'react';
 import o from './Posts.module.css'
 import {Post} from './post/Post';
+import {PostType} from '../../../../redux/state';
 
 
-export function Posts() {
+type PostsType = {
+    data: PostType[];
+}
+
+export function Posts(props: PostsType) {
+    const mappedPosts = props.data.map(p => {
+        return (
+            <Post id={p.id} message={p.message} like={p.like}/>
+        );
+    })
     return (
         <div className={o.posts}>
             My posts:
@@ -11,13 +21,7 @@ export function Posts() {
                 <input type="text"/>
                 <button>add</button>
             </div>
-
-            <Post
-                message={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, harum!'}
-                like={20}/>
-            <Post
-                message={'Lorem ipsum dolor sit amet, consectetur adipisicing.'} like={15}/>
-
+            {mappedPosts}
         </div>
     );
 }

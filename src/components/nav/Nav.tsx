@@ -13,6 +13,23 @@ export function Nav() {
             }>News</NavLink></div>
             <div><NavLink to="/Settings" activeClassName={o.active
             }>Settings</NavLink></div>
+            <h1>Friends</h1>
+            <div className={o.friends}>
+
+                <div className="block">
+                    <div className={o.circle}></div>
+                    <div className={o.name}>Ann</div>
+                </div>
+                <div className="block">
+                    <div className={o.circle}></div>
+                    <div className={o.name}>Bob</div>
+                </div>
+                <div className="block">
+                    <div className={o.circle}></div>
+                    <div className={o.name}>Sophia</div>
+                </div>
+                
+            </div>
         </nav>
     );
 }

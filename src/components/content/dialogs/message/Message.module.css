@@ -1,0 +1,29 @@
+.wrapper {
+    display: flex;
+    align-items: end;
+    width: 90%;
+}
+
+.message {
+    background-color: floralwhite;
+    margin-bottom: 2%;
+    height: 30px;
+    width: 90%;
+    padding: 2%;
+    border-radius: 44px 0 44px 0;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px gainsboro;
+}
+
+.message::first-letter {
+    margin-left: 3%;
+    font-size: larger;
+}
+
+.corner {
+    width: 0;
+    height: 0;
+    border-bottom: 15px solid floralwhite;
+    border-left: 45px solid transparent;
+    margin-bottom: 2%;
+}

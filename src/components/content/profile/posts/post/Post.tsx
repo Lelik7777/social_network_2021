@@ -2,11 +2,7 @@ import React from 'react';
 import o from './Post.module.css';
 import ava from './img/avatar.png';
 import like from './img/like.jpeg';
-
-type PostType = {
-    message: string;
-    like: number;
-}
+import {PostType} from '../../../../../redux/state';
 
 export function Post(props: PostType) {
     return (

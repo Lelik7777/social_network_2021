@@ -3,27 +3,34 @@ import o from './App.module.css';
 import {Header} from './components/header/Header';
 import {Nav} from './components/nav/Nav';
 import {Profile} from './components/content/profile/Profile';
-import {Dialogs} from './components/content/dialog/Dialogs';
+
 import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/content/news/News';
 import {Settings} from './components/content/settings/Settings';
+import {Dialogs} from './components/content/dialogs/Dialogs';
+import {StateType} from './redux/state';
 
-function App() {
+
+type AppType = {
+    data: StateType;
+}
+
+function App(props: AppType) {
     return (
         <BrowserRouter>
             <div className={o.AppWrapper}>
                 <Header/>
                 <Nav/>
                 <div className={o.content}>
-                    <Route path={'/Profile'} component={Profile}/>
-                    <Route path={'/Dialogs'} component={Dialogs}/>
-                    <Route path={'/News'} component={News}/>
-                    <Route path={'/Settings'} component={Settings}/>
+                    <Route path={'/Profile'} render={() => <Profile data={props.data.dataProfile}/>}/>
+                    <Route path={'/Dialogs'} render={() => <Dialogs data={props.data.dataDialogs}/>}/>
+                    <Route path={'/News'} render={() => <News/>}/>
+                    <Route path={'/Settings'} render={() => <Settings/>}/>
                 </div>
             </div>
         </BrowserRouter>
     );
-}
+} 
 
 export default App;
 

@@ -1,0 +1,24 @@
+.dialog {
+    margin: 5%;
+    font-size: 1.4rem;
+    color: snow;
+    font-weight: bold;
+}
+a{
+    display: flex;
+    justify-content: center;
+
+}
+img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+.s_img{
+    width: 30%;
+    text-align: left;
+}
+.s_name{
+
+    width: 70%;
+}
