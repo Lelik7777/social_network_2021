@@ -3,22 +3,21 @@
     font-size: 1.4rem;
     color: snow;
     font-weight: bold;
+    width: 70%;
 }
-a{
-    display: flex;
-    justify-content: center;
 
-}
 img{
     width: 30px;
     height: 30px;
     margin-right: 10px;
 }
 .s_img{
+    display: inline-block;
     width: 30%;
     text-align: left;
 }
 .s_name{
-
+display: inline-block;
     width: 70%;
+    text-align: center;
 }
