@@ -3,8 +3,7 @@ import React from 'react';
 import o from './Dialog.module.css';
 import {DialogType} from '../../../../redux/state';
 
-//components
-export function Dialog(props: DialogType) {
+export const Dialog = (props: DialogType) => {
     const path = `/dialogs/${props.id}`;
     return (
         <div className={o.dialog}>

@@ -20,7 +20,7 @@ function App(props: AppType) {
         <BrowserRouter>
             <div className={o.AppWrapper}>
                 <Header/>
-                <Nav/>
+                <Nav data={props.data.dataNav}/>
                 <div className={o.content}>
                     <Route path={'/Profile'} render={() => <Profile data={props.data.dataProfile}/>}/>
                     <Route path={'/Dialogs'} render={() => <Dialogs data={props.data.dataDialogs}/>}/>
@@ -30,7 +30,7 @@ function App(props: AppType) {
             </div>
         </BrowserRouter>
     );
-} 
+}
 
 export default App;
 

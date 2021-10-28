@@ -1,8 +1,18 @@
 import React from 'react';
 import o from './Nav.module.css'
 import {NavLink} from 'react-router-dom';
+import {Block} from './block/Block';
+import {DataNavType} from '../../redux/state';
+type NavType={
+    data:DataNavType;
+}
+export const Nav = (props:NavType) => {
+   const mappedBlock = props.data.friends.map(f=>{
+         return(
+             <Block name={f.name} id={f.id}/>
+         )
+     });
 
-export function Nav() {
     return (
         <nav className={o.nav}>
             <div><NavLink to="/Profile" activeClassName={o.active
@@ -15,20 +25,7 @@ export function Nav() {
             }>Settings</NavLink></div>
             <h1>Friends</h1>
             <div className={o.friends}>
-
-                <div className="block">
-                    <div className={o.circle}></div>
-                    <div className={o.name}>Ann</div>
-                </div>
-                <div className="block">
-                    <div className={o.circle}></div>
-                    <div className={o.name}>Bob</div>
-                </div>
-                <div className="block">
-                    <div className={o.circle}></div>
-                    <div className={o.name}>Sophia</div>
-                </div>
-                
+                {mappedBlock}
             </div>
         </nav>
     );

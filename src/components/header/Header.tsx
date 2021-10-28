@@ -3,7 +3,7 @@ import o from './Header.module.css';
 import img from './avatar_1634803761499.png';
 
 
-export function Header() {
+export const Header = () => {
     return (
         <header className={o.header}>
             <img src={img} alt="logo"/>

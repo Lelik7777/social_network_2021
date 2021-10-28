@@ -21,9 +21,17 @@ export type DataDialogsType = {
 export type DataProfileType = {
     posts: PostType[]
 }
+export type BlockType={
+    id:number;
+    name:string;
+}
+export type DataNavType ={
+    friends:BlockType[];
+}
 export type StateType = {
     dataDialogs: DataDialogsType;
     dataProfile: DataProfileType;
+    dataNav:DataNavType;
 }
  export const state:StateType = {
     dataDialogs: {
@@ -52,7 +60,15 @@ export type StateType = {
             {id: 2, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing', like: 115},
             {id: 1, message: 'Lorem ipsum dolor sit amet,', like: 7},
         ]
-    }
+    },
+     dataNav:{
+        friends:[
+            {id:1,name:'Bob'},
+            {id:2,name: 'Ann'},
+            {id:3,name: 'Sophia'},
+
+        ]
+     }
 }
 
 
