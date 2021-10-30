@@ -8,15 +8,15 @@ type DialogsType = {
     data: DataDialogsType;
 }
 
-export function Dialogs(props: DialogsType) {
-    const mappedDialogs = props.data.dialogs.map(d => {
+export function Dialogs({data}: DialogsType) {
+    const mappedDialogs = data.dialogs.map(d => {
         return (
             <Dialog name={d.name} id={d.id} img={d.img}/>
         );
     });
-    const mappedMessages = props.data.messages.map(m => {
+    const mappedMessages = data.messages.map(m => {
         return (
-            <Message id={m.id} text={m.text} />
+            <Message id={m.id} text={m.text}/>
         );
     });
     return (

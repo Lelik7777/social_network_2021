@@ -8,11 +8,11 @@ type ProfileType = {
     data: DataProfileType
 }
 
-export function Profile(props: ProfileType) {
+export function Profile({data}: ProfileType) {
     return (
         <div className={o.profile}>
             <ProfileInfo/>
-            <Posts data={props.data.posts}/>
+            <Posts data={data.posts}/>
         </div>
     );
 }

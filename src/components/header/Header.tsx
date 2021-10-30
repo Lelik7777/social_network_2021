@@ -7,7 +7,6 @@ export const Header = () => {
     return (
         <header className={o.header}>
             <img src={img} alt="logo"/>
-            header
         </header>
     );
 }

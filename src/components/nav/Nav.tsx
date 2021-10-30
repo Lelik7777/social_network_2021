@@ -6,8 +6,8 @@ import {DataNavType} from '../../redux/state';
 type NavType={
     data:DataNavType;
 }
-export const Nav = (props:NavType) => {
-   const mappedBlock = props.data.friends.map(f=>{
+export const Nav = ({data,...props}:NavType) => {
+   const mappedBlock = data.friends.map(f=>{
          return(
              <Block name={f.name} id={f.id}/>
          )

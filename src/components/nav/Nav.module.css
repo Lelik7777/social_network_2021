@@ -24,13 +24,14 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
-.friends{
+
+.friends {
     display: flex;
     justify-content: space-around;
     padding: 0 10px 0 10px;
 }
 
-h1{
+h1 {
     margin: 5% 0 0 0;
     padding: 0;
     color: bisque;
