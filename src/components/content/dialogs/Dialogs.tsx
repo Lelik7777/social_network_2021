@@ -6,9 +6,10 @@ import {DataDialogsType} from '../../../redux/state';
 
 type DialogsType = {
     data: DataDialogsType;
+    callBack2: (t: string | undefined) => void;
 }
 
-export function Dialogs({data}: DialogsType) {
+export function Dialogs({data, callBack2}: DialogsType) {
     const mappedDialogs = data.dialogs.map(d => {
         return (
             <Dialog name={d.name} id={d.id} img={d.img}/>
@@ -19,9 +20,11 @@ export function Dialogs({data}: DialogsType) {
             <Message id={m.id} text={m.text}/>
         );
     });
-    const ref=React.createRef<HTMLTextAreaElement>();
+    const ref = React.createRef<HTMLTextAreaElement>();
 
-    const onClick = ()=>{alert(ref.current?.value)};
+    const onClick = () => {
+        callBack2(ref.current?.value)
+    };
     return (
         <div className={o.dialogs}>
             <div className={o.dialogs_items}>
@@ -29,7 +32,7 @@ export function Dialogs({data}: DialogsType) {
             </div>
             <div className={o.messages}>
                 {mappedMessages}
-                <textarea ref={ref} />
+                <textarea ref={ref}/>
                 <button onClick={onClick}>+</button>
             </div>
 

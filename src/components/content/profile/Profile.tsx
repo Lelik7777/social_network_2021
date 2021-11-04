@@ -5,14 +5,15 @@ import {ProfileInfo} from './profileInfo/ProfileInfo';
 import {DataProfileType} from '../../../redux/state';
 
 type ProfileType = {
-    data: DataProfileType
+    data: DataProfileType;
+    callBack: (m: string | undefined) => void;
 }
 
-export function Profile({data}: ProfileType) {
+export function Profile({data, callBack}: ProfileType) {
     return (
         <div className={o.profile}>
             <ProfileInfo/>
-            <Posts data={data.posts}/>
+            <Posts data={data.posts} callBack={callBack}/>
         </div>
     );
 }

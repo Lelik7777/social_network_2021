@@ -5,9 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'typeface-roboto';
 import {state} from './redux/state';
+import {addPost,addMessage} from './redux/state';
 
 ReactDOM.render(
-    <App data={state}/>,
+    <App data={state} callBack={addPost} callBack2={addMessage}/>,
     document.getElementById('root')
 );
 
