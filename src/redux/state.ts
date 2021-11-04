@@ -1,5 +1,6 @@
 import img_g from './img/ava_girl.jpeg';
 import img_b from './img/ava_boy.jpeg';
+import {rerender} from '../rerender';
 
 export type DialogType = {
     id: number;
@@ -74,10 +75,12 @@ export const state: StateType = {
 export const addPost = (message: string | undefined) => {
     // debugger;
     state.dataProfile.posts.push({id: 4, message, like: 0});
+    rerender(state);
 }
-export const addMessage = (text:string|undefined) => {
+export const addMessage = (text: string | undefined) => {
 
-state.dataDialogs.messages.push({id:6,text});
+    state.dataDialogs.messages.push({id: 6, text});
+    rerender(state);
 }
 
 

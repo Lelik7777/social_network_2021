@@ -23,7 +23,7 @@ export function Dialogs({data, callBack2}: DialogsType) {
     const ref = React.createRef<HTMLTextAreaElement>();
 
     const onClick = () => {
-        callBack2(ref.current?.value)
+        callBack2(ref.current?.value);
     };
     return (
         <div className={o.dialogs}>
