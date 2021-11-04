@@ -19,6 +19,9 @@ export function Dialogs({data}: DialogsType) {
             <Message id={m.id} text={m.text}/>
         );
     });
+    const ref=React.createRef<HTMLTextAreaElement>();
+
+    const onClick = ()=>{alert(ref.current?.value)};
     return (
         <div className={o.dialogs}>
             <div className={o.dialogs_items}>
@@ -26,6 +29,8 @@ export function Dialogs({data}: DialogsType) {
             </div>
             <div className={o.messages}>
                 {mappedMessages}
+                <textarea ref={ref} />
+                <button onClick={onClick}>+</button>
             </div>
 
         </div>

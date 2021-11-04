@@ -13,13 +13,18 @@ export function Posts({data}: PostsType) {
         return (
             <Post id={p.id} message={p.message} like={p.like}/>
         );
-    })
+    });
+const textarea=React.createRef<HTMLTextAreaElement>();
+const text=textarea.current?.value;
+    const onClick = ()=>{
+        alert(textarea.current?.value);
+    };
     return (
         <div className={o.posts}>
             My posts:
             <div>
-                <input type="text"/>
-                <button>add</button>
+                <textarea ref={textarea}></textarea>
+                <button onClick={onClick}>add</button>
             </div>
             {mappedPosts}
         </div>
