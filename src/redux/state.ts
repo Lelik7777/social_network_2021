@@ -21,7 +21,8 @@ export type DataDialogsType = {
     messages: MessageType[];
 }
 export type DataProfileType = {
-    posts: PostType[]
+    posts: PostType[];
+    newText:string;
 }
 export type BlockType = {
     id: number;
@@ -61,7 +62,8 @@ export const state: StateType = {
             {id: 1, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius!', like: 10},
             {id: 2, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing', like: 115},
             {id: 3, message: 'Lorem ipsum dolor sit amet,', like: 7},
-        ]
+        ],
+        newText:'',
     },
     dataNav: {
         friends: [
@@ -72,15 +74,22 @@ export const state: StateType = {
         ]
     }
 }
-export const addPost = (message: string | undefined) => {
+export const addPost = () => {
     // debugger;
+    let message=state.dataProfile.newText;
     state.dataProfile.posts.push({id: 4, message, like: 0});
+    state.dataProfile.newText='';
     rerender(state);
 }
 export const addMessage = (text: string | undefined) => {
 
     state.dataDialogs.messages.push({id: 6, text});
     rerender(state);
+}
+export const updateNewText = (text:string) => {
+    state.dataProfile.newText=text;
+    rerender(state);
+    //console.log(state.dataProfile.newText);
 }
 
 

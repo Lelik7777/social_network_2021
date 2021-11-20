@@ -5,7 +5,8 @@ import like_img from './img/like.jpeg';
 import {PostType} from '../../../../../redux/state';
 
 
-export function Post({message, id, like}: PostType) {
+
+export function Post({message, id, like,}: PostType) {
     return (
         <div className={o.post}>
             <div className={o.block}>

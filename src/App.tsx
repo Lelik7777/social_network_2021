@@ -13,19 +13,26 @@ import {StateType} from './redux/state';
 
 type AppType = {
     data: StateType;
-    callBack: (m: string | undefined) => void;
-    callBack2: (t: string | undefined) => void;
+    addPost: () => void;
+    addMessage: (t: string | undefined) => void;
+    updateNewText: (t: string) => void;
 }
 
-function App({data, callBack, callBack2}: AppType) {
+function App({data, addPost, addMessage, updateNewText}: AppType) {
     return (
         <BrowserRouter>
             <div className={o.AppWrapper}>
                 <Header/>
                 <Nav data={data.dataNav}/>
                 <div className={o.content}>
-                    <Route path={'/Profile'} render={() => <Profile data={data.dataProfile} callBack={callBack}/>}/>
-                    <Route path={'/Dialogs'} render={() => <Dialogs data={data.dataDialogs} callBack2={callBack2}/>}/>
+                    <Route path={'/Profile'} render={() => <Profile data={data.dataProfile}
+                                                                    newText={data.dataProfile.newText}
+                                                                    addPost={addPost}
+                                                                    updateNewText={updateNewText}
+                    />}/>
+                    <Route path={'/Dialogs'} render={() => <Dialogs data={data.dataDialogs}
+                                                                    callBack2={addMessage}
+                    />}/>
                     <Route path={'/News'} render={() => <News/>}/>
                     <Route path={'/Settings'} render={() => <Settings/>}/>
                 </div>
