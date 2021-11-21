@@ -1,7 +1,7 @@
 import React from 'react';
 import o from './Posts.module.css'
 import {Post} from './post/Post';
-import {ActionType, PostType} from '../../../../redux/state';
+import {ActionType, createActionAddPost, createActionUpdateNewText, PostType} from '../../../../redux/state';
 
 
 type PostsType = {
@@ -18,12 +18,10 @@ export function Posts({data, newText, dispatch}: PostsType) {
     });
     const textarea = React.createRef<HTMLTextAreaElement>();
     const onClick = () => {
-        const action = {type: 'ADD-POST'};
-        dispatch(action)
+        dispatch(createActionAddPost())
     };
     const onChange = () => {
-        const action = {type: 'UPDATE-NEW-TEXT', text: textarea.current?.value};
-        dispatch(action)
+        dispatch(createActionUpdateNewText(textarea.current?.value as string))
 
     };
     return (

@@ -1,7 +1,9 @@
 import img_g from './img/ava_girl.jpeg';
 import img_b from './img/ava_boy.jpeg';
 
-
+const UPDATE_NEW_TEXT = 'UPDATE-NEW-TEXT';
+const ADD_POST = 'ADD-POST';
+const ADD_MESSAGE = 'ADD-MESSAGE';
 export type DialogType = {
     id: number;
     name: string;
@@ -44,7 +46,7 @@ export type StoreType = {
     dispatch: (a: ActionType) => void;
 }
 export type ActionType = {
-    type: string;
+    type: typeof UPDATE_NEW_TEXT | typeof ADD_POST | typeof ADD_MESSAGE;
     text?: string;
 }
 export const store: StoreType = {
@@ -113,7 +115,11 @@ export const store: StoreType = {
                 this._rerender(this._state);
         }
     }
-
 }
+
+export const createActionAddPost: () => ActionType = () => ({type: ADD_POST});
+export const createActionUpdateNewText: (t: string) => ActionType = (t: string) => ({type: UPDATE_NEW_TEXT, text: t});
+export const createActionAddMessage: (t: string) => ActionType = (t: string) => ({type: ADD_MESSAGE, text: t});
+
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import o from './Dialogs.module.css';
 import {Dialog} from './dialog/Dialog';
 import {Message} from './message/Message';
-import {ActionType, DataDialogsType} from '../../../redux/state';
+import {ActionType, createActionAddMessage, DataDialogsType} from '../../../redux/state';
 
 type DialogsType = {
     data: DataDialogsType;
@@ -24,8 +24,7 @@ export function Dialogs({data, dispatch}: DialogsType) {
     const ref = React.createRef<HTMLTextAreaElement>();
 
     const onClick = () => {
-        const action = {type: 'ADD-MESSAGE', text: ref.current?.value};
-        dispatch(action)
+        dispatch(createActionAddMessage(ref.current?.value as string));
     };
     return (
         <div className={o.dialogs}>
