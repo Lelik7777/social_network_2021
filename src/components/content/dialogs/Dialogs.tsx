@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import o from './Dialogs.module.css';
 import {Dialog} from './dialog/Dialog';
 import {Message} from './message/Message';
-import {ActionType, createActionAddMessage, DataDialogsType} from '../../../redux/state';
+import {ActionType, addMessageCreator, DataDialogsType, updateNewMessageCreator} from '../../../redux/state';
 
 type DialogsType = {
     data: DataDialogsType;
@@ -24,9 +24,10 @@ export function Dialogs({data, dispatch}: DialogsType) {
     const ref = React.createRef<HTMLTextAreaElement>();
 
     const onClick = () => {
-        //undefined
-        if(ref.current!==null)
-        dispatch(createActionAddMessage(ref.current.value));
+        dispatch(addMessageCreator());
+    };
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        dispatch(updateNewMessageCreator(e.currentTarget.value))
     };
     return (
         <div className={o.dialogs}>
@@ -35,8 +36,10 @@ export function Dialogs({data, dispatch}: DialogsType) {
             </div>
             <div className={o.messages}>
                 {mappedMessages}
-                <textarea ref={ref}/>
-                <button onClick={onClick}>+</button>
+                <textarea value={data.newMessage}
+                          onChange={onChange}/>
+                <button onClick={onClick}>+
+                </button>
             </div>
 
         </div>

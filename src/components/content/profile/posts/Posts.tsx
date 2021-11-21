@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import o from './Posts.module.css'
 import {Post} from './post/Post';
-import {ActionType, createActionAddPost, createActionUpdateNewText, PostType} from '../../../../redux/state';
+import {ActionType, AddPostCreator, PostType, updateNewTextCreator} from '../../../../redux/state';
 
 
 type PostsType = {
@@ -16,21 +16,17 @@ export function Posts({data, newText, dispatch}: PostsType) {
             <Post id={p.id} message={p.message} like={p.like}/>
         );
     });
-    const textarea = React.createRef<HTMLTextAreaElement>();
     const onClick = () => {
-        dispatch(createActionAddPost())
+        dispatch(AddPostCreator())
     };
-    const onChange = () => {
-        //if(textarea.current!==null)
-        dispatch(createActionUpdateNewText(textarea.current?.value??''))
-
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        dispatch(updateNewTextCreator(e.currentTarget.value))
     };
     return (
         <div className={o.posts}>
             My posts:
             <div>
-                <textarea ref={textarea}
-                          value={newText}
+                <textarea value={newText}
                           onChange={onChange}
                 >
                 </textarea>

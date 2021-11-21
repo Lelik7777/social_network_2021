@@ -4,6 +4,7 @@ import img_b from './img/ava_boy.jpeg';
 const UPDATE_NEW_TEXT = 'UPDATE-NEW-TEXT';
 const ADD_POST = 'ADD-POST';
 const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
 export type DialogType = {
     id: number;
     name: string;
@@ -21,6 +22,7 @@ export type PostType = {
 export type DataDialogsType = {
     dialogs: DialogType[];
     messages: MessageType[];
+    newMessage: string;
 }
 export type DataProfileType = {
     posts: PostType[];
@@ -46,7 +48,7 @@ export type StoreType = {
     dispatch: (a: ActionType) => void;
 }
 export type ActionType = {
-    type: typeof UPDATE_NEW_TEXT | typeof ADD_POST | typeof ADD_MESSAGE;
+    type: typeof UPDATE_NEW_TEXT | typeof ADD_POST | typeof ADD_MESSAGE | typeof UPDATE_NEW_MESSAGE;
     text?: string;
 }
 export const store: StoreType = {
@@ -69,7 +71,8 @@ export const store: StoreType = {
                     id: 5,
                     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequatur explicabo natus!'
                 },
-            ]
+            ],
+            newMessage: '',
         },
         dataProfile: {
             posts: [
@@ -107,19 +110,33 @@ export const store: StoreType = {
                 this._rerender(this._state);
                 break;
             case UPDATE_NEW_TEXT:
-                this._state.dataProfile.newText = action.text as string;
+                if (action.text !== undefined)
+                    this._state.dataProfile.newText = action.text;
                 this._rerender(this._state);
                 break;
             case ADD_MESSAGE:
-                this._state.dataDialogs.messages.push({id: 6, text: action.text});
+                this._state.dataDialogs.messages.push({id: 6, text:this._state.dataDialogs.newMessage});
                 this._rerender(this._state);
+                this._state.dataDialogs.newMessage = '';
+                break;
+            case UPDATE_NEW_MESSAGE:
+                //debugger;
+                if (action.text !== undefined)
+                    this._state.dataDialogs.newMessage = action.text;
+                this._rerender(this._state);
+                console.log(this._state.dataDialogs.newMessage)
+                break;
         }
     }
 }
 
-export const createActionAddPost: () => ActionType = () => ({type: ADD_POST});
-export const createActionUpdateNewText: (t: string) => ActionType = (t: string) => ({type: UPDATE_NEW_TEXT, text: t});
-export const createActionAddMessage: (t: string) => ActionType = (t: string) => ({type: ADD_MESSAGE, text: t});
+export const AddPostCreator: () => ActionType = () => ({type: ADD_POST});
+export const updateNewTextCreator: (t: string) => ActionType = (t: string) => ({type: UPDATE_NEW_TEXT, text: t});
+export const addMessageCreator: () => ActionType = () => ({type: ADD_MESSAGE});
+export const updateNewMessageCreator: (t: string) => ActionType = (t: string) => ({
+    type: UPDATE_NEW_MESSAGE,
+    text: t
+});
 
 
 
