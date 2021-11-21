@@ -86,6 +86,7 @@ export const store: StoreType = {
             ]
         }
     },
+
     getState() {
         return this._state;
     },
