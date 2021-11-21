@@ -2,24 +2,26 @@ import React from 'react';
 import o from './Profile.module.css';
 import {Posts} from './posts/Posts';
 import {ProfileInfo} from './profileInfo/ProfileInfo';
-import {DataProfileType} from '../../../redux/state';
+import {StoreType} from '../../../redux/state';
 
 type ProfileType = {
-    data: DataProfileType;
-    newText: string;
-    addPost: () => void;
-    updateNewText: (t: string) => void;
+    /* data: DataProfileType;
+     newText: string;
+     addPost: () => void;
+     updateNewText: (t: string) => void;*/
+    store: StoreType;
 }
 
-export function Profile({data, addPost, newText, updateNewText}: ProfileType) {
+export function Profile({store}: ProfileType) {
     return (
         <div className={o.profile}>
             <ProfileInfo/>
             <Posts
-                data={data.posts}
-                newText={newText}
-                addPost={addPost}
-                updateNewText={updateNewText}
+                data={store.getState().dataProfile.posts}
+                newText={store.getState().dataProfile.newText}
+                addPost={store.addPost.bind(store)}
+                updateNewText={store.updateNewText.bind(store)}
+
             />
         </div>
     );

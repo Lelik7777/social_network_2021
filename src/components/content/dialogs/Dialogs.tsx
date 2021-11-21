@@ -6,7 +6,8 @@ import {DataDialogsType} from '../../../redux/state';
 
 type DialogsType = {
     data: DataDialogsType;
-    callBack2: (t: string | undefined) => void;
+    callBack2: (t: string) => void;
+
 }
 
 export function Dialogs({data, callBack2}: DialogsType) {
@@ -23,7 +24,7 @@ export function Dialogs({data, callBack2}: DialogsType) {
     const ref = React.createRef<HTMLTextAreaElement>();
 
     const onClick = () => {
-        callBack2(ref.current?.value);
+        callBack2(ref.current?.value as string);
     };
     return (
         <div className={o.dialogs}>
