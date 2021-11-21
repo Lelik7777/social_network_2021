@@ -9,10 +9,6 @@ import App from './App';
 const rerender = (s: StateType) => {
     ReactDOM.render(
         <App
-            /* data={state}
-             addPost={addPost}
-             addMessage={addMessage}
-             updateNewText={updateNewText}*/
             store={store}
         />,
         document.getElementById('root')

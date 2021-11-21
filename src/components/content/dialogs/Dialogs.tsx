@@ -2,15 +2,15 @@ import React from 'react';
 import o from './Dialogs.module.css';
 import {Dialog} from './dialog/Dialog';
 import {Message} from './message/Message';
-import {DataDialogsType} from '../../../redux/state';
+import {ActionType, DataDialogsType} from '../../../redux/state';
 
 type DialogsType = {
     data: DataDialogsType;
-    callBack2: (t: string) => void;
+    dispatch: (a: ActionType) => void;
 
 }
 
-export function Dialogs({data, callBack2}: DialogsType) {
+export function Dialogs({data, dispatch}: DialogsType) {
     const mappedDialogs = data.dialogs.map(d => {
         return (
             <Dialog name={d.name} id={d.id} img={d.img}/>
@@ -24,7 +24,8 @@ export function Dialogs({data, callBack2}: DialogsType) {
     const ref = React.createRef<HTMLTextAreaElement>();
 
     const onClick = () => {
-        callBack2(ref.current?.value as string);
+        const action = {type: 'ADD-MESSAGE', text: ref.current?.value};
+        dispatch(action)
     };
     return (
         <div className={o.dialogs}>

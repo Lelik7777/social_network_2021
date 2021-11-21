@@ -1,17 +1,16 @@
 import React from 'react';
 import o from './Posts.module.css'
 import {Post} from './post/Post';
-import {PostType} from '../../../../redux/state';
+import {ActionType, PostType} from '../../../../redux/state';
 
 
 type PostsType = {
     data: PostType[];
     newText: string;
-    addPost: () => void;
-    updateNewText: (t: string) => void;
+    dispatch: (action: ActionType) => void;
 }
 
-export function Posts({data, addPost, newText, updateNewText}: PostsType) {
+export function Posts({data, newText, dispatch}: PostsType) {
     const mappedPosts = data.map(p => {
         return (
             <Post id={p.id} message={p.message} like={p.like}/>
@@ -19,12 +18,13 @@ export function Posts({data, addPost, newText, updateNewText}: PostsType) {
     });
     const textarea = React.createRef<HTMLTextAreaElement>();
     const onClick = () => {
-        addPost();
-
+        const action = {type: 'ADD-POST'};
+        dispatch(action)
     };
     const onChange = () => {
-        updateNewText(textarea.current?.value as string);
-        //console.log(textarea.current?.value)
+        const action = {type: 'UPDATE-NEW-TEXT', text: textarea.current?.value};
+        dispatch(action)
+
     };
     return (
         <div className={o.posts}>

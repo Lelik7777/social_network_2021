@@ -12,10 +12,6 @@ import {StoreType} from './redux/state';
 
 
 type AppType = {
-    /* data: StateType;
-     addPost: () => void;
-     addMessage: (t: string | undefined) => void;
-     updateNewText: (t: string) => void;*/
     store: StoreType;
 }
 
@@ -28,7 +24,7 @@ function App({store}: AppType) {
                 <div className={o.content}>
                     <Route path={'/Profile'} render={() => <Profile store={store}/>}/>
                     <Route path={'/Dialogs'} render={() => <Dialogs data={store.getState().dataDialogs}
-                                                                    callBack2={store.addMessage.bind(store)}
+                                                                    dispatch={store.dispatch.bind(store)}
                     />}/>
                     <Route path={'/News'} render={() => <News/>}/>
                     <Route path={'/Settings'} render={() => <Settings/>}/>

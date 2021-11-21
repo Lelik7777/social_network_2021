@@ -5,10 +5,6 @@ import {ProfileInfo} from './profileInfo/ProfileInfo';
 import {StoreType} from '../../../redux/state';
 
 type ProfileType = {
-    /* data: DataProfileType;
-     newText: string;
-     addPost: () => void;
-     updateNewText: (t: string) => void;*/
     store: StoreType;
 }
 
@@ -19,9 +15,7 @@ export function Profile({store}: ProfileType) {
             <Posts
                 data={store.getState().dataProfile.posts}
                 newText={store.getState().dataProfile.newText}
-                addPost={store.addPost.bind(store)}
-                updateNewText={store.updateNewText.bind(store)}
-
+                dispatch={store.dispatch.bind(store)}
             />
         </div>
     );
