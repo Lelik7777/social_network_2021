@@ -24,7 +24,9 @@ export function Dialogs({data, dispatch}: DialogsType) {
     const ref = React.createRef<HTMLTextAreaElement>();
 
     const onClick = () => {
-        dispatch(createActionAddMessage(ref.current?.value as string));
+        //undefined
+        if(ref.current!==null)
+        dispatch(createActionAddMessage(ref.current.value));
     };
     return (
         <div className={o.dialogs}>

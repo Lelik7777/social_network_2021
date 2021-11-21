@@ -100,17 +100,17 @@ export const store: StoreType = {
 
     dispatch(action: ActionType) {
         switch (action.type) {
-            case 'ADD-POST':
+            case ADD_POST:
                 let message = this._state.dataProfile.newText;
                 this._state.dataProfile.posts.push({id: 4, message, like: 0});
                 this._state.dataProfile.newText = '';
                 this._rerender(this._state);
                 break;
-            case 'UPDATE-NEW-TEXT':
+            case UPDATE_NEW_TEXT:
                 this._state.dataProfile.newText = action.text as string;
                 this._rerender(this._state);
                 break;
-            case 'ADD-MESSAGE':
+            case ADD_MESSAGE:
                 this._state.dataDialogs.messages.push({id: 6, text: action.text});
                 this._rerender(this._state);
         }

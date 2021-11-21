@@ -21,7 +21,8 @@ export function Posts({data, newText, dispatch}: PostsType) {
         dispatch(createActionAddPost())
     };
     const onChange = () => {
-        dispatch(createActionUpdateNewText(textarea.current?.value as string))
+        //if(textarea.current!==null)
+        dispatch(createActionUpdateNewText(textarea.current?.value??''))
 
     };
     return (
