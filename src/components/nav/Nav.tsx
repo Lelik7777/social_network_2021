@@ -2,7 +2,7 @@ import React from 'react';
 import o from './Nav.module.css'
 import {NavLink} from 'react-router-dom';
 import {Block} from './block/Block';
-import {DataNavType} from '../../redux/state';
+import {DataNavType} from '../../redux/store';
 type NavType={
     data:DataNavType;
 }

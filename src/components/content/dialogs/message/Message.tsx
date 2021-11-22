@@ -1,6 +1,6 @@
 import o from './Message.module.css';
 import React from 'react';
-import {MessageType} from '../../../../redux/state';
+import {MessageType} from '../../../../redux/store';
 
 
 export function Message({id, text}: MessageType) {

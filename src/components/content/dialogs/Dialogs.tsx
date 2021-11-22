@@ -2,7 +2,8 @@ import React, {ChangeEvent} from 'react';
 import o from './Dialogs.module.css';
 import {Dialog} from './dialog/Dialog';
 import {Message} from './message/Message';
-import {ActionType, addMessageCreator, DataDialogsType, updateNewMessageCreator} from '../../../redux/state';
+import {ActionType,DataDialogsType} from '../../../redux/store';
+import {addMessageCreator, updateNewMessageCreator} from '../../../redux/dialogReducer';
 
 type DialogsType = {
     data: DataDialogsType;

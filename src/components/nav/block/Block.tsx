@@ -1,6 +1,6 @@
 import React from 'react';
 import o from './Block.module.css';
-import {BlockType} from '../../../redux/state';
+import {BlockType} from '../../../redux/store';
 
 
 export const Block = ({name,id,...props}: BlockType) => {

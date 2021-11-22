@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/content/news/News';
 import {Settings} from './components/content/settings/Settings';
 import {Dialogs} from './components/content/dialogs/Dialogs';
-import {StoreType} from './redux/state';
+import {StoreType} from './redux/store';
 
 
 type AppType = {

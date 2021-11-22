@@ -2,7 +2,7 @@ import React from 'react';
 import o from './Profile.module.css';
 import {Posts} from './posts/Posts';
 import {ProfileInfo} from './profileInfo/ProfileInfo';
-import {StoreType} from '../../../redux/state';
+import {StoreType} from '../../../redux/store';
 
 type ProfileType = {
     store: StoreType;

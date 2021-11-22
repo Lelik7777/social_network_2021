@@ -1,10 +1,9 @@
 import img_g from './img/ava_girl.jpeg';
 import img_b from './img/ava_boy.jpeg';
+import {ADD_MESSAGE, dialogReducer, UPDATE_NEW_MESSAGE} from './dialogReducer';
+import {ADD_POST, profileReducer, UPDATE_NEW_TEXT} from './profileReducer';
+import {navReducer} from './navReducer';
 
-const UPDATE_NEW_TEXT = 'UPDATE-NEW-TEXT';
-const ADD_POST = 'ADD-POST';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
 export type DialogType = {
     id: number;
     name: string;
@@ -102,41 +101,14 @@ export const store: StoreType = {
     },
 
     dispatch(action: ActionType) {
-        switch (action.type) {
-            case ADD_POST:
-                let message = this._state.dataProfile.newText;
-                this._state.dataProfile.posts.push({id: 4, message, like: 0});
-                this._state.dataProfile.newText = '';
-                this._rerender(this._state);
-                break;
-            case UPDATE_NEW_TEXT:
-                if (action.text !== undefined)
-                    this._state.dataProfile.newText = action.text;
-                this._rerender(this._state);
-                break;
-            case ADD_MESSAGE:
-                this._state.dataDialogs.messages.push({id: 6, text:this._state.dataDialogs.newMessage});
-                this._rerender(this._state);
-                this._state.dataDialogs.newMessage = '';
-                break;
-            case UPDATE_NEW_MESSAGE:
-                //debugger;
-                if (action.text !== undefined)
-                    this._state.dataDialogs.newMessage = action.text;
-                this._rerender(this._state);
-                console.log(this._state.dataDialogs.newMessage)
-                break;
-        }
+        dialogReducer(this._state.dataDialogs, action);
+        profileReducer(this._state.dataProfile, action);
+        navReducer(this._state.dataNav, action);
+        this._rerender(this._state);
     }
 }
 
-export const AddPostCreator: () => ActionType = () => ({type: ADD_POST});
-export const updateNewTextCreator: (t: string) => ActionType = (t: string) => ({type: UPDATE_NEW_TEXT, text: t});
-export const addMessageCreator: () => ActionType = () => ({type: ADD_MESSAGE});
-export const updateNewMessageCreator: (t: string) => ActionType = (t: string) => ({
-    type: UPDATE_NEW_MESSAGE,
-    text: t
-});
+
 
 
 

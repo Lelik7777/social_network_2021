@@ -2,7 +2,7 @@ import React from 'react';
 import o from './Post.module.css';
 import ava from './img/avatar.png';
 import like_img from './img/like.jpeg';
-import {PostType} from '../../../../../redux/state';
+import {PostType} from '../../../../../redux/store';
 
 
 export function Post({message, id, like,}: PostType) {
