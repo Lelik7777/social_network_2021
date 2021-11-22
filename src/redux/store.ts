@@ -1,7 +1,7 @@
 import img_g from './img/ava_girl.jpeg';
 import img_b from './img/ava_boy.jpeg';
-import {ADD_MESSAGE_TYPE, dialogReducer, UPDATE_NEW_MESSAGE_TYPE} from './dialogReducer';
-import {ADD_POST_TYPE, profileReducer, UPDATE_NEW_TEXT_TYPE} from './profileReducer';
+import {AddMessageType, dialogReducer, UpdateNewMessageType} from './dialogReducer';
+import {AddPostType, profileReducer, UpdateNewTextType} from './profileReducer';
 import {navReducer} from './navReducer';
 
 export type DialogType = {
@@ -47,9 +47,9 @@ export type StoreType = {
     dispatch: (a: ActionType) => void;
 }
 export type ActionType = {
-    type: UPDATE_NEW_TEXT_TYPE| ADD_POST_TYPE  |ADD_MESSAGE_TYPE| UPDATE_NEW_MESSAGE_TYPE
+    type: UpdateNewTextType| AddPostType  |AddMessageType| UpdateNewMessageType
     text?: string;
-}
+}K
 export const store: StoreType = {
     _state: {
         dataDialogs: {
