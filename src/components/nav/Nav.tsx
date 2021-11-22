@@ -3,15 +3,16 @@ import o from './Nav.module.css'
 import {NavLink} from 'react-router-dom';
 import {Block} from './block/Block';
 import {DataNavType} from '../../redux/store';
-type NavType={
-    data:DataNavType;
+
+type NavType = {
+    data: DataNavType;
 }
-export const Nav = ({data,...props}:NavType) => {
-   const mappedBlock = data.friends.map(f=>{
-         return(
-             <Block name={f.name} id={f.id}/>
-         )
-     });
+export const Nav = ({data, ...props}: NavType) => {
+    const mappedBlock = data.friends.map(f => {
+        return (
+            <Block name={f.name} id={f.id}/>
+        )
+    });
 
     return (
         <nav className={o.nav}>

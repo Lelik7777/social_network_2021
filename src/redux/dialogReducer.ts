@@ -1,14 +1,14 @@
 import {ActionType, DataDialogsType} from './store';
 
-export const ADD_MESSAGE = 'ADD-MESSAGE';
-export const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+export type ADD_MESSAGE_TYPE='ADD-MESSAGE';
+export type UPDATE_NEW_MESSAGE_TYPE='UPDATE-NEW-MESSAGE';
 export const dialogReducer: (s: DataDialogsType, a: ActionType) => DataDialogsType = (state, action) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case 'ADD-MESSAGE':
             state.messages.push({id: 6, text: state.newMessage});
             state.newMessage = '';
             return state;
-        case UPDATE_NEW_MESSAGE:
+        case 'UPDATE-NEW-MESSAGE':
             //debugger;
             if (action.text !== undefined)
                 state.newMessage = action.text;
@@ -18,8 +18,8 @@ export const dialogReducer: (s: DataDialogsType, a: ActionType) => DataDialogsTy
             return state;
     }
 }
-export const addMessageCreator: () => ActionType = () => ({type: ADD_MESSAGE});
+export const addMessageCreator: () => ActionType = () => ({type:'ADD-MESSAGE'});
 export const updateNewMessageCreator: (t: string) => ActionType = (t: string) => ({
-    type: UPDATE_NEW_MESSAGE,
+    type: 'UPDATE-NEW-MESSAGE',
     text: t
 });
