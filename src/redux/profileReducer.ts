@@ -2,7 +2,16 @@ import {ActionType, DataProfileType} from './store';
 
 export type UpdateNewTextType = 'updateNewText';
 export type AddPostType = 'addPost';
-export const profileReducer: (s: DataProfileType, a: ActionType) => DataProfileType = (state, action) => {
+
+let initialState: DataProfileType = {
+    posts: [
+        {id: 1, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius!', like: 10},
+        {id: 2, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing', like: 115},
+        {id: 3, message: 'Lorem ipsum dolor sit amet,', like: 7},
+    ],
+    newText: '',
+}
+export const profileReducer: (s: DataProfileType, a: ActionType) => DataProfileType = (state = initialState, action) => {
     switch (action.type) {
         case 'addPost':
             let message = state.newText;

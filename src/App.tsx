@@ -8,23 +8,24 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/content/news/News';
 import {Settings} from './components/content/settings/Settings';
 import {Dialogs} from './components/content/dialogs/Dialogs';
-import {StoreType} from './redux/store';
+import {ActionType, StateType} from './redux/store';
 
 
 type AppType = {
-    store: StoreType;
+    data: StateType;
+    dispatch: (action: ActionType) => void;
 }
 
-function App({store}: AppType) {
+function App({data, dispatch}: AppType) {
     return (
         <BrowserRouter>
             <div className={o.AppWrapper}>
                 <Header/>
-                <Nav data={store.getState().dataNav}/>
+                <Nav data={data.dataNav}/>
                 <div className={o.content}>
-                    <Route path={'/Profile'} render={() => <Profile store={store}/>}/>
-                    <Route path={'/Dialogs'} render={() => <Dialogs data={store.getState().dataDialogs}
-                                                                    dispatch={store.dispatch.bind(store)}
+                    <Route path={'/Profile'} render={() => <Profile data={data.dataProfile} dispatch={dispatch}/>}/>
+                    <Route path={'/Dialogs'} render={() => <Dialogs data={data.dataDialogs}
+                                                                    dispatch={dispatch}
                     />}/>
                     <Route path={'/News'} render={() => <News/>}/>
                     <Route path={'/Settings'} render={() => <Settings/>}/>

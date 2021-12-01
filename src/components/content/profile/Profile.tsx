@@ -2,20 +2,21 @@ import React from 'react';
 import o from './Profile.module.css';
 import {Posts} from './posts/Posts';
 import {ProfileInfo} from './profileInfo/ProfileInfo';
-import {StoreType} from '../../../redux/store';
+import {ActionType, DataProfileType} from '../../../redux/store';
 
 type ProfileType = {
-    store: StoreType;
+    data: DataProfileType;
+    dispatch: (action: ActionType) => void;
 }
 
-export function Profile({store}: ProfileType) {
+export function Profile({data, dispatch}: ProfileType) {
     return (
         <div className={o.profile}>
             <ProfileInfo/>
             <Posts
-                data={store.getState().dataProfile.posts}
-                newText={store.getState().dataProfile.newText}
-                dispatch={store.dispatch.bind(store)}
+                data={data.posts}
+                newText={data.newText}
+                dispatch={dispatch}
             />
         </div>
     );

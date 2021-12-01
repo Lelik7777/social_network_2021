@@ -18,7 +18,7 @@ export function Posts({data, newText, dispatch}: PostsType) {
         );
     });
     const onClick = () => {
-        dispatch(AddPostCreator())
+        dispatch(AddPostCreator());
     };
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(updateNewTextCreator(e.currentTarget.value))

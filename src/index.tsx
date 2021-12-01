@@ -2,20 +2,25 @@ import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import 'typeface-roboto';
-import {StateType, store} from './redux/store';
+
 import ReactDOM from 'react-dom';
 import App from './App';
+import {ReducersType, reduxStore} from './redux/redux-store';
+import {Store} from 'redux';
 
-const rerender = (s: StateType) => {
+
+const rerender = (store: Store<ReducersType, any>) => {
     ReactDOM.render(
         <App
-            store={store}
+            data={store.getState()}
+            dispatch={store.dispatch}
         />,
         document.getElementById('root')
     );
 }
-rerender(store.getState());
-store.subscriber(rerender);
+rerender(reduxStore);
+reduxStore.subscribe(() => rerender(reduxStore));
+//store.subscriber(rerender);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

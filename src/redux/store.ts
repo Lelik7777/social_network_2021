@@ -39,7 +39,7 @@ export type StateType = {
     dataProfile: DataProfileType;
     dataNav: DataNavType;
 }
-export type StoreType = {
+ type StoreType = {
     _state: StateType;
     getState: () => StateType;
     _rerender: (s: StateType) => void;
@@ -49,7 +49,7 @@ export type StoreType = {
 export type ActionType = {
     type: UpdateNewTextType| AddPostType  |AddMessageType| UpdateNewMessageType
     text?: string;
-}K
+}
 export const store: StoreType = {
     _state: {
         dataDialogs: {
