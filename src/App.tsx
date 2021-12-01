@@ -8,15 +8,16 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/content/news/News';
 import {Settings} from './components/content/settings/Settings';
 import {Dialogs} from './components/content/dialogs/Dialogs';
-import {ActionType, StateType} from './redux/store';
+import {ReducersType} from './redux/redux-store';
+import {ActionType} from './redux/store';
 
 
 type AppType = {
-    data: StateType;
-    dispatch: (action: ActionType) => void;
+    data: ReducersType;
+    dispatch: (a: ActionType) => void;
 }
 
-function App({data, dispatch}: AppType) {
+function App({data,dispatch}: AppType) {
     return (
         <BrowserRouter>
             <div className={o.AppWrapper}>

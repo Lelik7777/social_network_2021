@@ -22,8 +22,6 @@ export function Dialogs({data, dispatch}: DialogsType) {
             <Message id={m.id} text={m.text}/>
         );
     });
-    const ref = React.createRef<HTMLTextAreaElement>();
-
     const onClick = () => {
         dispatch(addMessageCreator());
     };

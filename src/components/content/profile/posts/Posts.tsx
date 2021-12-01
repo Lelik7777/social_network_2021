@@ -1,34 +1,32 @@
 import React, {ChangeEvent} from 'react';
 import o from './Posts.module.css'
 import {Post} from './post/Post';
-import {AddPostCreator,updateNewTextCreator} from '../../../../redux/profileReducer';
-import {ActionType, PostType} from '../../../../redux/store';
+import {PostType} from '../../../../redux/store';
 
 
 type PostsType = {
     data: PostType[];
     newText: string;
-    dispatch: (action: ActionType) => void;
+    onClick: () => void;
+    onChange: (s: string) => void;
 }
 
-export function Posts({data, newText, dispatch}: PostsType) {
+export function Posts({data, newText, onChange, onClick}: PostsType) {
     const mappedPosts = data.map(p => {
         return (
             <Post id={p.id} message={p.message} like={p.like}/>
         );
     });
-    const onClick = () => {
-        dispatch(AddPostCreator());
-    };
-    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateNewTextCreator(e.currentTarget.value))
+
+    const onChange1 = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        onChange(e.currentTarget.value);
     };
     return (
         <div className={o.posts}>
             My posts:
             <div>
                 <textarea value={newText}
-                          onChange={onChange}
+                          onChange={onChange1}
                 >
                 </textarea>
                 <button onClick={onClick}>add</button>
