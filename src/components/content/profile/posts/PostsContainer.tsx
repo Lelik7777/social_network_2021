@@ -1,23 +1,26 @@
-import {AddPostCreator, updateNewTextCreator} from '../../../../redux/profileReducer';
-import React, {ChangeEvent} from 'react';
-import {ActionType, DataProfileType} from '../../../../redux/store';
+import React, {Dispatch} from 'react';
+import {connect} from 'react-redux';
 import {Posts} from './Posts';
+import {ActionProfileType, addPostAC, DataProfileType, updateNewTextAC} from '../../../../redux/profileReducer';
+import {ReducersType} from '../../../../redux/redux-store';
 
-type PropsType = {
+
+export type MapStateType = {
     data: DataProfileType;
-    dispatch: (action: ActionType) => void;
 }
-export const PostsContainer = ({data,dispatch}: PropsType) => {
-    const onClick = () => {
-        dispatch(AddPostCreator());
-    };
-    const onChange = (s:string) => {
-        dispatch(updateNewTextCreator(s))
-    };
-    return (<Posts
-        data={data.posts}
-        newText={data.newText}
-        onChange={onChange}
-        onClick={onClick}
-        />)
+export type MapDispatchType = {
+    onClick: () => void;
+    onChange: (e: string) => void;
 }
+const mapStateToProps = (state: ReducersType): MapStateType => {
+    return {
+        data: state.dataProfile
+    }
+}
+const mapDispatchToProps = (dispatch: Dispatch<ActionProfileType>) => {
+    return {
+        onClick: () => dispatch(addPostAC()),
+        onChange: (e: string) => dispatch(updateNewTextAC(e)),
+    }
+}
+export const PostsContainer = connect<MapStateType, MapDispatchType, any, ReducersType>(mapStateToProps,mapDispatchToProps)(Posts);

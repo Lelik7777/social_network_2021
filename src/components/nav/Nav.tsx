@@ -2,23 +2,16 @@ import React from 'react';
 import o from './Nav.module.css'
 import {NavLink} from 'react-router-dom';
 import {Block} from './block/Block';
-import {DataNavType} from '../../redux/store';
+import {MapDispatchType, MapStateType} from './NavContainer';
 
-type NavType = {
-    data:DataNavType;
-}
-export const Nav = ({data}: NavType) => {
-    const mappedBlock = data.friends.map(f => {
-        return (
-            <Block name={f.name} id={f.id}/>
-        )
-    });
+type PropsType = MapStateType & MapDispatchType;
+export const Nav = ({data}: PropsType) => {
 
-    return (
-        <nav className={o.nav}>
+    const mappedBlock = data.friends.map((x) => <Block key={x.id} name={x.name}/>)
+    return (<nav className={o.nav}>
             <div><NavLink to="/Profile" activeClassName={o.active
             }>Profile</NavLink></div>
-            <div><NavLink to="/Dialogs" activeClassName={o.active
+            <div><NavLink to="/DialogsContainer" activeClassName={o.active
             }>Messages</NavLink></div>
             <div><NavLink to="/News" activeClassName={o.active
             }>News</NavLink></div>
@@ -29,5 +22,5 @@ export const Nav = ({data}: NavType) => {
                 {mappedBlock}
             </div>
         </nav>
-    );
+    )
 }

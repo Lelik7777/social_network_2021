@@ -1,6 +1,8 @@
+import React from 'react';
+/*
 import img_g from './img/ava_girl.jpeg';
 import img_b from './img/ava_boy.jpeg';
-import {AddMessageType, dialogReducer, UpdateNewMessageType} from './dialogReducer';
+import {AddMessageType, dialogsReducer, UpdateNewMessageType} from './dialogsReducer';
 import {AddPostType, profileReducer, UpdateNewTextType} from './profileReducer';
 import {navReducer} from './navReducer';
 
@@ -101,7 +103,7 @@ export const store: StoreType = {
     },
 
     dispatch(action: ActionType) {
-        dialogReducer(this._state.dataDialogs, action);
+        dialogsReducer(this._state.dataDialogs, action);
         profileReducer(this._state.dataProfile, action);
         navReducer(this._state.dataNav, action);
         this._rerender(this._state);
@@ -112,3 +114,4 @@ export const store: StoreType = {
 
 
 
+*/

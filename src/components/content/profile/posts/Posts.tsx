@@ -1,20 +1,16 @@
 import React, {ChangeEvent} from 'react';
 import o from './Posts.module.css'
 import {Post} from './post/Post';
-import {PostType} from '../../../../redux/store';
+import {MapDispatchType, MapStateType} from './PostsContainer';
 
 
-type PostsType = {
-    data: PostType[];
-    newText: string;
-    onClick: () => void;
-    onChange: (s: string) => void;
-}
+type PropsType = MapStateType & MapDispatchType;
 
-export function Posts({data, newText, onChange, onClick}: PostsType) {
-    const mappedPosts = data.map(p => {
+
+export function Posts({data, onClick, onChange}: PropsType) {
+    const mappedPosts = data.posts.map((p) => {
         return (
-            <Post id={p.id} message={p.message} like={p.like}/>
+            <Post key={p.id} message={p.message} like={p.like}/>
         );
     });
 
@@ -25,7 +21,7 @@ export function Posts({data, newText, onChange, onClick}: PostsType) {
         <div className={o.posts}>
             My posts:
             <div>
-                <textarea value={newText}
+                <textarea value={data.newText}
                           onChange={onChange1}
                 >
                 </textarea>

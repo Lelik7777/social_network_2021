@@ -2,10 +2,13 @@ import React from 'react';
 import o from './Post.module.css';
 import ava from './img/avatar.png';
 import like_img from './img/like.jpeg';
-import {PostType} from '../../../../../redux/store';
 
+type PropsType = {
+    message: string;
+    like: number;
+}
 
-export function Post({message, id, like,}: PostType) {
+export function Post({message, like,}: PropsType) {
     return (
         <div className={o.post}>
             <div className={o.block}>

@@ -1,8 +1,13 @@
-import {ActionType, DataProfileType} from './store';
+export type PostType = {
+    id: number;
+    message: string;
+    like: number;
+}
 
-export type UpdateNewTextType = 'updateNewText';
-export type AddPostType = 'addPost';
-
+export type DataProfileType = {
+    posts: PostType[];
+    newText: string;
+}
 let initialState: DataProfileType = {
     posts: [
         {id: 1, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius!', like: 10},
@@ -11,20 +16,17 @@ let initialState: DataProfileType = {
     ],
     newText: '',
 }
-export const profileReducer: (s: DataProfileType, a: ActionType) => DataProfileType = (state = initialState, action) => {
+export const profileReducer = (state = initialState, action: ActionProfileType): DataProfileType => {
     switch (action.type) {
-        case 'addPost':
-            let message = state.newText;
-            state.posts.push({id: 4, message, like: 0});
-            state.newText = '';
-            return state;
-        case 'updateNewText':
-            if (action.text !== undefined)
-                state.newText = action.text;
-            return state;
+        case 'ADD-POST':
+            let newPost = {id: 4, message: state.newText, like: 9};
+            return {...state, posts: [...state.posts, newPost], newText: ''};
+        case 'UPDATE-NEW-TEXT':
+            return {...state, newText: action.payload.text}
         default:
             return state;
     }
 }
-export const AddPostCreator: () => ActionType = () => ({type: 'addPost'});
-export const updateNewTextCreator: (t: string) => ActionType = (t: string) => ({type: 'updateNewText', text: t});
+export type ActionProfileType = ReturnType<typeof addPostAC | typeof updateNewTextAC>
+export const addPostAC = () => ({type: 'ADD-POST'}) as const;
+export const updateNewTextAC = (text: string) => ({type: 'UPDATE-NEW-TEXT', payload: {text}}) as const;

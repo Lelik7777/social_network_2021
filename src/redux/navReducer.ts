@@ -1,5 +1,10 @@
-import {ActionType, DataNavType} from './store';
-
+export type BlockType = {
+    id: number;
+    name: string;
+}
+export type DataNavType = {
+    friends: BlockType[];
+}
 let initialState: DataNavType = {
     friends: [
         {id: 1, name: 'Bob'},
@@ -8,7 +13,7 @@ let initialState: DataNavType = {
 
     ]
 }
-export const navReducer: (s: DataNavType, a: ActionType) => DataNavType = (state = initialState, action) => {
+export const navReducer= (state = initialState, action:any):DataNavType => {
     switch (action.type) {
         default:
             return state;

@@ -1,9 +1,13 @@
 import {NavLink} from 'react-router-dom';
 import React from 'react';
 import o from './Dialog.module.css';
-import {DialogType} from '../../../../redux/store';
 
-export const Dialog = ({id, name, img}: DialogType) => {
+type PropsType={
+    id:number;
+    name:string;
+    img:string;
+}
+export const Dialog = ({id, name, img}: PropsType) => {
     const path = `/dialogs/${id}`;
     return (
         <div className={o.dialog}>
