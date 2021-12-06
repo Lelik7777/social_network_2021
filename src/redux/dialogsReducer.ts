@@ -1,6 +1,11 @@
 import img_b from './img/ava_boy.jpeg';
 import img_g from './img/ava_girl.jpeg';
 
+enum ACTIONS_TYPE {
+    ADD_MESSAGE = 'DataDialogs/ADD_MESSAGE',
+    UPDATE_NEW_MESSAGE = 'DataDialogs/UPDATE_NEW_MESSAGE',
+}
+
 export type DialogType = {
     id: number;
     name: string;
@@ -38,7 +43,7 @@ let initialState: DataDialogsType = {
 }
 export const dialogsReducer = (state = initialState, action: ActionDialogsType): DataDialogsType => {
     switch (action.type) {
-        case 'ADD-MESSAGE':
+        case ACTIONS_TYPE.ADD_MESSAGE:
             const newMessage = {id: 6, text: state.newMessage}
 
             return {
@@ -47,7 +52,7 @@ export const dialogsReducer = (state = initialState, action: ActionDialogsType):
                 newMessage: ''
             }
 
-        case 'UPDATE-NEW-MESSAGE':
+        case ACTIONS_TYPE.UPDATE_NEW_MESSAGE:
             return {
                 ...state,
                 newMessage: action.payload.text
@@ -57,10 +62,18 @@ export const dialogsReducer = (state = initialState, action: ActionDialogsType):
     }
 }
 
-export type ActionDialogsType = ReturnType<typeof addMessageAC | typeof updateNewMessageAC>
-
-export const addMessageAC = () => ({type: 'ADD-MESSAGE'}) as const;
-export const updateNewMessageAC = (text: string) => ({
-    type: 'UPDATE-NEW-MESSAGE',
-    payload: {text}
-}) as const;
+export type ActionDialogsType =AddMessageType|UpdateNewMessageType;
+type AddMessageType = {
+    type: ACTIONS_TYPE.ADD_MESSAGE;
+}
+type UpdateNewMessageType = {
+    type: ACTIONS_TYPE.UPDATE_NEW_MESSAGE;
+    payload: {
+        text: string;
+    }
+}
+export const AddMessage = (): AddMessageType => ({type: ACTIONS_TYPE.ADD_MESSAGE,});
+export const UpdateNewMessage = (text: string): UpdateNewMessageType => ({
+    type: ACTIONS_TYPE.UPDATE_NEW_MESSAGE,
+    payload: {text},
+});

@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux';
-import {ActionDialogsType, addMessageAC, DataDialogsType, updateNewMessageAC} from '../../../redux/dialogsReducer';
-import {ReducersType} from '../../../redux/redux-store';
+import {ActionDialogsType, AddMessage, DataDialogsType, UpdateNewMessage} from '../../../redux/dialogsReducer';
+import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
 import {Dialogs} from './Dialogs';
 
@@ -11,15 +11,21 @@ export type Mdtptype = {
     onClick: () => void
     onChange: (e: string) => void
 }
-const mapStateToProps = (state: ReducersType): MstpType => {
+//always accept global state
+const mapStateToProps = (state: RootStateType): MstpType => {
     return {
         data: state.dataDialogs,
     }
 }
+//accept dispatch for branch
 const mapDispatchToProps = (dispatch: Dispatch<ActionDialogsType>): Mdtptype => {
     return {
-        onClick: () => dispatch(addMessageAC()),
-        onChange: (e: string) => dispatch(updateNewMessageAC(e)),
+        onClick: () => dispatch(AddMessage()),
+        onChange: (e: string) => dispatch(UpdateNewMessage(e)),
     }
 }
-export const DialogsContainer = connect<MstpType, Mdtptype, any, ReducersType>(mapStateToProps, mapDispatchToProps)(Dialogs);
+export const DialogsContainer = connect<MstpType, Mdtptype, any, RootStateType>(mapStateToProps, mapDispatchToProps)(Dialogs);
+// этот вариант меннее предпочтителен
+/* const DialogsContainer =connect(mapStateToProps,mapDispatchToProps);
+export type TProps=ConnectedProps<typeof DialogsContainer>
+ export default DialogsContainer(Dialogs);*/

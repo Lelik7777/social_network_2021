@@ -1,3 +1,8 @@
+enum ACTIONS_TYPE {
+    ADD_POST = 'DataProfile/ADD_POST',
+    UPDATE_NEW_TEXT = 'DataProfile/UPDATE_NEW_TEXT',
+}
+
 export type PostType = {
     id: number;
     message: string;
@@ -18,15 +23,32 @@ let initialState: DataProfileType = {
 }
 export const profileReducer = (state = initialState, action: ActionProfileType): DataProfileType => {
     switch (action.type) {
-        case 'ADD-POST':
+        case ACTIONS_TYPE.ADD_POST:
             let newPost = {id: 4, message: state.newText, like: 9};
             return {...state, posts: [...state.posts, newPost], newText: ''};
-        case 'UPDATE-NEW-TEXT':
+        case ACTIONS_TYPE.UPDATE_NEW_TEXT:
             return {...state, newText: action.payload.text}
         default:
             return state;
     }
 }
-export type ActionProfileType = ReturnType<typeof addPostAC | typeof updateNewTextAC>
-export const addPostAC = () => ({type: 'ADD-POST'}) as const;
-export const updateNewTextAC = (text: string) => ({type: 'UPDATE-NEW-TEXT', payload: {text}}) as const;
+export type ActionProfileType = AddPostType | UpdateNewText;
+type AddPostType = {
+    type: ACTIONS_TYPE.ADD_POST;
+}
+type UpdateNewText = {
+    type: ACTIONS_TYPE.UPDATE_NEW_TEXT;
+    payload: {
+        text: string,
+    }
+}
+export const AddPost = (): AddPostType => (
+    {
+        type: ACTIONS_TYPE.ADD_POST,
+    }
+);
+export const UpdateNewText = (text: string): UpdateNewText => (
+    {
+        type: ACTIONS_TYPE.UPDATE_NEW_TEXT,
+        payload: {text},
+    });

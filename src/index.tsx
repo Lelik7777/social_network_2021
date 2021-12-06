@@ -4,12 +4,12 @@ import reportWebVitals from './reportWebVitals';
 import 'typeface-roboto';
 
 import ReactDOM from 'react-dom';
-import {reduxStore} from './redux/redux-store';
+import {store} from './redux/store';
 import {Provider} from 'react-redux';
 import App from './App';
 
 ReactDOM.render(
-    <Provider store={reduxStore}>
+    <Provider store={store}>
         <App/>
     </Provider>,
     document.getElementById('root')

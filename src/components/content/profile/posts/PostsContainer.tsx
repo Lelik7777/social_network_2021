@@ -1,8 +1,8 @@
 import React, {Dispatch} from 'react';
 import {connect} from 'react-redux';
 import {Posts} from './Posts';
-import {ActionProfileType, addPostAC, DataProfileType, updateNewTextAC} from '../../../../redux/profileReducer';
-import {ReducersType} from '../../../../redux/redux-store';
+import {ActionProfileType, AddPost, DataProfileType, UpdateNewText} from '../../../../redux/profileReducer';
+import {RootStateType} from '../../../../redux/store';
 
 
 export type MapStateType = {
@@ -12,15 +12,15 @@ export type MapDispatchType = {
     onClick: () => void;
     onChange: (e: string) => void;
 }
-const mapStateToProps = (state: ReducersType): MapStateType => {
+const mapStateToProps = (state: RootStateType): MapStateType => {
     return {
         data: state.dataProfile
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch<ActionProfileType>) => {
     return {
-        onClick: () => dispatch(addPostAC()),
-        onChange: (e: string) => dispatch(updateNewTextAC(e)),
+        onClick: () => dispatch(AddPost()),
+        onChange: (e: string) => dispatch(UpdateNewText(e)),
     }
 }
-export const PostsContainer = connect<MapStateType, MapDispatchType, any, ReducersType>(mapStateToProps,mapDispatchToProps)(Posts);
+export const PostsContainer = connect<MapStateType, MapDispatchType, any, RootStateType>(mapStateToProps,mapDispatchToProps)(Posts);
