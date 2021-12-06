@@ -1,8 +1,10 @@
 import React, {Dispatch} from 'react';
 import {connect} from 'react-redux';
 import {Posts} from './Posts';
-import {ActionProfileType, AddPost, DataProfileType, UpdateNewText} from '../../../../redux/profileReducer';
 import {RootStateType} from '../../../../redux/store';
+import {DataProfileType} from '../../../../redux/profileReducer/profileReducer';
+import {AddPost, UpdateNewText} from '../../../../redux/profileReducer/profileActionCreators';
+import {ActionProfileType} from '../../../../redux/profileReducer/profileReducerActionTypes';
 
 
 export type MapStateType = {
