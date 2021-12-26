@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {ActionDialogsType, AddMessage, DataDialogsType, UpdateNewMessage} from '../../../redux/dialogsReducer';
+import {ActionDialogsType, addMessage, DataDialogsType, updateNewMessage} from '../../../redux/dialogsReducer';
 import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
 import {Dialogs} from './Dialogs';
@@ -20,8 +20,8 @@ const mapStateToProps = (state: RootStateType): MstpType => {
 //accept dispatch for branch
 const mapDispatchToProps = (dispatch: Dispatch<ActionDialogsType>): Mdtptype => {
     return {
-        onClick: () => dispatch(AddMessage()),
-        onChange: (e: string) => dispatch(UpdateNewMessage(e)),
+        onClick: () => dispatch(addMessage()),
+        onChange: (e: string) => dispatch(updateNewMessage(e)),
     }
 }
 export const DialogsContainer = connect<MstpType, Mdtptype, any, RootStateType>(mapStateToProps, mapDispatchToProps)(Dialogs);

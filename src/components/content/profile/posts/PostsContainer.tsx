@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Posts} from './Posts';
 import {RootStateType} from '../../../../redux/store';
 import {DataProfileType} from '../../../../redux/profileReducer/profileReducer';
-import {AddPost, UpdateNewText} from '../../../../redux/profileReducer/profileActionCreators';
+import {addPost, updateNewText} from '../../../../redux/profileReducer/profileActionCreators';
 import {ActionProfileType} from '../../../../redux/profileReducer/profileReducerActionTypes';
 
 
@@ -21,8 +21,8 @@ const mapStateToProps = (state: RootStateType): MapStateType => {
 }
 const mapDispatchToProps = (dispatch: Dispatch<ActionProfileType>) => {
     return {
-        onClick: () => dispatch(AddPost()),
-        onChange: (e: string) => dispatch(UpdateNewText(e)),
+        onClick: () => dispatch(addPost()),
+        onChange: (e: string) => dispatch(updateNewText(e)),
     }
 }
 export const PostsContainer = connect<MapStateType, MapDispatchType, any, RootStateType>(mapStateToProps,mapDispatchToProps)(Posts);

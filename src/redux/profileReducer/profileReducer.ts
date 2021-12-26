@@ -1,5 +1,3 @@
-import {ActionType} from '../store';
-
 export type PostType = {
     id: number;
     message: string;
@@ -18,15 +16,28 @@ let initialState: DataProfileType = {
     ],
     newText: '',
 }
-
-export const profileReducer= (state = initialState, action: ActionType): DataProfileType => {
+export type ActionProfileType=ReturnType<typeof addPost|typeof updateNewText>;
+export const profileReducer= (state = initialState, action: ActionProfileType): DataProfileType => {
     switch (action.type) {
         case 'ADD_POST':
             let newPost = {id: 4, message: state.newText, like: 9};
             return {...state, posts: [...state.posts, newPost], newText: ''};
         case 'UPDATE_NEW_TEXT':
-            return {...state, newText: action.payload.text};
+            //debugger
+           return {...state, newText: action.payload.text};
+
         default:
             return state;
     }
 }
+export const addPost = () => (
+    {
+        type: 'ADD_POST',
+    }
+)as const;
+
+export const updateNewText = (text: string) => (
+    {
+        type:'UPDATE_NEW_TEXT',
+        payload: {text},
+    })as const;

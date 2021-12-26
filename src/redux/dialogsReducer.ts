@@ -56,6 +56,7 @@ export const dialogsReducer = (state = initialState, action: ActionDialogsType):
             return {
                 ...state,
                 newMessage: action.payload.text
+                //...action.payload,
             }
         default:
             return state;
@@ -63,6 +64,7 @@ export const dialogsReducer = (state = initialState, action: ActionDialogsType):
 }
 
 export type ActionDialogsType =AddMessageType|UpdateNewMessageType;
+
 type AddMessageType = {
     type: ACTIONS_TYPE.ADD_MESSAGE;
 }
@@ -72,8 +74,10 @@ type UpdateNewMessageType = {
         text: string;
     }
 }
-export const AddMessage = (): AddMessageType => ({type: ACTIONS_TYPE.ADD_MESSAGE,});
-export const UpdateNewMessage = (text: string): UpdateNewMessageType => ({
+
+export const addMessage = (): AddMessageType => ({type: ACTIONS_TYPE.ADD_MESSAGE,});
+
+export const updateNewMessage = (text: string): UpdateNewMessageType => ({
     type: ACTIONS_TYPE.UPDATE_NEW_MESSAGE,
     payload: {text},
 });
