@@ -1,0 +1,54 @@
+.users{
+    display: flex;
+}
+.avatar{
+    margin: 20px;
+    width: 10%;
+}
+.avatar button{
+    margin-top: 10px;
+    background-color: skyblue;
+}
+.data{
+    margin: 20px;
+    padding-left: 20px;
+    border: 2px solid gainsboro;
+    width: 70%;
+    border-radius: 10px;
+    display: flex;
+    color:grey;
+    font-size: 1.3rem;
+}
+.sub_data1{
+    width: 78%;
+}
+.sub_data1>div,.sub_data2>div{
+    height: 48%;
+    padding-bottom: 2px;
+
+}
+.sub_data2{
+    width: 18%;
+  text-align: right;
+}
+.button{
+    font-size: 2rem;
+    border: 2px solid white;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: white;
+    background-color: skyblue;
+    cursor: pointer;
+}
+@media screen and (max-width:1100px ) {
+.users{
+    flex-direction: column;
+}
+    .data{
+        width: 40%;
+    }
+}

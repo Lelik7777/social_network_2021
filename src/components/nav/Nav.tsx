@@ -15,6 +15,7 @@ export const Nav = ({data}: PropsType) => {
             }>Messages</NavLink></div>
             <div><NavLink to="/News" activeClassName={o.active
             }>News</NavLink></div>
+            <div><NavLink to={'/Users'} activeClassName={o.active}>Users</NavLink></div>
             <div><NavLink to="/Settings" activeClassName={o.active
             }>Settings</NavLink></div>
             <h1>Friends</h1>

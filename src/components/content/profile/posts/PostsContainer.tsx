@@ -2,9 +2,13 @@ import React, {Dispatch} from 'react';
 import {connect} from 'react-redux';
 import {Posts} from './Posts';
 import {RootStateType} from '../../../../redux/store';
-import {DataProfileType} from '../../../../redux/profileReducer/profileReducer';
-import {addPost, updateNewText} from '../../../../redux/profileReducer/profileActionCreators';
-import {ActionProfileType} from '../../../../redux/profileReducer/profileReducerActionTypes';
+import {
+    ActionProfileType,
+    addPost,
+    DataProfileType,
+    updateNewText
+} from '../../../../redux/profileReducer/profileReducer';
+
 
 
 export type MapStateType = {

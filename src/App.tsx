@@ -7,7 +7,7 @@ import {Settings} from './components/content/settings/Settings'
 import {NavContainer} from './components/nav/NavContainer';
 import {Profile} from './components/content/profile/Profile';
 import {DialogsContainer} from './components/content/dialogs/DialogsContainer';
-import {Users} from './components/content/users/Users';
+import {UsersContainer} from './components/content/users/Users';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
                 <div className={o.content}>
                     <Route path={'/Profile'} render={() => <Profile/>}/>
                     <Route path={'/DialogsContainer'} render={() => <DialogsContainer/>}/>
-                    <Route path={'/Users'} render={() => <Users/>}/>
+                    <Route path={'/Users'} render={() => <UsersContainer/>}/>
                     <Route path={'/News'} render={() => <News/>}/>
                     <Route path={'/Settings'} render={() => <Settings/>}/>
                 </div>
