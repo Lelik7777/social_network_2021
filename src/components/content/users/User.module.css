@@ -1,37 +1,54 @@
-.users{
+.active{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 5px;
+}
+.user {
     display: flex;
 }
-.avatar{
+
+.avatar {
     margin: 20px;
     width: 10%;
 }
-.avatar button{
+
+.avatar button {
     margin-top: 10px;
     background-color: skyblue;
 }
-.data{
+
+.data {
     margin: 20px;
     padding-left: 20px;
     border: 2px solid gainsboro;
     width: 70%;
     border-radius: 10px;
     display: flex;
-    color:grey;
+    color: grey;
     font-size: 1.3rem;
 }
-.sub_data1{
+
+.sub_data1 {
     width: 78%;
 }
-.sub_data1>div,.sub_data2>div{
+
+.sub_data1 > div, .sub_data2 > div {
     height: 48%;
     padding-bottom: 2px;
 
 }
-.sub_data2{
+
+.sub_data2 {
     width: 18%;
-  text-align: right;
+    text-align: right;
 }
-.button{
+
+.wrapper_button {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
     font-size: 2rem;
     border: 2px solid white;
     width: 200px;
@@ -44,11 +61,18 @@
     background-color: skyblue;
     cursor: pointer;
 }
-@media screen and (max-width:1100px ) {
-.users{
-    flex-direction: column;
-}
-    .data{
+
+@media screen and (max-width: 1100px ) {
+    .user {
+        flex-direction: column;
+    }
+
+    .data {
         width: 40%;
+    }
+
+    .wrapper_button {
+        margin-left: 2%;
+        justify-content: flex-start;
     }
 }

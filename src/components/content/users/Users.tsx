@@ -6,7 +6,6 @@ import {Dispatch} from 'redux';
 import s from './User.module.css';
 import {User} from './User';
 import axios from 'axios';
-import ava from './img/avatar.png';
 
 type PropsType = MDTPType & MSTPType;
 const Users = ({users, follow, unfollow, setUsers}: PropsType) => {
@@ -53,29 +52,31 @@ const Users = ({users, follow, unfollow, setUsers}: PropsType) => {
          },
      ]);*/
     return (
-        <div>
+        <div className={s.users}>
             <h2>Users</h2>
-            {users.map(x=><div>
-                <div>{x.name}</div>
-                <div><img src={x.photos.small!==null?x.photos.small:ava} alt=""/></div>
-                <div>{x.status}</div>
-                <div>{x.id}</div>
-                <div>{x.uniqueUrlName!==null?x.uniqueUrlName:'empty'}</div>
-            </div>)}
-            <div style={{display: 'flex', justifyContent: 'center'}}>
+            {users.map((x) => <User key={x.id} user={x} follow={follow} unfollow={unfollow}/>)}
+            <div className={s.wrapper_button}>
                 <div className={s.button} onClick={() => setUsers([])}>show more</div>
             </div>
         </div>
     )
 }
 
-export type MSTPType = { users: UserType[] };
+type MSTPType = {
+    users: UserType[];
+    pageSize: number;
+    totalUsersCount: number;
+    currentPage: number;
+};
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         users: state.dataUsers.items,
+        pageSize: state.dataUsers.pageSize,
+        totalUsersCount: state.dataUsers.totalUsersCount,
+        currentPage: state.dataUsers.currentPage,
     }
 };
-export type MDTPType = {
+type MDTPType = {
     follow: (id: number) => void;
     unfollow: (id: number) => void;
     setUsers: (users: UserType[]) => void;

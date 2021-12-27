@@ -3,21 +3,21 @@ import React from 'react';
 import {UserType} from '../../../redux/usersReducer';
 import ava from './img/avatar.png';
 
-type PropsType={
-    user:UserType;
-    follow:(id:number)=>void;
-    unfollow:(id:number)=>void;
+type PropsType = {
+    user: UserType;
+    follow: (id: number) => void;
+    unfollow: (id: number) => void;
 }
-export const User = ({user,follow,unfollow}:PropsType) => {
+export const User = ({user, follow, unfollow}: PropsType) => {
     const onClick = () => {
         return follow(user.id)
     };
     console.log(user)
 
     const onClick1 = () => unfollow(user.id);
-    return (<div key={user.id} className={s.users}>
+    return (<div className={s.user}>
         <div className={s.avatar}>
-            <img src={user.photos.small!==null?user.photos.small:ava} alt="avatar"/>
+            <img src={user.photos.small !== null ? user.photos.small : ava} alt="avatar"/>
             <br/>
             {user.followed
                 ?
@@ -30,12 +30,12 @@ export const User = ({user,follow,unfollow}:PropsType) => {
                 <div>{user.name}</div>
                 <div
                     style={{display: 'flex', alignItems: 'flex-end', fontSize: '1rem'}}>
-                    {user.status!==null?user.status:'i am happy'}
+                    {user.status !== null ? user.status : 'i am happy'}
                 </div>
             </div>
             <div className={s.sub_data2}>
-                <div>{{/*user.location.country*/}},</div>
-                <div>{{/*user.location.city*/}}</div>
+                <div>country</div>
+                <div>city</div>
             </div>
         </div>
 
