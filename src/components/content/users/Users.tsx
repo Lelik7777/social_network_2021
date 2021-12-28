@@ -1,58 +1,86 @@
-import React, {useEffect} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {RootStateType} from '../../../redux/store';
-import {ActionUsersType, followAC, getCurrentPageAC, setPagesAC, setUsersAC, unfollowAC, UserType} from '../../../redux/usersReducer';
+import {
+    ActionUsersType,
+    followAC,
+    getCurrentPageAC,
+    setPagesAC,
+    setTotalUserCountAC,
+    setUsersAC,
+    unfollowAC,
+    UserType
+} from '../../../redux/usersReducer';
 import {Dispatch} from 'redux';
 import s from './User.module.css';
 import {User} from './User';
 import axios from 'axios';
 
 type PropsType = MDTPType & MSTPType;
-const Users = ({users, follow, unfollow, setUsers}: PropsType) => {
+
+const Users = ({
+                   users,
+                   follow,
+                   unfollow,
+                   setUsers,
+                   pageSize,
+                   totalUsersCount,
+                   currentPage,
+                   setPages,
+                   setTotalUsersCount,
+                   getCurrentPage,
+               }: PropsType) => {
+    const [value, setValue] = useState(1);
     useEffect(() => {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users/').then((resp) => setUsers(resp.data.items))
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${currentPage}`).then((resp) => {
+            setUsers(resp.data.items);
+            setTotalUsersCount(resp.data.totalCount);
+
+        });
     }, []);
-
-
-    console.log(users)
-
-    /*setUsers(
-        [
-         {
-             id: 1,
-             avatar: ava,
-             following: true,
-             name: 'Alex',
-             status: 'i like to gym',
-             location: {city: 'Moscow', country: 'Russia'}
-         },
-         {
-             id: 2,
-             avatar: ava,
-             following: false,
-             name: 'Bob',
-             status: 'i am happy',
-             location: {city: 'New York', country: 'Usa'}
-         },
-         {
-             id: 3,
-             avatar: ava,
-             following: true,
-             name: 'Sophia',
-             status: 'i travel on America',
-             location: {city: 'London', country: 'UK'}
-         },
-         {
-             id: 4,
-             avatar: ava,
-             following: true,
-             name: 'Nick',
-             status: 'i study in university',
-             location: {city: 'Kiev', country: 'Ukraine'}
-         },
-     ]);*/
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.currentTarget.valueAsNumber);
+    }
+    let countPagesAll = Math.ceil(totalUsersCount / pageSize)
+    let pages = [];
+    for (let i = 1; i <= countPagesAll; i++) {
+        pages.push(i);
+    }
+    let partPages = [];
+    let countOfPages=10;
+    for (let i = currentPage,count=0; i < pages.length; i++,count++) {
+        if (count <= countOfPages) {
+            partPages.push(i);
+        }
+    }
+    const setCurrPage = () =>{
+        getCurrentPage(value);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${value}`).then((res)=>{
+            setUsers(res.data.items);
+        });
+    };
     return (
         <div className={s.users}>
+            {partPages.map(x => {
+                const getCurrPage = () =>{
+                    getCurrentPage(x);
+                    axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${x}`).then((res)=>{
+                       setUsers(res.data.items);
+                    });
+                }
+                return <span
+                    key={x}
+                    className={x === currentPage ? s.active : ''}
+                    onClick={getCurrPage}
+                >{x}
+            </span>;
+            })}
+            <br/>
+            <input type="number" value={value} onChange={onChange}/>
+            <button className={s.but_input}
+                    onClick={setCurrPage}
+            >set current page at first
+            </button>
             <h2>Users</h2>
             {users.map((x) => <User key={x.id} user={x} follow={follow} unfollow={unfollow}/>)}
             <div className={s.wrapper_button}>
@@ -82,6 +110,7 @@ type MDTPType = {
     setUsers: (users: UserType[]) => void;
     setPages: (pages: number) => void;
     getCurrentPage: (page: number) => void;
+    setTotalUsersCount: (count: number) => void;
 }
 const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
     return {
@@ -90,6 +119,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
         setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
         setPages: (pages: number) => dispatch(setPagesAC(pages)),
         getCurrentPage: (page) => dispatch(getCurrentPageAC(page)),
+        setTotalUsersCount: (count) => dispatch(setTotalUserCountAC(count)),
     }
 }
 export const UsersContainer =

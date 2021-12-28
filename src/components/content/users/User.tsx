@@ -12,8 +12,6 @@ export const User = ({user, follow, unfollow}: PropsType) => {
     const onClick = () => {
         return follow(user.id)
     };
-    console.log(user)
-
     const onClick1 = () => unfollow(user.id);
     return (<div className={s.user}>
         <div className={s.avatar}>

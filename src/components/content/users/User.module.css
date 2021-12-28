@@ -1,9 +1,31 @@
+.users span {
+    margin: 0px 3px;
+    cursor: pointer;
+    padding: 0 3px;
+    background-color: snow;
+}
 
-.active{
+.users input {
+    width: 40px;
+    font-weight: bold;
+}
+
+.users .but_input {
+    background-color:cornsilk;
+    color: gray;
+    margin-left: 1px;
+}
+
+.users h2 {
+    margin-left: 15%;
+}
+
+.active {
     font-weight: bold;
     font-size: 1.2rem;
     margin: 0 5px;
 }
+
 .user {
     display: flex;
 }

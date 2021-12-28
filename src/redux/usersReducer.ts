@@ -21,7 +21,7 @@ const initialState: UsersType = {
     items: [],
     pageSize: 4,
     totalUsersCount: 0,
-    currentPage: 3,
+    currentPage: 1,
 
 };
 export type ActionUsersType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC | typeof setPagesAC | typeof getCurrentPageAC | typeof setTotalUserCountAC>;
@@ -31,7 +31,7 @@ export const usersReducer = (state = initialState, action: ActionUsersType): Use
             return {...state, items: state.items.map(x => x.id === action.payload.id ? {...x, followed: false} : x)};
         case 'UNFOLLOW-TYPE':
             return {...state, items: state.items.map(x => x.id === action.payload.id ? {...x, followed: true} : x)};
-        case 'SET-USERS-TYPE':
+        case 'SET-USERS':
             return {...state, items: action.payload.users};
         case 'SET-PAGES':
             return {...state, pageSize: action.payload.pages};
@@ -62,7 +62,7 @@ export const unfollowAC = (id: number) => {
 
 export const setUsersAC = (users: UserType[]) => {
     return {
-        type: 'SET-USERS-TYPE',
+        type: 'SET-USERS',
         payload: {users,},
     } as const;
 };

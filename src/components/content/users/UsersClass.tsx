@@ -17,10 +17,10 @@ import axios from 'axios';
 
 type PropsType = MDTPType & MSTPType;
 
-class UsersClass extends React.Component<PropsType, { value: number }> {
+class UsersAPIClass extends React.Component<PropsType, { value: number }> {
     constructor(props: PropsType) {
         super(props);
-        this.state = {value: 0};
+        this.state = {value: 1};
     }
 
     componentDidMount() {
@@ -47,24 +47,17 @@ class UsersClass extends React.Component<PropsType, { value: number }> {
     }
 
     render() {
-        let countPages = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let countPagesAll = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
         let pages = [];
-        for (let i = 1; i <= countPages; i++) {
+        for (let i = 1; i <= countPagesAll; i++) {
             pages.push(i);
         }
         let partPages = [];
-        let count = 0;
-        for (let i = this.props.currentPage; i < pages.length; i++) {
-            if (count <= 10) {
+        let countOfPages=10;
+        for (let i = this.props.currentPage,count=0; i < pages.length; i++,count++) {
+            if (count <= countOfPages) {
                 partPages.push(i);
             }
-            count++;
-        }
-        const styleSpan = {
-            margin: '0 3px',
-            cursor: 'pointer',
-            padding: '0 3px',
-            backgroundColor: 'snow',
         }
         const onChange = (e: ChangeEvent<HTMLInputElement>) => {
             if (e.currentTarget.valueAsNumber > 0)
@@ -77,24 +70,22 @@ class UsersClass extends React.Component<PropsType, { value: number }> {
                         className={this.props.currentPage === x ? s.active : ''}
                         key={x}
                         onClick={() => this.clickOnSpan(x)}
-                        style={styleSpan}
                     >
                     {x}
                 </span>)
                 }
                 <br/>
                 <input type="number"
-                       style={{width: '40px', fontWeight: 'bold'}}
                        onChange={onChange}
                        value={this.state.value}
                 />
-                <button style={{backgroundColor: 'bisque', color: 'blue', marginLeft: '1px'}}
+                <button className={s.but_input}
                         onClick={() => this.setCurrentPageAtFirst()}
                 >
                     set current page at first
                 </button>
 
-                <h2 style={{marginLeft: '40px'}}>Users:</h2>
+                <h2 >Users:</h2>
 
                 {this.props.users.map((x) =>
                     <User key={x.id}
@@ -148,4 +139,4 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
 }
 export const UsersContainerClass =
     connect<MSTPType, MDTPType, any, RootStateType>
-    (mapStateToProps, mapDispatchToProps)(UsersClass);
+    (mapStateToProps, mapDispatchToProps)(UsersAPIClass);
