@@ -1,9 +1,10 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {RootStateType} from '../../../redux/store';
 import {
     ActionUsersType,
-    followAC, getCurrentPageAC,
+    followAC,
+    getCurrentPageAC,
     setPagesAC,
     setTotalUserCountAC,
     setUsersAC,
@@ -11,9 +12,8 @@ import {
     UserType
 } from '../../../redux/usersReducer';
 import {Dispatch} from 'redux';
-import s from './User.module.css';
-import {User} from './User';
 import axios from 'axios';
+import {UsersForClass} from './UsersForClass';
 
 type PropsType = MDTPType & MSTPType;
 
@@ -36,10 +36,10 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
             this.props.setUsers(res.data.items);
         });
     }
-    setCurrentPageAtFirst = () => {
-        this.props.getCurrentPage(this.state.value);
-        if(this.props.pageSize){
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.state.value}&count=${this.props.pageSize}`).then((res) => {
+    setCurrentPageAtFirst = (value: number) => {
+        this.props.getCurrentPage(value);
+        if (this.props.pageSize) {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${value}&count=${this.props.pageSize}`).then((res) => {
                 this.props.setUsers(res.data.items);
             });
         }
@@ -47,59 +47,20 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
     }
 
     render() {
-        let countPagesAll = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        let pages = [];
-        for (let i = 1; i <= countPagesAll; i++) {
-            pages.push(i);
-        }
-        let partPages = [];
-        let countOfPages=10;
-        for (let i = this.props.currentPage,count=0; i < pages.length; i++,count++) {
-            if (count <= countOfPages) {
-                partPages.push(i);
-            }
-        }
-        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-            if (e.currentTarget.valueAsNumber > 0)
-                this.setState({value: e.currentTarget.valueAsNumber});
-        }
         return (
-            <div className={s.users}>
-                {partPages.map(x =>
-                    <span
-                        className={this.props.currentPage === x ? s.active : ''}
-                        key={x}
-                        onClick={() => this.clickOnSpan(x)}
-                    >
-                    {x}
-                </span>)
-                }
-                <br/>
-                <input type="number"
-                       onChange={onChange}
-                       value={this.state.value}
-                />
-                <button className={s.but_input}
-                        onClick={() => this.setCurrentPageAtFirst()}
-                >
-                    set current page at first
-                </button>
-
-                <h2 >Users:</h2>
-
-                {this.props.users.map((x) =>
-                    <User key={x.id}
-                          user={x}
-                          follow={this.props.follow}
-                          unfollow={this.props.unfollow}
-                    />)}
-                <div className={s.wrapper_button}>
-                    <div className={s.button}
-                         onClick={() => this.props.setUsers([])}>
-                        show more
-                    </div>
-                </div>
-            </div>
+            <UsersForClass
+                value={this.state.value}
+                setState={this.setState}
+                users={this.props.users}
+                totalUsersCount={this.props.totalUsersCount}
+                currentPage={this.props.currentPage}
+                pageSize={this.props.pageSize}
+                clickOnSpan={this.clickOnSpan}
+                setCurrentPageAtFirst={this.setCurrentPageAtFirst}
+                setUsers={this.props.setUsers}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
+            />
         )
     }
 }

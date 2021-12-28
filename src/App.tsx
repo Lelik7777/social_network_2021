@@ -7,7 +7,7 @@ import {Settings} from './components/content/settings/Settings'
 import {NavContainer} from './components/nav/NavContainer';
 import {Profile} from './components/content/profile/Profile';
 import {DialogsContainer} from './components/content/dialogs/DialogsContainer';
-import {UsersContainerClass} from './components/content/users/UsersClass';
+import {UsersContainerClass} from './components/content/users/UsersAPIClass';
 
 
 function App() {
