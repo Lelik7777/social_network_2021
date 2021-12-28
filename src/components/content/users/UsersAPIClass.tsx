@@ -30,9 +30,9 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
         });
     }
 
-    clickOnSpan = (x: number) => {
-        this.props.getCurrentPage(x);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${x}&count=${this.props.pageSize}`).then((res) => {
+    getCurrentPage = (page: number) => {
+        this.props.getCurrentPage(page);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then((res) => {
             this.props.setUsers(res.data.items);
         });
     }
@@ -45,17 +45,20 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
         }
         this.setState({value: 1});
     }
+    onChange = (value: number) => {
+        this.setState({value: value})
+    }
 
     render() {
         return (
             <UsersForClass
                 value={this.state.value}
-                setState={this.setState}
+                onChange={this.onChange}
                 users={this.props.users}
                 totalUsersCount={this.props.totalUsersCount}
                 currentPage={this.props.currentPage}
                 pageSize={this.props.pageSize}
-                clickOnSpan={this.clickOnSpan}
+                getCurrentPage={this.getCurrentPage}
                 setCurrentPageAtFirst={this.setCurrentPageAtFirst}
                 setUsers={this.props.setUsers}
                 follow={this.props.follow}

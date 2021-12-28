@@ -5,7 +5,7 @@ import {User} from './User';
 
 type PropsType = {
     value: number;
-    setState: (value: { value: number }) => void;
+    onChange: (value: number) => void;
     follow: (id: number) => void;
     unfollow: (id: number) => void;
     setUsers: (users: UserType[]) => void;
@@ -13,12 +13,12 @@ type PropsType = {
     pageSize: number;
     totalUsersCount: number;
     currentPage: number;
-    clickOnSpan: (page: number) => void;
+    getCurrentPage: (page: number) => void;
     setCurrentPageAtFirst: (v: number) => void;
 }
 export const UsersForClass = ({
-                                  value, setState, users, pageSize, totalUsersCount, currentPage,
-                                  clickOnSpan, setCurrentPageAtFirst, follow, unfollow, setUsers,
+                                  value, onChange, users, pageSize, totalUsersCount, currentPage,
+                                  getCurrentPage, setCurrentPageAtFirst, follow, unfollow, setUsers,
                               }: PropsType) => {
     let countPagesAll = Math.ceil(totalUsersCount / pageSize)
     let pages = [];
@@ -32,9 +32,9 @@ export const UsersForClass = ({
             partPages.push(i);
         }
     }
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.valueAsNumber > 0)
-            setState({value: e.currentTarget.valueAsNumber});
+            onChange(e.currentTarget.valueAsNumber);
     }
     return (
         <div className={s.users}>
@@ -42,14 +42,14 @@ export const UsersForClass = ({
                 <span
                     className={currentPage === x ? s.active : ''}
                     key={x}
-                    onClick={() => clickOnSpan(x)}
+                    onClick={() => getCurrentPage(x)}
                 >
                     {x}
                 </span>)
             }
             <br/>
             <input type="number"
-                   onChange={onChange}
+                   onChange={onChangeValue}
                    value={value}
             />
             <button className={s.but_input}
