@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {RootStateType} from '../../../redux/store';
-import {ActionUsersType, followAC, setUsersAC, unfollowAC, UserType} from '../../../redux/usersReducer';
+import {ActionUsersType, followAC, getCurrentPageAC, setPagesAC, setUsersAC, unfollowAC, UserType} from '../../../redux/usersReducer';
 import {Dispatch} from 'redux';
 import s from './User.module.css';
 import {User} from './User';
@@ -80,12 +80,16 @@ type MDTPType = {
     follow: (id: number) => void;
     unfollow: (id: number) => void;
     setUsers: (users: UserType[]) => void;
+    setPages: (pages: number) => void;
+    getCurrentPage: (page: number) => void;
 }
 const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
     return {
         follow: (id: number) => dispatch(followAC(id)),
         unfollow: (id: number) => dispatch(unfollowAC(id)),
         setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
+        setPages: (pages: number) => dispatch(setPagesAC(pages)),
+        getCurrentPage: (page) => dispatch(getCurrentPageAC(page)),
     }
 }
 export const UsersContainer =
