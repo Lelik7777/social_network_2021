@@ -6,7 +6,7 @@ import {Preloader} from '../../../common components/preloader/Preloader';
 
 type PropsType = {
     value: number;
-    onChange: (value: number) => void;
+    updateNewMessage: (value: number) => void;
     follow: (id: number) => void;
     unfollow: (id: number) => void;
     setUsers: (users: UserType[]) => void;
@@ -19,7 +19,7 @@ type PropsType = {
     isFetching: boolean;
 }
 export const UsersForClass = ({
-                                  value, onChange, users, pageSize, totalUsersCount, currentPage,
+                                  value, updateNewMessage, users, pageSize, totalUsersCount, currentPage,
                                   getCurrentPage, setCurrentPageAtFirst, follow, unfollow, setUsers,
                                   isFetching,
                               }: PropsType) => {
@@ -37,7 +37,7 @@ export const UsersForClass = ({
     }
     const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.valueAsNumber > 0)
-            onChange(e.currentTarget.valueAsNumber);
+            updateNewMessage(e.currentTarget.valueAsNumber);
     }
     return (
         <div className={s.users}>
@@ -61,7 +61,7 @@ export const UsersForClass = ({
             >
                 set current page at first
             </button>
-            {isFetching&&<Preloader/>}
+            {isFetching && <Preloader/>}
             <h2>Users:</h2>
 
             {users.map((x) =>

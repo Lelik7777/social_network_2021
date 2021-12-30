@@ -7,25 +7,25 @@ import {MapDispatchType, MapStateType} from './PostsContainer';
 type PropsType = MapStateType & MapDispatchType;
 
 
-export function Posts({data, onClick, onChange}: PropsType) {
+export function Posts({data, addPost, updateNewText}: PropsType) {
     const mappedPosts = data.posts.map((p) => {
         return (
             <Post key={p.id} message={p.message} like={p.like}/>
         );
     });
 
-    const onChange1 = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        onChange(e.currentTarget.value);
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        updateNewText(e.currentTarget.value);
     };
     return (
         <div className={o.posts}>
             My posts:
             <div>
                 <textarea value={data.newText}
-                          onChange={onChange1}
+                          onChange={onChange}
                 >
                 </textarea>
-                <button onClick={onClick}>add</button>
+                <button onClick={addPost}>add</button>
             </div>
             {mappedPosts}
         </div>

@@ -2,16 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {RootStateType} from '../../../redux/store';
 import {
-    ActionUsersType, checkIsFetchingAC,
-    followAC,
-    getCurrentPageAC,
-    setPagesAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC,
+    checkIsFetching,
+    follow,
+    getCurrentPage,
+    setPages,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
     UserType
 } from '../../../redux/usersReducer';
-import {Dispatch} from 'redux';
 import axios from 'axios';
 import {UsersForClass} from './UsersForClass';
 
@@ -24,29 +23,29 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
     }
 
     componentDidMount() {
-        this.props.checkIsFetchingAC(true);
+        this.props.checkIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
-            this.props.setUsersAC(res.data.items);
-            this.props.setTotalUsersCountAC(res.data.totalCount);
-            this.props.checkIsFetchingAC(false);
+            this.props.setUsers(res.data.items);
+            this.props.setTotalUsersCount(res.data.totalCount);
+            this.props.checkIsFetching(false);
         });
     }
 
     getCurrentPage = (page: number) => {
-        this.props.checkIsFetchingAC(true);
-        this.props.getCurrentPageAC(page);
+        this.props.checkIsFetching(true);
+        this.props.getCurrentPage(page);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then((res) => {
-            this.props.setUsersAC(res.data.items);
-            this.props.checkIsFetchingAC(false);
+            this.props.setUsers(res.data.items);
+            this.props.checkIsFetching(false);
         });
     }
     setCurrentPageAtFirst = (value: number) => {
-        this.props.checkIsFetchingAC(true);
-        this.props.getCurrentPageAC(value);
+        this.props.checkIsFetching(true);
+        this.props.getCurrentPage(value);
         if (this.props.pageSize) {
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${value}&count=${this.props.pageSize}`).then((res) => {
-                this.props.setUsersAC(res.data.items);
-                this.props.checkIsFetchingAC(false);
+                this.props.setUsers(res.data.items);
+                this.props.checkIsFetching(false);
             });
         }
         this.setState({value: 1});
@@ -59,16 +58,16 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
         return (
             <UsersForClass
                 value={this.state.value}
-                onChange={this.onChange}
+                updateNewMessage={this.onChange}
                 users={this.props.users}
                 totalUsersCount={this.props.totalUsersCount}
                 currentPage={this.props.currentPage}
                 pageSize={this.props.pageSize}
                 getCurrentPage={this.getCurrentPage}
                 setCurrentPageAtFirst={this.setCurrentPageAtFirst}
-                setUsers={this.props.setUsersAC}
-                follow={this.props.followAC}
-                unfollow={this.props.unfollowAC}
+                setUsers={this.props.setUsers}
+                follow={this.props.follow}
+                unfollow={this.props.unfollow}
                 isFetching={this.props.isFetching}
             />
         )
@@ -93,13 +92,13 @@ const mapStateToProps = (state: RootStateType): MSTPType => {
     }
 };
 type MDTPType = {
-    followAC: (id: number) => void;
-    unfollowAC: (id: number) => void;
-    setUsersAC: (users: UserType[]) => void;
-    setPagesAC: (pages: number) => void;
-    getCurrentPageAC: (page: number) => void;
-    setTotalUsersCountAC: (count: number) => void;
-    checkIsFetchingAC: (isFet: boolean) => void;
+    follow: (id: number) => void;
+    unfollow: (id: number) => void;
+    setUsers: (users: UserType[]) => void;
+    setPages: (pages: number) => void;
+    getCurrentPage: (page: number) => void;
+    setTotalUsersCount: (count: number) => void;
+    checkIsFetching: (isFet: boolean) => void;
 }
 /*const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
     return {
@@ -115,7 +114,7 @@ type MDTPType = {
 export const UsersContainerClass =
     connect<MSTPType, MDTPType, any, RootStateType>
     (mapStateToProps, {
-        followAC, unfollowAC, setUsersAC,
-        setPagesAC, getCurrentPageAC,
-        setTotalUsersCountAC, checkIsFetchingAC,
+        follow, unfollow, setUsers,
+        setPages, getCurrentPage,
+        setTotalUsersCount, checkIsFetching,
     })(UsersAPIClass);

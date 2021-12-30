@@ -6,7 +6,7 @@ import {Mdtptype, MstpType} from './DialogsContainer';
 
 type PropsType = MstpType & Mdtptype
 
-export function Dialogs({data, onChange, onClick}: PropsType) {
+export function Dialogs({data, updateNewMessage, addMessage}: PropsType) {
 
     const mappedDialogs = data.dialogs.map((d) => {
         return (
@@ -18,11 +18,8 @@ export function Dialogs({data, onChange, onClick}: PropsType) {
             <Message key={m.id} text={m.text}/>
         );
     });
-    const onClick1 = () => {
-        onClick();
-    };
-    const onChange1 = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange(e.currentTarget.value);
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        updateNewMessage(e.currentTarget.value);
     };
 
     return (
@@ -32,8 +29,8 @@ export function Dialogs({data, onChange, onClick}: PropsType) {
             </div>
             <div className={o.messages}>
                 {mappedMessages}
-                <input value={data.newMessage} onChange={onChange1}/>
-                <button onClick={onClick1}>+
+                <input value={data.newMessage} onChange={onChange}/>
+                <button onClick={addMessage}>+
                 </button>
             </div>
 

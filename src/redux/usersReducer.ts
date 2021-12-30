@@ -25,7 +25,7 @@ const initialState: UsersType = {
     currentPage: 1,
     isFetching: false,
 };
-export type ActionUsersType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC | typeof setPagesAC | typeof getCurrentPageAC | typeof setTotalUsersCountAC|typeof checkIsFetchingAC>;
+export type ActionUsersType = ReturnType<typeof follow | typeof unfollow | typeof setUsers | typeof setPages | typeof getCurrentPage | typeof setTotalUsersCount|typeof checkIsFetching>;
 export const usersReducer = (state = initialState, action: ActionUsersType): UsersType => {
     switch (action.type) {
         case'FOLLOW-TYPE':
@@ -47,14 +47,14 @@ export const usersReducer = (state = initialState, action: ActionUsersType): Use
             return state;
     }
 };
-export const followAC = (id: number) => {
+export const follow = (id: number) => {
     return {
         type: 'FOLLOW-TYPE',
         payload: {id},
     } as const;
 };
 
-export const unfollowAC = (id: number) => {
+export const unfollow = (id: number) => {
     return {
         type: 'UNFOLLOW-TYPE',
         payload: {
@@ -63,30 +63,30 @@ export const unfollowAC = (id: number) => {
     } as const;
 };
 
-export const setUsersAC = (users: UserType[]) => {
+export const setUsers = (users: UserType[]) => {
     return {
         type: 'SET-USERS',
         payload: {users,},
     } as const;
 };
-export const setPagesAC = (pages: number) => {
+export const setPages = (pages: number) => {
     return {
         type: 'SET-PAGES',
         payload: {pages},
     } as const;
 };
-export const getCurrentPageAC = (page: number) => {
+export const getCurrentPage = (page: number) => {
     return {
         type: 'GET-CURRENT-PAGE', payload: {page,},
     } as const;
 };
-export const setTotalUsersCountAC = (count: number) => {
+export const setTotalUsersCount = (count: number) => {
     return {
         type: 'SET-TOTAL-USER-COUNT',
         payload: {count,},
     } as const;
 };
-export const checkIsFetchingAC = (isFet: boolean) => {
+export const checkIsFetching = (isFet: boolean) => {
     return {
         type: 'CHECK-IS-FETCHING',
         payload: {isFet,},

@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import {RootStateType} from '../../../redux/store';
 import {
     ActionUsersType,
-    followAC,
-    getCurrentPageAC,
-    setPagesAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC,
+    follow,
+    getCurrentPage,
+    setPages,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
     UserType
 } from '../../../redux/usersReducer';
 import {Dispatch} from 'redux';
@@ -114,12 +114,12 @@ type MDTPType = {
 }
 const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
     return {
-        follow: (id: number) => dispatch(followAC(id)),
-        unfollow: (id: number) => dispatch(unfollowAC(id)),
-        setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
-        setPages: (pages: number) => dispatch(setPagesAC(pages)),
-        getCurrentPage: (page) => dispatch(getCurrentPageAC(page)),
-        setTotalUsersCount: (count) => dispatch(setTotalUsersCountAC(count)),
+        follow: (id: number) => dispatch(follow(id)),
+        unfollow: (id: number) => dispatch(unfollow(id)),
+        setUsers: (users: UserType[]) => dispatch(setUsers(users)),
+        setPages: (pages: number) => dispatch(setPages(pages)),
+        getCurrentPage: (page) => dispatch(getCurrentPage(page)),
+        setTotalUsersCount: (count) => dispatch(setTotalUsersCount(count)),
     }
 }
 export const UsersContainer =
