@@ -16,15 +16,16 @@ export type UsersType = {
     pageSize: number;
     totalUsersCount: number;
     currentPage: number;
+    isFetching: boolean;
 }
 const initialState: UsersType = {
     items: [],
     pageSize: 4,
     totalUsersCount: 0,
     currentPage: 1,
-
+    isFetching: false,
 };
-export type ActionUsersType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC | typeof setPagesAC | typeof getCurrentPageAC | typeof setTotalUserCountAC>;
+export type ActionUsersType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC | typeof setPagesAC | typeof getCurrentPageAC | typeof setTotalUsersCountAC|typeof checkIsFetchingAC>;
 export const usersReducer = (state = initialState, action: ActionUsersType): UsersType => {
     switch (action.type) {
         case'FOLLOW-TYPE':
@@ -40,6 +41,8 @@ export const usersReducer = (state = initialState, action: ActionUsersType): Use
             return {...state, currentPage: action.payload.page};
         case 'SET-TOTAL-USER-COUNT':
             return {...state, totalUsersCount: action.payload.count};
+        case 'CHECK-IS-FETCHING':
+            return {...state,isFetching:action.payload.isFet};
         default:
             return state;
     }
@@ -77,9 +80,15 @@ export const getCurrentPageAC = (page: number) => {
         type: 'GET-CURRENT-PAGE', payload: {page,},
     } as const;
 };
-export const setTotalUserCountAC = (count: number) => {
+export const setTotalUsersCountAC = (count: number) => {
     return {
         type: 'SET-TOTAL-USER-COUNT',
         payload: {count,},
+    } as const;
+};
+export const checkIsFetchingAC = (isFet: boolean) => {
+    return {
+        type: 'CHECK-IS-FETCHING',
+        payload: {isFet,},
     } as const;
 };

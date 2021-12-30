@@ -6,7 +6,7 @@ import {
     followAC,
     getCurrentPageAC,
     setPagesAC,
-    setTotalUserCountAC,
+    setTotalUsersCountAC,
     setUsersAC,
     unfollowAC,
     UserType
@@ -119,7 +119,7 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
         setUsers: (users: UserType[]) => dispatch(setUsersAC(users)),
         setPages: (pages: number) => dispatch(setPagesAC(pages)),
         getCurrentPage: (page) => dispatch(getCurrentPageAC(page)),
-        setTotalUsersCount: (count) => dispatch(setTotalUserCountAC(count)),
+        setTotalUsersCount: (count) => dispatch(setTotalUsersCountAC(count)),
     }
 }
 export const UsersContainer =

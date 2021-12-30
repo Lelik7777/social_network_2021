@@ -2,6 +2,7 @@ import {UserType} from '../../../redux/usersReducer';
 import React, {ChangeEvent} from 'react';
 import s from './User.module.css';
 import {User} from './User';
+import {Preloader} from '../../../common components/preloader/Preloader';
 
 type PropsType = {
     value: number;
@@ -15,10 +16,12 @@ type PropsType = {
     currentPage: number;
     getCurrentPage: (page: number) => void;
     setCurrentPageAtFirst: (v: number) => void;
+    isFetching: boolean;
 }
 export const UsersForClass = ({
                                   value, onChange, users, pageSize, totalUsersCount, currentPage,
                                   getCurrentPage, setCurrentPageAtFirst, follow, unfollow, setUsers,
+                                  isFetching,
                               }: PropsType) => {
     let countPagesAll = Math.ceil(totalUsersCount / pageSize)
     let pages = [];
@@ -38,6 +41,7 @@ export const UsersForClass = ({
     }
     return (
         <div className={s.users}>
+
             {partPages.map(x =>
                 <span
                     className={currentPage === x ? s.active : ''}
@@ -57,7 +61,7 @@ export const UsersForClass = ({
             >
                 set current page at first
             </button>
-
+            {isFetching&&<Preloader/>}
             <h2>Users:</h2>
 
             {users.map((x) =>
