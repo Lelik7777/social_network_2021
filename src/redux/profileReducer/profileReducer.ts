@@ -11,7 +11,6 @@ export type DataProfileType = {
 let initialState: DataProfileType = {
     posts: [
         {id: 1, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius!', like: 10},
-        {id: 2, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing', like: 115},
         {id: 3, message: 'Lorem ipsum dolor sit amet,', like: 7},
     ],
     newText: '',

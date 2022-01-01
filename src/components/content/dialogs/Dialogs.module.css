@@ -3,7 +3,7 @@
     height: 90vh;
     display: flex;
     flex-direction: row;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .dialogs_items {
