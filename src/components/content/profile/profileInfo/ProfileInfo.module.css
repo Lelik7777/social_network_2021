@@ -1,0 +1,8 @@
+
+.profile_info .img_profile {
+    width: 100%;
+    object-fit: cover;
+    height: 200px;
+    margin-bottom: 1%;
+    box-shadow: 5px 4px 15px gray;
+}

@@ -2,6 +2,7 @@ import s from './User.module.css';
 import React from 'react';
 import {UserType} from '../../../redux/usersReducer';
 import ava from './img/avatar.png';
+import { NavLink } from 'react-router-dom';
 
 type PropsType = {
     user: UserType;
@@ -15,7 +16,10 @@ export const User = ({user, follow, unfollow}: PropsType) => {
     const onClick1 = () => unfollow(user.id);
     return (<div className={s.user}>
         <div className={s.avatar}>
-            <img src={user.photos.small !== null ? user.photos.small : ava} alt="avatar"/>
+            <NavLink to={'./Profile'}>
+                <img src={user.photos.small !== null ? user.photos.small : ava} alt="avatar"/>
+            </NavLink>
+
             <br/>
             {user.followed
                 ?

@@ -6,7 +6,7 @@ export function ProfileInfo() {
     return (
         <div className={o.profile_info}>
             <div>
-                <img
+                <img className={o.img_profile}
                     src={img}
                     alt="sea"/>
             </div>

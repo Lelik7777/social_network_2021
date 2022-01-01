@@ -18,4 +18,10 @@ html,body{
   grid-area: c;
   background-color: whitesmoke;
 }
+@media screen and (max-width: 800px){
+.AppWrapper{
+grid-template-columns: auto;
+
+}
+}
 

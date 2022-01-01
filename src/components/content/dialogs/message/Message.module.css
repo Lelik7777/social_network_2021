@@ -13,6 +13,7 @@
     border-radius: 44px 0 44px 0;
     overflow: hidden;
     box-shadow: 5px 5px 5px gainsboro;
+
 }
 
 .message::first-letter {
@@ -26,4 +27,10 @@
     border-bottom: 15px solid floralwhite;
     border-left: 45px solid transparent;
     margin-bottom: 2%;
+}
+@media screen and (max-width: 800px){
+.message{
+    overflow: auto;
+    border-radius: 10px 10px 10px 0;
+}
 }
