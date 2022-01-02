@@ -29,14 +29,3 @@ function App() {
 }
 
 export default App;
-const man = {
-    name: 'alex',
-    age: 33,
-    address: {
-        city: 'simf',
-        street: 'tampovska'
-    }
-}
-type ManType = typeof man;
-type KeysManType = keyof ManType;
-type All = ManType[KeysManType];

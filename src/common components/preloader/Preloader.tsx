@@ -1,9 +1,8 @@
 import React from 'react';
 import img from './img/preloader.gif';
 import img2 from './img/1_CsJ05WEGfunYMLGfsT2sXA.gif'
-type PropsType={
-}
-export const Preloader = ({}:PropsType) => {
+
+export const Preloader = () => {
   const style={
     height:'15px',
     width:'70px',

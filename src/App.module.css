@@ -21,6 +21,6 @@ html,body{
 
 @media screen and (max-width: 800px){
   .AppWrapper{
-    grid-template-columns: auto;
+    grid-template-columns:max-content;
   }
 }
