@@ -1,11 +1,12 @@
 import {connect} from 'react-redux';
 import {Posts} from './Posts';
 import {RootStateType} from '../../../../redux/store';
-import {addPost, DataProfileType, updateNewText} from '../../../../redux/profileReducer/profileReducer';
+import {addPost, PostType, updateNewText} from '../../../../redux/profileReducer/profileReducer';
 
 
 export type MapStateType = {
-    data: DataProfileType;
+    posts:PostType[];
+    newText:string;
 }
 export type MapDispatchType = {
     addPost: () => void;
@@ -13,7 +14,8 @@ export type MapDispatchType = {
 }
 const mapStateToProps = (state: RootStateType): MapStateType => {
     return {
-        data: state.dataProfile
+        posts: state.dataProfile.posts,
+        newText:state.dataProfile.newText,
     }
 }
 export const PostsContainer =

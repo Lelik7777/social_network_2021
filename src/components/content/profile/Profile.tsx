@@ -2,12 +2,15 @@ import React from 'react';
 import o from './Profile.module.css';
 import {ProfileInfo} from './profileInfo/ProfileInfo';
 import {PostsContainer} from './posts/PostsContainer';
+import {ProfileType} from '../../../redux/profileReducer/profileReducer';
 
-
-export function Profile() {
+type PropsType={
+    profile:ProfileType;
+}
+export function Profile({profile,...props}:PropsType) {
     return (
         <div className={o.profile}>
-            <ProfileInfo/>
+            <ProfileInfo profile={profile}/>
             <PostsContainer/>
         </div>
     );

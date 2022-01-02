@@ -5,9 +5,9 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/content/news/News';
 import {Settings} from './components/content/settings/Settings'
 import {NavContainer} from './components/nav/NavContainer';
-import {Profile} from './components/content/profile/Profile';
 import {DialogsContainer} from './components/content/dialogs/DialogsContainer';
 import {UsersContainerClass} from './components/content/users/UsersAPIClass';
+import {ProfileContainer} from './components/content/profile/ProfileContainer';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
                 <Header/>
                 <NavContainer/>
                 <div className={o.content}>
-                    <Route path={'/Profile'} render={() => <Profile/>}/>
+                    <Route path={'/Profile'} render={() => <ProfileContainer/>}/>
                     <Route path={'/DialogsContainer'} render={() => <DialogsContainer/>}/>
                     <Route path={'/Users'} render={() => <UsersContainerClass/>}/>
                     <Route path={'/News'} render={() => <News/>}/>

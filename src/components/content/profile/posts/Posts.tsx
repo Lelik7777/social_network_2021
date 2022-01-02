@@ -7,8 +7,8 @@ import {MapDispatchType, MapStateType} from './PostsContainer';
 type PropsType = MapStateType & MapDispatchType;
 
 
-export function Posts({data, addPost, updateNewText}: PropsType) {
-    const mappedPosts = data.posts.map((p) => {
+export function Posts({posts, newText, addPost, updateNewText}: PropsType) {
+    const mappedPosts = posts.map((p) => {
         return (
             <Post key={p.id} message={p.message} like={p.like}/>
         );
@@ -21,7 +21,7 @@ export function Posts({data, addPost, updateNewText}: PropsType) {
         <div className={o.posts}>
             My posts:
             <div>
-                <textarea value={data.newText}
+                <textarea value={newText}
                           onChange={onChange}
                 >
                 </textarea>
