@@ -9,7 +9,7 @@ type PropsType={
     profile:ProfileType;
 }
 export function Profile({profile,...props}:PropsType) {
-    if(profile.aboutMe){
+    if(profile.fullName){
         return (
             <div className={o.profile}>
                 <ProfileInfo profile={profile}/>

@@ -6,7 +6,7 @@ import {ProfileType} from '../../../../redux/profileReducer/profileReducer';
 import {PictureForProfile} from './pictureForProfile/PictureForProfile';
 import {BlogInfo} from './blogInfo/BlogInfo';
 
-export function ProfileInfo({profile}:{profile:ProfileType}) {
+export function ProfileInfo({profile}: { profile: ProfileType }) {
     const [toggle, setToggle] = useState(true);
     const onClick = () => setToggle(!toggle);
     return (

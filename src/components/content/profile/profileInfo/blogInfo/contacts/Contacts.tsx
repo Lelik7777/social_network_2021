@@ -9,43 +9,54 @@ import {ProfileType} from '../../../../../../redux/profileReducer/profileReducer
 import o from '../../ProfileInfo.module.css';
 
 export const Contacts = ({profile}: { profile: ProfileType }) => {
+    console.log(profile.contacts.website)
     return <div className={o.right}>
         {/* block 1*/}
-        <div style={{overflow:'auto'}}>
+        <div className={o.block1}>
             <div>
                 <img src={img_vk} alt="vk"/>
-                {profile.contacts.vk}
+                <a href={profile.contacts.vk ? 'http://' + profile.contacts.vk : 'https://vk.com/'}
+                   target="_blank">{profile.contacts.vk?profile.contacts.vk:'vk'}</a>
             </div>
             <div>
                 <img src={img_yout} alt="youtube"/>
-                {profile.contacts.youtube}
+                <a href={profile.contacts.youtube ? 'http://' + profile.contacts.youtube : 'https://www.youtube.com/'}
+                   target="_blank">{profile.contacts.youtube?profile.contacts.youtube:'youtube'}</a>
             </div>
             <div>
                 <img src={img_inst} alt="instagram"/>
-                {profile.contacts.instagram}
+                <a href={profile.contacts.instagram ? 'http://' + profile.contacts.instagram : 'https://www.instagram.com/'}
+                   target="_blank">{profile.contacts.instagram?profile.contacts.instagram:'instagram'}</a>
             </div>
             <div>
                 <img src={img_twit} alt="twitter"/>
-                {profile.contacts.twitter}
+                <a href={profile.contacts.twitter ? 'http://' + profile.contacts.twitter : 'https://twitter.com/?lang=ru'}
+                   target={'_blank'}>{profile.contacts.twitter?profile.contacts.twitter:'twitter'}</a>
             </div>
         </div>
         {/* //block 2*/}
-        <div className={o.block2} style={{overflow:'auto'}}>
+        <div className={o.block2} style={{overflow: 'auto'}}>
             <div>
                 <img src={img_git} alt="github"/>
-                {profile.contacts.github}
+                <a href={profile.contacts.github ? 'http://' + profile.contacts.github : 'https://github.com/'}
+                   target={'_blank'}>{profile.contacts.github?profile.contacts.github:'github'}</a>
             </div>
             <div>
                 <img src={img_face} alt="facebook"/>
-                {profile.contacts.facebook}
+                <a href={profile.contacts.facebook ? 'http://' + profile.contacts.facebook : 'https://www.facebook.com/'}
+                target={'_blank'}>{profile.contacts.facebook?profile.contacts.facebook:'facebook'}</a>
             </div>
             <div>
                 <span> website: </span>
-                <span style={{paddingLeft: '3px'}}> {profile.contacts.website}</span>
+                <span style={{paddingLeft: '3px'}}>
+                    <a href={profile.contacts.website ? 'http://' + profile.contacts.website : 'https://www.patreon.com/itkamasutra'} target={'_blank'}>{profile.contacts.website?profile.contacts.website:'it-kamasutra'}</a>
+                </span>
             </div>
             <div>
-                <span >main Link:</span>
-                <span style={{paddingLeft: '3px'}}>{profile.contacts.mainLink}</span>
+                <span>main Link:</span>
+                <span style={{paddingLeft: '3px'}}>
+                    <a href={profile.contacts.mainLink?'http://'+profile.contacts.mainLink:'https://www.themainlink.net/'} target={'_blank'}>{profile.contacts.mainLink?profile.contacts.mainLink:'main link'}</a>
+                </span>
             </div>
         </div>
 
