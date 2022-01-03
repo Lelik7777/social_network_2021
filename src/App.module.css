@@ -17,6 +17,8 @@ html,body{
 .content{
   grid-area: c;
   background-color: whitesmoke;
+  /*for preloader2 in profile*/
+  position: relative;
 }
 
 @media screen and (max-width: 800px){

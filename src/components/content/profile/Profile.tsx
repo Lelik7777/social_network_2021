@@ -3,16 +3,22 @@ import o from './Profile.module.css';
 import {ProfileInfo} from './profileInfo/ProfileInfo';
 import {PostsContainer} from './posts/PostsContainer';
 import {ProfileType} from '../../../redux/profileReducer/profileReducer';
+import {Preloader2} from '../../../common components/preloader/Preloader2';
 
 type PropsType={
     profile:ProfileType;
 }
 export function Profile({profile,...props}:PropsType) {
-    return (
-        <div className={o.profile}>
-            <ProfileInfo profile={profile}/>
-            <PostsContainer/>
-        </div>
-    );
+    if(profile.aboutMe){
+        return (
+            <div className={o.profile}>
+                <ProfileInfo profile={profile}/>
+                <PostsContainer/>
+            </div>
+        );
+    }
+    else {
+     return <Preloader2/>
+    }
 }
 

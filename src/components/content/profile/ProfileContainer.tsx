@@ -5,17 +5,20 @@ import {connect} from 'react-redux';
 import {ProfileType, setUserProfile} from '../../../redux/profileReducer/profileReducer';
 import axios from 'axios';
 
-type PropsType = MSTPType&MDTPType;
+type PropsType ={
+    profile:ProfileType;
+    setUserProfile:(profile: ProfileType) => void;
+};
 
-class ProfileAPIClass extends React.Component<PropsType, {}> {
+class ProfileAPIClass extends React.Component<PropsType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((res) => {
-            console.log(res.data)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/10`).then((res) => {
+            this.props.setUserProfile(res.data);
         })
     }
 
     render() {
-        return <Profile {...this.props} profile={this.props.profile}/>;
+        return <Profile  profile={this.props.profile}/>;
     }
 }
 
