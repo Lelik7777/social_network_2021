@@ -16,8 +16,6 @@ class ProfileAPIClass extends React.Component<PropsType> {
         if (!userId) {
             userId = '2';
         }
-        console.log(userId);
-        console.log(this.props.match.params)
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then((res) => {
             this.props.setUserProfile(res.data);

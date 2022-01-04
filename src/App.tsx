@@ -1,6 +1,5 @@
 import React from 'react';
 import o from './App.module.css';
-import {Header} from './components/header/Header';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './components/content/news/News';
 import {Settings} from './components/content/settings/Settings'
@@ -8,13 +7,14 @@ import {NavContainer} from './components/nav/NavContainer';
 import {DialogsContainer} from './components/content/dialogs/DialogsContainer';
 import {UsersContainerClass} from './components/content/users/UsersAPIClass';
 import {ProfileContainer} from './components/content/profile/ProfileContainer';
+import HeaderContainer from './components/header/HeaderContainer';
 
 
 function App() {
     return (
         <BrowserRouter>
             <div className={o.AppWrapper}>
-                <Header/>
+                <HeaderContainer/>
                 <NavContainer/>
                 <div className={o.content}>
                     <Route path={'/Profile/:userId?'} render={() => <ProfileContainer/>}/>

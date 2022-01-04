@@ -1,9 +1,10 @@
 .header {
     grid-area: h;
-    background-color:skyblue;
+    background-color: skyblue;
     box-shadow: -2px 0 8px blue;
     display: flex;
     align-items: center;
+    padding-top: 3px;
 }
 
 .header img {
@@ -11,4 +12,31 @@
     width: 70px;
     border-radius: 25px;
     margin-left: 10px;
+}
+
+.header .log {
+    margin-left: auto;
+    width: 15%;
+}
+
+.log button {
+    background-color: snow;
+    color: darkblue;
+    border: none;
+    box-shadow: 5px -1px 15px cornflowerblue;
+    border-radius: 6px;
+    font-size: 1.01rem;
+    padding: 5px;
+    cursor: pointer;
+}
+
+ .log .but_sign_up {
+    background-color: skyblue;
+}
+
+@media screen and (max-width: 950px) {
+    .log button {
+        margin-bottom: 5%;
+        font-size: 0.9rem;
+    }
 }

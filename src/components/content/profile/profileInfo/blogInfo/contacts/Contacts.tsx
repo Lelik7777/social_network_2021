@@ -9,7 +9,7 @@ import {ProfileType} from '../../../../../../redux/profileReducer/profileReducer
 import o from '../../ProfileInfo.module.css';
 
 export const Contacts = ({profile}: { profile: ProfileType }) => {
-    console.log(profile.contacts.website)
+    //console.log(profile.contacts.website)
     return <div className={o.right}>
         {/* block 1*/}
         <div className={o.block1}>

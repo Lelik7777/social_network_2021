@@ -4,7 +4,7 @@ import {ProfileType} from '../../../../../redux/profileReducer/profileReducer';
 import {Contacts} from './contacts/Contacts';
 
 export const BlogInfo = ({profile}: { profile: ProfileType }) => {
-    console.log(profile.lookingForAJob)
+    //console.log(profile.lookingForAJob)
     return <div className={o.blog_info}>
         <div className={o.left}>
             <div className={o.about}>' {profile.aboutMe} '</div>
