@@ -17,7 +17,7 @@ function App() {
                 <Header/>
                 <NavContainer/>
                 <div className={o.content}>
-                    <Route path={'/Profile'} render={() => <ProfileContainer/>}/>
+                    <Route path={'/Profile/:userId?'} render={() => <ProfileContainer/>}/>
                     <Route path={'/DialogsContainer'} render={() => <DialogsContainer/>}/>
                     <Route path={'/Users'} render={() => <UsersContainerClass/>}/>
                     <Route path={'/News'} render={() => <News/>}/>

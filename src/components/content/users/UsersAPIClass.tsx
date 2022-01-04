@@ -24,7 +24,9 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
 
     componentDidMount() {
         this.props.checkIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((res) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users
+        ?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then((res) => {
             this.props.setUsers(res.data.items);
             this.props.setTotalUsersCount(res.data.totalCount);
             this.props.checkIsFetching(false);
@@ -34,7 +36,9 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
     getCurrentPage = (page: number) => {
         this.props.checkIsFetching(true);
         this.props.getCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then((res) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users
+        ?page=${page}&count=${this.props.pageSize}`)
+            .then((res) => {
             this.props.setUsers(res.data.items);
             this.props.checkIsFetching(false);
         });
@@ -43,7 +47,9 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
         this.props.checkIsFetching(true);
         this.props.getCurrentPage(value);
         if (this.props.pageSize) {
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${value}&count=${this.props.pageSize}`).then((res) => {
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users
+            ?page=${value}&count=${this.props.pageSize}`)
+                .then((res) => {
                 this.props.setUsers(res.data.items);
                 this.props.checkIsFetching(false);
             });

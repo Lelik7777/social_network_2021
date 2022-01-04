@@ -4,18 +4,25 @@ import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
 import {ProfileType, setUserProfile} from '../../../redux/profileReducer/profileReducer';
 import axios from 'axios';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 
-type PropsType1 = MDTPType & MSTPType;
-type PropsType = {
-    profile: ProfileType;
-    setUserProfile: (profile: ProfileType) => void;
-};
+type PropsType = MDTPType & MSTPType & RouteComponentProps<{ userId: string }>
 
 class ProfileAPIClass extends React.Component<PropsType> {
+
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/4`).then((res) => {
+        //debugger
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = '2';
+        }
+        console.log(userId);
+        console.log(this.props.match.params)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+            .then((res) => {
             this.props.setUserProfile(res.data);
         })
+
     }
 
     render() {
@@ -32,5 +39,11 @@ type MDTPType = {
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {profile: state.dataProfile.profile}
 }
+
+/*const ProfileWithDateURL = withRouter(ProfileAPIClass);
 export const ProfileContainer =
-    connect<MSTPType, MDTPType, any, RootStateType>(mapStateToProps, {setUserProfile})(ProfileAPIClass);
+    connect<MSTPType, MDTPType, any, RootStateType>(mapStateToProps, {setUserProfile})(ProfileWithDateURL);*/
+export const ProfileContainer=
+    withRouter(connect<MSTPType,MDTPType,any,RootStateType>
+    (mapStateToProps,{setUserProfile})
+    (ProfileAPIClass));

@@ -15,8 +15,8 @@ export function ProfileInfo({profile}: { profile: ProfileType }) {
             <div className={o.blog}>
                 <div className={o.blog_img}>
                     {toggle
-                        ? <img src={profile.photos.small ? profile.photos.small : img_small}/>
-                        : <img src={profile.photos.large ? profile.photos.large : img_big}/>
+                        ? <img src={profile.photos.small ? profile.photos.small : img_small} alt={'avatar-small'}/>
+                        : <img src={profile.photos.large ? profile.photos.large : img_big} alt={'avatar-big'}/>
                     }
                     <br/>
                     <button

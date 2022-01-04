@@ -15,47 +15,86 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
         <div className={o.block1}>
             <div>
                 <img src={img_vk} alt="vk"/>
-                <a href={profile.contacts.vk ? 'http://' + profile.contacts.vk : 'https://vk.com/'}
-                   target="_blank">{profile.contacts.vk?profile.contacts.vk:'vk'}</a>
+                <a href={profile.contacts.vk
+                    ? 'http://' + profile.contacts.vk
+                    : 'https://vk.com/'}
+                   target="_blank" rel={'noreferrer'}>
+                    {profile.contacts.vk ? profile.contacts.vk : 'vk'}</a>
             </div>
             <div>
                 <img src={img_yout} alt="youtube"/>
-                <a href={profile.contacts.youtube ? 'http://' + profile.contacts.youtube : 'https://www.youtube.com/'}
-                   target="_blank">{profile.contacts.youtube?profile.contacts.youtube:'youtube'}</a>
+                <a href={profile.contacts.youtube
+                    ? 'http://' + profile.contacts.youtube
+                    : 'https://www.youtube.com/'}
+                   target="_blank"
+                   rel={'noreferrer'}>{profile.contacts.youtube
+                    ? profile.contacts.youtube : 'youtube'}</a>
             </div>
             <div>
                 <img src={img_inst} alt="instagram"/>
-                <a href={profile.contacts.instagram ? 'http://' + profile.contacts.instagram : 'https://www.instagram.com/'}
-                   target="_blank">{profile.contacts.instagram?profile.contacts.instagram:'instagram'}</a>
+                <a href={profile.contacts.instagram
+                    ? 'http://' + profile.contacts.instagram
+                    : 'https://www.instagram.com/'}
+                   target="_blank"
+                   rel={'noreferrer'}>
+                    {profile.contacts.instagram
+                        ? profile.contacts.instagram : 'instagram'}</a>
             </div>
             <div>
                 <img src={img_twit} alt="twitter"/>
-                <a href={profile.contacts.twitter ? 'http://' + profile.contacts.twitter : 'https://twitter.com/?lang=ru'}
-                   target={'_blank'}>{profile.contacts.twitter?profile.contacts.twitter:'twitter'}</a>
+                <a href={profile.contacts.twitter
+                    ? 'http://' + profile.contacts.twitter
+                    : 'https://twitter.com/?lang=ru'}
+                   target={'_blank'}
+                   rel={'noreferrer'}>
+                    {profile.contacts.twitter
+                        ? profile.contacts.twitter : 'twitter'}</a>
             </div>
         </div>
         {/* //block 2*/}
         <div className={o.block2} style={{overflow: 'auto'}}>
             <div>
                 <img src={img_git} alt="github"/>
-                <a href={profile.contacts.github ? 'http://' + profile.contacts.github : 'https://github.com/'}
-                   target={'_blank'}>{profile.contacts.github?profile.contacts.github:'github'}</a>
+                <a href={profile.contacts.github
+                    ? 'http://' + profile.contacts.github
+                    : 'https://github.com/'}
+                   target={'_blank'}
+                   rel={'noreferrer'}>
+                    {profile.contacts.github
+                        ? profile.contacts.github : 'github'}</a>
             </div>
             <div>
                 <img src={img_face} alt="facebook"/>
-                <a href={profile.contacts.facebook ? 'http://' + profile.contacts.facebook : 'https://www.facebook.com/'}
-                target={'_blank'}>{profile.contacts.facebook?profile.contacts.facebook:'facebook'}</a>
+                <a href={profile.contacts.facebook
+                    ? 'http://' + profile.contacts.facebook
+                    : 'https://www.facebook.com/'}
+                   target={'_blank'}
+                   rel={'noreferrer'}>
+                    {profile.contacts.facebook
+                        ? profile.contacts.facebook : 'facebook'}</a>
             </div>
             <div>
                 <span> website: </span>
                 <span style={{paddingLeft: '3px'}}>
-                    <a href={profile.contacts.website ? 'http://' + profile.contacts.website : 'https://www.patreon.com/itkamasutra'} target={'_blank'}>{profile.contacts.website?profile.contacts.website:'it-kamasutra'}</a>
+                    <a href={profile.contacts.website
+                        ? 'http://' + profile.contacts.website
+                        : 'https://www.patreon.com/itkamasutra'}
+                       target={'_blank'}
+                       rel={'noreferrer'}>
+                        {profile.contacts.website
+                            ? profile.contacts.website : 'it-kamasutra'}</a>
                 </span>
             </div>
             <div>
                 <span>main Link:</span>
                 <span style={{paddingLeft: '3px'}}>
-                    <a href={profile.contacts.mainLink?'http://'+profile.contacts.mainLink:'https://www.themainlink.net/'} target={'_blank'}>{profile.contacts.mainLink?profile.contacts.mainLink:'main link'}</a>
+                    <a href={profile.contacts.mainLink
+                        ? 'http://' + profile.contacts.mainLink
+                        : 'https://www.themainlink.net/'}
+                       target={'_blank'}
+                       rel={'noreferrer'}>
+                        {profile.contacts.mainLink
+                            ? profile.contacts.mainLink : 'main link'}</a>
                 </span>
             </div>
         </div>
