@@ -11,12 +11,12 @@ import {
     unfollow,
     UserType
 } from '../../../redux/usersReducer';
-import axios from 'axios';
 import {UsersForClass} from './UsersForClass';
+import {userAPI} from '../../../api/api';
 
 
 type PropsType = MDTPType & MSTPType;
-
+F
 class UsersAPIClass extends React.Component<PropsType, { value: number }> {
     constructor(props: PropsType) {
         super(props);
@@ -33,60 +33,53 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
                  this.props.checkIsFetching(false);
              })*/
         //more shortly using params
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`,
-            {
-                params: {
-                    page: this.props.currentPage,
-                    count: this.props.pageSize,
-                }
-            })
-            .then((res) => {
-                this.props.setUsers(res.data.items);
-                this.props.setTotalUsersCount(res.data.totalCount);
-                this.props.checkIsFetching(false);
-            });
-    }
+        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
+            this.props.setUsers(res.items);
+            this.props.setTotalUsersCount(res.totalCount);
+            this.props.checkIsFetching(false);
+        });
+    };
 
     getCurrentPage = (page: number) => {
         this.props.checkIsFetching(true);
         this.props.getCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`, {
-            params: {
-                page: page,
-                count: this.props.pageSize,
-            }
-        })
-            .then((res) => {
-                this.props.setUsers(res.data.items);
+
+        userAPI.getUsers(page, this.props.pageSize).then((res) => {
+            this.props.setUsers(res.items);
+            this.props.checkIsFetching(false);
+        });
+    };
+    setCurrentPageAtFirst = (curPage: number) => {
+        this.props.checkIsFetching(true);
+        this.props.getCurrentPage(curPage);
+        if (this.props.pageSize) {
+           userAPI.getUsers(curPage, this.props.pageSize).then((res) => {
+                this.props.setUsers(res.items);
                 this.props.checkIsFetching(false);
             });
-    }
-    setCurrentPageAtFirst = (value: number) => {
-        this.props.checkIsFetching(true);
-        this.props.getCurrentPage(value);
-        if (this.props.pageSize) {
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users`,{
-                params:{
-                    page:value,
-                    count:this.props.pageSize,
-                }
-            })
-                .then((res) => {
-                    this.props.setUsers(res.data.items);
-                    this.props.checkIsFetching(false);
-                });
         }
         this.setState({value: 1});
-    }
-    onChange = (value: number) => {
+    };
+    onChangeValueInput = (value: number) => {
         this.setState({value: value})
+    };
+    setFollowOnClick = (id: number) => {
+
+        userAPI.postFollow(id).then(() => {
+            this.props.follow(id);
+        })
+    };
+    setUnfollowOnClick = (id: number) => {
+        userAPI.deleteFollow(id).then(() => {
+            this.props.unfollow(id)
+        })
     }
 
     render() {
         return (
             <UsersForClass
                 value={this.state.value}
-                updateNewMessage={this.onChange}
+                updateNewMessage={this.onChangeValueInput}
                 users={this.props.users}
                 totalUsersCount={this.props.totalUsersCount}
                 currentPage={this.props.currentPage}
@@ -94,8 +87,8 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
                 getCurrentPage={this.getCurrentPage}
                 setCurrentPageAtFirst={this.setCurrentPageAtFirst}
                 setUsers={this.props.setUsers}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
+                setFollowOnClick={this.setFollowOnClick}
+                setUnfollowOnClick={this.setUnfollowOnClick}
                 isFetching={this.props.isFetching}
             />
         )

@@ -20,8 +20,6 @@ type PropsType = MDTPType & MSTPType;
 
 const Users = ({
                    users,
-                   follow,
-                   unfollow,
                    setUsers,
                    pageSize,
                    totalUsersCount,
@@ -30,7 +28,7 @@ const Users = ({
                    setTotalUsersCount,
                    getCurrentPage,
                }: PropsType) => {
-    const [value, setValue] = useState(1);
+    const [value, setValue] = useState(10);
     useEffect(() => {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${currentPage}`).then((resp) => {
             setUsers(resp.data.items);
@@ -47,26 +45,27 @@ const Users = ({
         pages.push(i);
     }
     let partPages = [];
-    let countOfPages=10;
-    for (let i = currentPage,count=0; i < pages.length; i++,count++) {
+    let countOfPages = 10;
+    for (let i = currentPage, count = 0; i < pages.length; i++, count++) {
         if (count <= countOfPages) {
             partPages.push(i);
         }
     }
-    const setCurrPage = () =>{
+    const setCurrPage = () => {
         getCurrentPage(value);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${value}`).then((res)=>{
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${value}`).then((res) => {
             setUsers(res.data.items);
         });
     };
     return (
         <div className={s.users}>
             {partPages.map(x => {
-                const getCurrPage = () =>{
+                const getCurrPage = () => {
                     getCurrentPage(x);
-                    axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${x}`).then((res)=>{
-                       setUsers(res.data.items);
-                    });
+                    axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=${pageSize}&page=${x}`)
+                        .then((res) => {
+                            setUsers(res.data.items);
+                        });
                 }
                 return <span
                     key={x}
@@ -82,7 +81,13 @@ const Users = ({
             >set current page at first
             </button>
             <h2>Users</h2>
-            {users.map((x) => <User key={x.id} user={x} follow={follow} unfollow={unfollow}/>)}
+            {users.map((x) => <User key={x.id}
+                                    user={x}
+                                    setFollowOnClick={() => {
+                                    }}
+                                    setUnfollowOnClick={() => {
+                                    }}
+            />)}
             <div className={s.wrapper_button}>
                 <div className={s.button} onClick={() => setUsers([])}>show more</div>
             </div>

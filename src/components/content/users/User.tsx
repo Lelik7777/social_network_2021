@@ -6,14 +6,10 @@ import {NavLink} from 'react-router-dom';
 
 type PropsType = {
     user: UserType;
-    follow: (id: number) => void;
-    unfollow: (id: number) => void;
+    setFollowOnClick:(id:number)=>void;
+    setUnfollowOnClick:(id:number)=>void;
 }
-export const User = ({user, follow, unfollow}: PropsType) => {
-    const onClick = () => {
-        return follow(user.id)
-    };
-    const onClick1 = () => unfollow(user.id);
+export const User = ({user, setFollowOnClick,setUnfollowOnClick}: PropsType) => {
     return (<div className={s.user}>
         <div className={s.avatar}>
             <NavLink to={'./Profile/' + user.id}>
@@ -21,11 +17,9 @@ export const User = ({user, follow, unfollow}: PropsType) => {
             </NavLink>
 
             <br/>
-            {user.followed
-                ?
-                <button onClick={onClick}>follow</button>
-                :
-                <button onClick={onClick1}>unfollow</button>}
+            {!user.followed
+                ? <button onClick={()=>setFollowOnClick(user.id)}>follow</button>
+                : <button onClick={()=>setUnfollowOnClick(user.id)}>unfollow</button>}
         </div>
         <div className={s.data}>
             <div className={s.sub_data1}>

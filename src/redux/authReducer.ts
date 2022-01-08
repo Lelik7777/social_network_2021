@@ -21,7 +21,7 @@ const initialState: AuthType = {
 export const authReducer = (state = initialState, action: ActionAuthType): AuthType => {
     switch (action.type) {
         case ActionType.SET_DATA_AUTH:
-            return {...state, ...action.payload.data, isAuth: action.payload.isAuth};
+            return {...state,data:action.payload.data, isAuth: action.payload.isAuth};
         default:
             return state;
     }

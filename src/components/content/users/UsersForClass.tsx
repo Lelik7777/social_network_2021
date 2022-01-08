@@ -7,8 +7,6 @@ import {Preloader} from '../../../common components/preloader/Preloader';
 type PropsType = {
     value: number;
     updateNewMessage: (value: number) => void;
-    follow: (id: number) => void;
-    unfollow: (id: number) => void;
     setUsers: (users: UserType[]) => void;
     users: UserType[];
     pageSize: number;
@@ -17,11 +15,13 @@ type PropsType = {
     getCurrentPage: (page: number) => void;
     setCurrentPageAtFirst: (v: number) => void;
     isFetching: boolean;
+    setFollowOnClick: (id: number) => void;
+    setUnfollowOnClick: (id: number) => void;
 }
 export const UsersForClass = ({
                                   value, updateNewMessage, users, pageSize, totalUsersCount, currentPage,
-                                  getCurrentPage, setCurrentPageAtFirst, follow, unfollow, setUsers,
-                                  isFetching,
+                                  getCurrentPage, setCurrentPageAtFirst, setUsers,
+                                  isFetching, setFollowOnClick, setUnfollowOnClick,
                               }: PropsType) => {
     let countPagesAll = Math.ceil(totalUsersCount / pageSize)
     let pages = [];
@@ -29,7 +29,7 @@ export const UsersForClass = ({
         pages.push(i);
     }
     let partPages = [];
-    let countOfPages = 10;
+    let countOfPages = 9;
     for (let i = currentPage, count = 0; i < pages.length; i++, count++) {
         if (count <= countOfPages) {
             partPages.push(i);
@@ -67,8 +67,8 @@ export const UsersForClass = ({
             {users.map((x) =>
                 <User key={x.id}
                       user={x}
-                      follow={follow}
-                      unfollow={unfollow}
+                      setFollowOnClick={setFollowOnClick}
+                      setUnfollowOnClick={setUnfollowOnClick}
                 />)}
             <div className={s.wrapper_button}>
                 <div className={s.button}

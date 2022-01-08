@@ -4,7 +4,7 @@ export type UserType = {
     name: string;
     photos: { small: string | null, large: string | null };
     status: string | null;
-    uniqueUrlName: string | null;
+    /*uniqueUrlName: string | null;*/
 
     /* location: {
          city: string;
@@ -20,7 +20,7 @@ export type UsersType = {
 }
 const initialState: UsersType = {
     items: [],
-    pageSize: 4,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -29,15 +29,17 @@ export type ActionUsersType = ReturnType<typeof follow | typeof unfollow | typeo
 export const usersReducer = (state = initialState, action: ActionUsersType): UsersType => {
     switch (action.type) {
         case'FOLLOW-TYPE':
-            return {...state, items: state.items.map(x => x.id === action.payload.id ? {...x, followed: false} : x)};
-        case 'UNFOLLOW-TYPE':
+            //debugger;
             return {...state, items: state.items.map(x => x.id === action.payload.id ? {...x, followed: true} : x)};
+        case 'UNFOLLOW-TYPE':
+            //debugger
+            return {...state, items: state.items.map(x => x.id === action.payload.id ? {...x, followed: false} : x)};
         case 'SET-USERS':
             return {...state, items: action.payload.users};
         case 'SET-PAGES':
             return {...state, pageSize: action.payload.pages};
         case 'GET-CURRENT-PAGE':
-            console.log(action.payload.page)
+            //console.log(action.payload.page)
             return {...state, currentPage: action.payload.page};
         case 'SET-TOTAL-USER-COUNT':
             return {...state, totalUsersCount: action.payload.count};

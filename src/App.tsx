@@ -7,14 +7,14 @@ import {NavContainer} from './components/nav/NavContainer';
 import {DialogsContainer} from './components/content/dialogs/DialogsContainer';
 import {UsersContainerClass} from './components/content/users/UsersAPIClass';
 import {ProfileContainer} from './components/content/profile/ProfileContainer';
-import HeaderContainer from './components/header/HeaderContainer';
+import HeaderContainerWithAPI from './components/header/HeaderContainerWithAPI';
 
 
 function App() {
     return (
         <BrowserRouter>
             <div className={o.AppWrapper}>
-                <HeaderContainer/>
+                <HeaderContainerWithAPI/>
                 <NavContainer/>
                 <div className={o.content}>
                     <Route path={'/Profile/:userId?'} render={() => <ProfileContainer/>}/>

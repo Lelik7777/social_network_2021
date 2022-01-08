@@ -29,14 +29,27 @@
     padding: 5px;
     cursor: pointer;
 }
-
+.log .but_sign_in{
+    margin-right: 10%;
+}
  .log .but_sign_up {
     background-color: skyblue;
 }
-
+#img_login{
+  height: 25px;
+    width: 40px;
+    margin-right: 10%;
+  position: relative;
+    top:8px;
+}
 @media screen and (max-width: 950px) {
     .log button {
         margin-bottom: 5%;
         font-size: 0.9rem;
+    }
+}
+@media screen and (max-width: 820px){
+    #img_login{
+        top:0;
     }
 }
