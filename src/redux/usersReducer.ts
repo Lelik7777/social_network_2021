@@ -17,6 +17,7 @@ export type UsersType = {
     totalUsersCount: number;
     currentPage: number;
     isFetching: boolean;
+    isFollowInProcessing: number[];
 }
 const initialState: UsersType = {
     items: [],
@@ -24,8 +25,10 @@ const initialState: UsersType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    isFollowInProcessing: [],
 };
-export type ActionUsersType = ReturnType<typeof follow | typeof unfollow | typeof setUsers | typeof setPages | typeof getCurrentPage | typeof setTotalUsersCount|typeof checkIsFetching>;
+export type ActionUsersType = ReturnType<typeof follow | typeof unfollow | typeof setUsers |
+    typeof setPages | typeof getCurrentPage | typeof setTotalUsersCount | typeof checkIsFetching | typeof setIsFollowInProc>;
 export const usersReducer = (state = initialState, action: ActionUsersType): UsersType => {
     switch (action.type) {
         case'FOLLOW-TYPE':
@@ -44,7 +47,12 @@ export const usersReducer = (state = initialState, action: ActionUsersType): Use
         case 'SET-TOTAL-USER-COUNT':
             return {...state, totalUsersCount: action.payload.count};
         case 'CHECK-IS-FETCHING':
-            return {...state,isFetching:action.payload.isFet};
+            return {...state, isFetching: action.payload.isFet};
+        case 'SET_IS_FOLLOW_IN_PROG':
+            return {
+                ...state,
+                isFollowInProcessing: action.payload.isFet ? [...state.isFollowInProcessing, action.payload.id] : state.isFollowInProcessing.filter(x => x !== action.payload.id)
+            };
         default:
             return state;
     }
@@ -92,5 +100,11 @@ export const checkIsFetching = (isFet: boolean) => {
     return {
         type: 'CHECK-IS-FETCHING',
         payload: {isFet,},
+    } as const;
+};
+export const setIsFollowInProc = (isFet: boolean, id: number) => {
+    return {
+        type: 'SET_IS_FOLLOW_IN_PROG',
+        payload: {isFet, id,},
     } as const;
 };

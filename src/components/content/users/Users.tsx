@@ -15,7 +15,7 @@ import {Dispatch} from 'redux';
 import s from './User.module.css';
 import {User} from './User';
 import axios from 'axios';
-
+//functional component - prototype UsersForClass - not worked
 type PropsType = MDTPType & MSTPType;
 
 const Users = ({
@@ -87,6 +87,7 @@ const Users = ({
                                     }}
                                     setUnfollowOnClick={() => {
                                     }}
+                                    isFollowInProcessing={[]}
             />)}
             <div className={s.wrapper_button}>
                 <div className={s.button} onClick={() => setUsers([])}>show more</div>

@@ -6,7 +6,7 @@ import {Settings} from './components/content/settings/Settings'
 import {NavContainer} from './components/nav/NavContainer';
 import {DialogsContainer} from './components/content/dialogs/DialogsContainer';
 import {UsersContainerClass} from './components/content/users/UsersAPIClass';
-import {ProfileContainer} from './components/content/profile/ProfileContainer';
+import {ProfileContainerWithAPI} from './components/content/profile/ProfileContainerWithAPI';
 import HeaderContainerWithAPI from './components/header/HeaderContainerWithAPI';
 
 
@@ -17,7 +17,7 @@ function App() {
                 <HeaderContainerWithAPI/>
                 <NavContainer/>
                 <div className={o.content}>
-                    <Route path={'/Profile/:userId?'} render={() => <ProfileContainer/>}/>
+                    <Route path={'/Profile/:userId?'} render={() => <ProfileContainerWithAPI/>}/>
                     <Route path={'/DialogsContainer'} render={() => <DialogsContainer/>}/>
                     <Route path={'/Users'} render={() => <UsersContainerClass/>}/>
                     <Route path={'/News'} render={() => <News/>}/>

@@ -9,6 +9,7 @@ type PropsType={
     profile:ProfileType;
 }
 export function Profile({profile,...props}:PropsType) {
+    debugger
     if(profile.fullName){
         return (
             <div className={o.profile}>

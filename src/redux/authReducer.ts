@@ -1,5 +1,5 @@
 export type DataForAuthType = {
-    id: string | null;
+    id: null|number;
     email: string | null;
     login: string | null;
 }

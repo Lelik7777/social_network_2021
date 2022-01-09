@@ -17,11 +17,15 @@ type PropsType = {
     isFetching: boolean;
     setFollowOnClick: (id: number) => void;
     setUnfollowOnClick: (id: number) => void;
+    isFollowInProcessing: number[];
 }
 export const UsersForClass = ({
-                                  value, updateNewMessage, users, pageSize, totalUsersCount, currentPage,
-                                  getCurrentPage, setCurrentPageAtFirst, setUsers,
-                                  isFetching, setFollowOnClick, setUnfollowOnClick,
+                                  value, updateNewMessage, users, pageSize,
+                                  totalUsersCount, currentPage,
+                                  getCurrentPage, setCurrentPageAtFirst,
+                                  setUsers, isFetching,
+                                  setFollowOnClick, setUnfollowOnClick,
+                                  isFollowInProcessing
                               }: PropsType) => {
     let countPagesAll = Math.ceil(totalUsersCount / pageSize)
     let pages = [];
@@ -69,6 +73,7 @@ export const UsersForClass = ({
                       user={x}
                       setFollowOnClick={setFollowOnClick}
                       setUnfollowOnClick={setUnfollowOnClick}
+                      isFollowInProcessing={isFollowInProcessing}
                 />)}
             <div className={s.wrapper_button}>
                 <div className={s.button}

@@ -5,6 +5,7 @@ import {
     checkIsFetching,
     follow,
     getCurrentPage,
+    setIsFollowInProc,
     setPages,
     setTotalUsersCount,
     setUsers,
@@ -16,7 +17,7 @@ import {userAPI} from '../../../api/api';
 
 
 type PropsType = MDTPType & MSTPType;
-F
+
 class UsersAPIClass extends React.Component<PropsType, { value: number }> {
     constructor(props: PropsType) {
         super(props);
@@ -33,30 +34,33 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
                  this.props.checkIsFetching(false);
              })*/
         //more shortly using params
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
-            this.props.setUsers(res.items);
-            this.props.setTotalUsersCount(res.totalCount);
-            this.props.checkIsFetching(false);
-        });
+        userAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then((res) => {
+                this.props.setUsers(res.items);
+                this.props.setTotalUsersCount(res.totalCount);
+                this.props.checkIsFetching(false);
+            });
     };
 
     getCurrentPage = (page: number) => {
         this.props.checkIsFetching(true);
         this.props.getCurrentPage(page);
 
-        userAPI.getUsers(page, this.props.pageSize).then((res) => {
-            this.props.setUsers(res.items);
-            this.props.checkIsFetching(false);
-        });
+        userAPI.getUsers(page, this.props.pageSize)
+            .then((res) => {
+                this.props.setUsers(res.items);
+                this.props.checkIsFetching(false);
+            });
     };
     setCurrentPageAtFirst = (curPage: number) => {
         this.props.checkIsFetching(true);
         this.props.getCurrentPage(curPage);
         if (this.props.pageSize) {
-           userAPI.getUsers(curPage, this.props.pageSize).then((res) => {
-                this.props.setUsers(res.items);
-                this.props.checkIsFetching(false);
-            });
+            userAPI.getUsers(curPage, this.props.pageSize)
+                .then((res) => {
+                    this.props.setUsers(res.items);
+                    // this.props.checkIsFetching(false);
+                });
         }
         this.setState({value: 1});
     };
@@ -64,14 +68,17 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
         this.setState({value: value})
     };
     setFollowOnClick = (id: number) => {
-
+        this.props.setIsFollowInProc(true, id)
         userAPI.postFollow(id).then(() => {
             this.props.follow(id);
+            this.props.setIsFollowInProc(false, id);
         })
     };
     setUnfollowOnClick = (id: number) => {
+        this.props.setIsFollowInProc(true, id)
         userAPI.deleteFollow(id).then(() => {
-            this.props.unfollow(id)
+            this.props.unfollow(id);
+            this.props.setIsFollowInProc(false, id)
         })
     }
 
@@ -90,6 +97,7 @@ class UsersAPIClass extends React.Component<PropsType, { value: number }> {
                 setFollowOnClick={this.setFollowOnClick}
                 setUnfollowOnClick={this.setUnfollowOnClick}
                 isFetching={this.props.isFetching}
+                isFollowInProcessing={this.props.isFollowInProcessing}
             />
         )
     }
@@ -102,6 +110,7 @@ type MSTPType = {
     totalUsersCount: number;
     currentPage: number;
     isFetching: boolean;
+    isFollowInProcessing: number[];
 };
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
@@ -110,6 +119,7 @@ const mapStateToProps = (state: RootStateType): MSTPType => {
         totalUsersCount: state.dataUsers.totalUsersCount,
         currentPage: state.dataUsers.currentPage,
         isFetching: state.dataUsers.isFetching,
+        isFollowInProcessing: state.dataUsers.isFollowInProcessing,
     }
 };
 type MDTPType = {
@@ -120,6 +130,7 @@ type MDTPType = {
     getCurrentPage: (page: number) => void;
     setTotalUsersCount: (count: number) => void;
     checkIsFetching: (isFet: boolean) => void;
+    setIsFollowInProc: (isFet: boolean, id: number) => void;
 }
 /*const mapDispatchToProps = (dispatch: Dispatch<ActionUsersType>): MDTPType => {
     return {
@@ -138,4 +149,5 @@ export const UsersContainerClass =
         follow, unfollow, setUsers,
         setPages, getCurrentPage,
         setTotalUsersCount, checkIsFetching,
+        setIsFollowInProc,
     })(UsersAPIClass);
