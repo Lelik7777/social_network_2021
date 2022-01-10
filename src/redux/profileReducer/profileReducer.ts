@@ -95,3 +95,4 @@ export const setUserProfile = (profile: ProfileType) => {
         payload: {profile},
     };
 };
+

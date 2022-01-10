@@ -22,7 +22,8 @@ class HeaderContainerWithAPI extends React.Component<PropsType> {
     getAuthOnClick = () => {
         //debugger
         userAPI.getAuthMe().then(res => {
-            console.log(res)
+            console.log(res.data)
+            if(res.data.login)
             this.props.setDataAuth(res.data, true);
 
         });

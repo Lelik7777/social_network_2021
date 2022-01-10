@@ -23,7 +23,8 @@ export const User = ({
             <br/>
             {!user.followed
                 ? <button
-                    onClick={() => setFollowOnClick(user.id)} disabled={isFollowInProcessing
+                    onClick={() => setFollowOnClick(user.id)}
+                    disabled={isFollowInProcessing
                     .some(x => x === user.id)}>
                     follow
                 </button>

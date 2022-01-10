@@ -7,25 +7,24 @@ import {Preloader} from '../../../common components/preloader/Preloader';
 type PropsType = {
     value: number;
     updateNewMessage: (value: number) => void;
-    setUsers: (users: UserType[]) => void;
     users: UserType[];
     pageSize: number;
     totalUsersCount: number;
     currentPage: number;
     getCurrentPage: (page: number) => void;
-    setCurrentPageAtFirst: (v: number) => void;
+    setPageAtBegin: (v: number) => void;
     isFetching: boolean;
     setFollowOnClick: (id: number) => void;
     setUnfollowOnClick: (id: number) => void;
     isFollowInProcessing: number[];
 }
 export const UsersForClass = ({
-                                  value, updateNewMessage, users, pageSize,
+                                  value, updateNewMessage,
+                                  users, pageSize,
                                   totalUsersCount, currentPage,
-                                  getCurrentPage, setCurrentPageAtFirst,
-                                  setUsers, isFetching,
-                                  setFollowOnClick, setUnfollowOnClick,
-                                  isFollowInProcessing
+                                  getCurrentPage, setPageAtBegin,
+                                  isFetching, setFollowOnClick,
+                                  setUnfollowOnClick, isFollowInProcessing
                               }: PropsType) => {
     let countPagesAll = Math.ceil(totalUsersCount / pageSize)
     let pages = [];
@@ -61,7 +60,7 @@ export const UsersForClass = ({
                    value={value}
             />
             <button className={s.but_input}
-                    onClick={() => setCurrentPageAtFirst(value)}
+                    onClick={() => setPageAtBegin(value)}
             >
                 set current page at first
             </button>
@@ -77,7 +76,7 @@ export const UsersForClass = ({
                 />)}
             <div className={s.wrapper_button}>
                 <div className={s.button}
-                     onClick={() => setUsers([])}>
+                     onClick={() => {}}>
                     show more
                 </div>
             </div>

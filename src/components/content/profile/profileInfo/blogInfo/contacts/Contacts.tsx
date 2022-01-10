@@ -16,7 +16,7 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
             <div>
                 <img src={img_vk} alt="vk"/>
                 <a href={profile.contacts.vk
-                    ? 'http://' + profile.contacts.vk
+                    ? profile.contacts.vk
                     : 'https://vk.com/'}
                    target="_blank" rel={'noreferrer'}>
                     {profile.contacts.vk ? profile.contacts.vk : 'vk'}</a>
@@ -24,7 +24,7 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
             <div>
                 <img src={img_yout} alt="youtube"/>
                 <a href={profile.contacts.youtube
-                    ? 'http://' + profile.contacts.youtube
+                    ? profile.contacts.youtube
                     : 'https://www.youtube.com/'}
                    target="_blank"
                    rel={'noreferrer'}>{profile.contacts.youtube
@@ -33,7 +33,7 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
             <div>
                 <img src={img_inst} alt="instagram"/>
                 <a href={profile.contacts.instagram
-                    ? 'http://' + profile.contacts.instagram
+                    ? profile.contacts.instagram
                     : 'https://www.instagram.com/'}
                    target="_blank"
                    rel={'noreferrer'}>
@@ -43,7 +43,7 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
             <div>
                 <img src={img_twit} alt="twitter"/>
                 <a href={profile.contacts.twitter
-                    ? 'http://' + profile.contacts.twitter
+                    ? profile.contacts.twitter
                     : 'https://twitter.com/?lang=ru'}
                    target={'_blank'}
                    rel={'noreferrer'}>
@@ -56,7 +56,7 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
             <div>
                 <img src={img_git} alt="github"/>
                 <a href={profile.contacts.github
-                    ? 'http://' + profile.contacts.github
+                    ? profile.contacts.github
                     : 'https://github.com/'}
                    target={'_blank'}
                    rel={'noreferrer'}>
@@ -66,7 +66,7 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
             <div>
                 <img src={img_face} alt="facebook"/>
                 <a href={profile.contacts.facebook
-                    ? 'http://' + profile.contacts.facebook
+                    ? profile.contacts.facebook
                     : 'https://www.facebook.com/'}
                    target={'_blank'}
                    rel={'noreferrer'}>
@@ -77,8 +77,8 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
                 <span> website: </span>
                 <span style={{paddingLeft: '3px'}}>
                     <a href={profile.contacts.website
-                        ? 'http://' + profile.contacts.website
-                        : 'https://www.patreon.com/itkamasutra'}
+                        ?  profile.contacts.website
+                        : 'https://it-incubator.by/'}
                        target={'_blank'}
                        rel={'noreferrer'}>
                         {profile.contacts.website
@@ -89,8 +89,8 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
                 <span>main Link:</span>
                 <span style={{paddingLeft: '3px'}}>
                     <a href={profile.contacts.mainLink
-                        ? 'http://' + profile.contacts.mainLink
-                        : 'https://www.themainlink.net/'}
+                        ? profile.contacts.mainLink
+                        : 'https://joblink.maine.gov/'}
                        target={'_blank'}
                        rel={'noreferrer'}>
                         {profile.contacts.mainLink

@@ -1,3 +1,9 @@
+import {Dispatch} from 'redux';
+import {userAPI} from '../api/api';
+import {ThunkDispatch} from 'redux-thunk';
+import {ActionType, RootStateType, ThunkType} from './store';
+
+
 export type UserType = {
     followed: boolean;
     id: number;
@@ -27,8 +33,11 @@ const initialState: UsersType = {
     isFetching: false,
     isFollowInProcessing: [],
 };
-export type ActionUsersType = ReturnType<typeof follow | typeof unfollow | typeof setUsers |
-    typeof setPages | typeof getCurrentPage | typeof setTotalUsersCount | typeof checkIsFetching | typeof setIsFollowInProc>;
+export type ActionUsersType = ReturnType<typeof follow |
+    typeof unfollow | typeof setUsers | typeof getCurrentPage |
+    typeof setTotalUsersCount | typeof checkIsFetching |
+    typeof setIsFollowInProc>;
+
 export const usersReducer = (state = initialState, action: ActionUsersType): UsersType => {
     switch (action.type) {
         case'FOLLOW-TYPE':
@@ -39,8 +48,6 @@ export const usersReducer = (state = initialState, action: ActionUsersType): Use
             return {...state, items: state.items.map(x => x.id === action.payload.id ? {...x, followed: false} : x)};
         case 'SET-USERS':
             return {...state, items: action.payload.users};
-        case 'SET-PAGES':
-            return {...state, pageSize: action.payload.pages};
         case 'GET-CURRENT-PAGE':
             //console.log(action.payload.page)
             return {...state, currentPage: action.payload.page};
@@ -48,7 +55,7 @@ export const usersReducer = (state = initialState, action: ActionUsersType): Use
             return {...state, totalUsersCount: action.payload.count};
         case 'CHECK-IS-FETCHING':
             return {...state, isFetching: action.payload.isFet};
-        case 'SET_IS_FOLLOW_IN_PROG':
+        case 'SET_IS_FOLLOW_IN_PROC':
             return {
                 ...state,
                 isFollowInProcessing: action.payload.isFet ? [...state.isFollowInProcessing, action.payload.id] : state.isFollowInProcessing.filter(x => x !== action.payload.id)
@@ -79,12 +86,6 @@ export const setUsers = (users: UserType[]) => {
         payload: {users,},
     } as const;
 };
-export const setPages = (pages: number) => {
-    return {
-        type: 'SET-PAGES',
-        payload: {pages},
-    } as const;
-};
 export const getCurrentPage = (page: number) => {
     return {
         type: 'GET-CURRENT-PAGE', payload: {page,},
@@ -104,7 +105,87 @@ export const checkIsFetching = (isFet: boolean) => {
 };
 export const setIsFollowInProc = (isFet: boolean, id: number) => {
     return {
-        type: 'SET_IS_FOLLOW_IN_PROG',
+        type: 'SET_IS_FOLLOW_IN_PROC',
         payload: {isFet, id,},
     } as const;
 };
+
+export const getUsers = (page: number, count: number): ThunkType => {
+// можно типизировать через ThunkType,который в  store
+//можно вместо
+    //внутренняя ф-ция принимает два параметра: первый это dispatch,a second - state across getState
+    // через который можно достать любое значение из общего стейта
+    return (dispatch, getState: () => RootStateType) => {
+
+        dispatch(checkIsFetching(true));
+        userAPI.getUsers(page, count)
+            .then((res) => {
+                dispatch(setUsers(res.items));
+                dispatch(setTotalUsersCount(res.totalCount));
+                dispatch(checkIsFetching(false));
+            }).catch(error => {
+            console.warn(error)
+        });
+    }
+}
+//second variant of typing
+/*
+export const getUsers2 = (page: number, count: number) => {
+
+    return (dispatch:ThunkDispatch<RootStateType,unknown,ActionType>,getState:()=>RootStateType ) => {
+
+        dispatch(checkIsFetching(true));
+        userAPI.getUsers(page, count)
+            .then((res) => {
+                dispatch(setUsers(res.items));
+                dispatch(setTotalUsersCount(res.totalCount));
+                dispatch(checkIsFetching(false));
+            });
+    }
+}*/
+
+export const getCurPage = (page: number, count: number) => {
+    return (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
+        dispatch(checkIsFetching(true));
+        dispatch(getCurrentPage(page));
+
+        userAPI.getUsers(page, count)
+            .then((res) => {
+                dispatch(setUsers(res.items));
+                dispatch(checkIsFetching(false));
+            });
+    }
+
+};
+export const setPageAtBegin = (page: number, count: number) => {
+    return (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
+        dispatch(checkIsFetching(true));
+        dispatch(getCurrentPage(page));
+        if (count) {
+            userAPI.getUsers(page, count)
+                .then((res) => {
+                    dispatch(setUsers(res.items));
+                    dispatch(checkIsFetching(false));
+                });
+        }
+    }
+};
+export const setFollow = (id: number) => {
+    return (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
+        debugger
+        dispatch(setIsFollowInProc(true, id));
+        userAPI.postFollow(id).then(() => {
+            dispatch(follow(id));
+            dispatch(setIsFollowInProc(false, id));
+        })
+    }
+};
+export const setUnFollow = (id: number) => {
+    return (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
+        dispatch(setIsFollowInProc(true, id));
+        userAPI.deleteFollow(id).then(() => {
+            dispatch(unfollow(id));
+            dispatch(setIsFollowInProc(false, id));
+        })
+    }
+}

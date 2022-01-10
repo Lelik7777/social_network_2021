@@ -21,11 +21,11 @@ export function ProfileInfo({profile}: { profile: ProfileType }) {
                     <br/>
                     <button
                         onClick={onClick}>{toggle
-                        ? 'toggle to big picture'
-                        : 'toggle to small picture'}
+                        ? 'toggle to big pic'
+                        : 'toggle to small pic'}
                     </button>
                     <br/>
-                    <span>{profile.fullName}</span>
+                    <span style={{color:'darkblue',marginLeft:'10%',fontSize:'1.3rem'}}>{profile.fullName}</span>
                 </div>
                 <BlogInfo profile={profile}/>
             </div>

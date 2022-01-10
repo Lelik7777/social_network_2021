@@ -14,7 +14,7 @@ class ProfileAPIClass extends React.Component<PropsType> {
         debugger
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = '2';
+            userId = '21240';
         }
         userAPI.getProfile(userId).then((res) => {
             this.props.setUserProfile(res.data);
