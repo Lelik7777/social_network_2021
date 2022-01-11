@@ -2,8 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Header} from './Header';
 import {RootStateType} from '../../redux/store';
-import {DataForAuthType, setDataAuth} from '../../redux/authReducer';
-import {userAPI} from '../../api/api';
+import {getAuthMe} from '../../redux/authReducer';
 
 type PropsType = MDTPType & MSTPType;
 
@@ -20,13 +19,7 @@ class HeaderContainerWithAPI extends React.Component<PropsType> {
      }*/
 
     getAuthOnClick = () => {
-        //debugger
-        userAPI.getAuthMe().then(res => {
-            console.log(res.data)
-            if(res.data.login)
-            this.props.setDataAuth(res.data, true);
-
-        });
+        this.props.getAuthMe();
     }
 
     render() {
@@ -44,7 +37,7 @@ type MSTPType = {
     email: string | null;
 }
 type MDTPType = {
-    setDataAuth: (data: DataForAuthType, isAuth: boolean) => void;
+    getAuthMe: () => void;
 }
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
@@ -55,4 +48,4 @@ const mapStateToProps = (state: RootStateType): MSTPType => {
 }
 
 export default connect<MSTPType, MDTPType, any, RootStateType>
-(mapStateToProps, {setDataAuth})(HeaderContainerWithAPI)
+(mapStateToProps, {getAuthMe})(HeaderContainerWithAPI)

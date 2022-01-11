@@ -2,45 +2,48 @@ import React from 'react';
 import {Profile} from './Profile';
 import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
-import {ProfileType, setUserProfile} from '../../../redux/profileReducer/profileReducer';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {userAPI} from '../../../api/api';
+import {getProfile, ProfileType} from '../../../redux/profileReducer/profileReducer';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {withAuthRedirect} from '../../../hoc/withAuthRedirect';
 
 type PropsType = MDTPType & MSTPType & RouteComponentProps<{ userId: string }>
 
 class ProfileAPIClass extends React.Component<PropsType> {
 
     componentDidMount() {
-        debugger
+        // debugger
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = '21240';
         }
-        userAPI.getProfile(userId).then((res) => {
-            this.props.setUserProfile(res.data);
-        });
-
+        this.props.getProfile(userId);
     }
 
     render() {
+
         return <Profile profile={this.props.profile}/>;
+
     }
 }
 
 type MSTPType = {
     profile: ProfileType;
+    isAuth: boolean;
 }
 type MDTPType = {
-    setUserProfile: (profile: ProfileType) => void;
+    getProfile: (id: string) => void;
 }
 const mapStateToProps = (state: RootStateType): MSTPType => {
-    return {profile: state.dataProfile.profile}
+    return {
+        profile: state.dataProfile.profile,
+        isAuth: state.dataAuth.isAuth,
+    }
 }
 
 /*const ProfileWithDateURL = withRouter(ProfileAPIClass);
 export const ProfileContainer =
     connect<MSTPType, MDTPType, any, RootStateType>(mapStateToProps, {setUserProfile})(ProfileWithDateURL);*/
 export const ProfileContainerWithAPI =
-    withRouter(connect<MSTPType, MDTPType, any, RootStateType>
-    (mapStateToProps, {setUserProfile})
-    (ProfileAPIClass));
+   withAuthRedirect(withRouter(connect<MSTPType, MDTPType, any, RootStateType>
+    (mapStateToProps, {getProfile})
+    (ProfileAPIClass)));

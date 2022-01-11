@@ -8,6 +8,7 @@ import {DialogsContainer} from './components/content/dialogs/DialogsContainer';
 import {UsersContainerClass} from './components/content/users/UsersAPIClass';
 import {ProfileContainerWithAPI} from './components/content/profile/ProfileContainerWithAPI';
 import HeaderContainerWithAPI from './components/header/HeaderContainerWithAPI';
+import {Login} from './components/content/login/Login';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route path={'/Users'} render={() => <UsersContainerClass/>}/>
                     <Route path={'/News'} render={() => <News/>}/>
                     <Route path={'/Settings'} render={() => <Settings/>}/>
+                    <Route path={'/Login'} render={()=><Login/>}/>
                 </div>
             </div>
         </BrowserRouter>

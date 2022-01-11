@@ -1,4 +1,3 @@
-import {Dispatch} from 'redux';
 import {userAPI} from '../api/api';
 import {ThunkDispatch} from 'redux-thunk';
 import {ActionType, RootStateType, ThunkType} from './store';
@@ -33,10 +32,11 @@ const initialState: UsersType = {
     isFetching: false,
     isFollowInProcessing: [],
 };
-export type ActionUsersType = ReturnType<typeof follow |
-    typeof unfollow | typeof setUsers | typeof getCurrentPage |
-    typeof setTotalUsersCount | typeof checkIsFetching |
-    typeof setIsFollowInProc>;
+export type ActionUsersType =
+    ReturnType<typeof follow> | ReturnType<typeof unfollow> |
+    ReturnType<typeof getCurrentPage> | ReturnType<typeof setTotalUsersCount> | ReturnType<typeof checkIsFetching>
+    | ReturnType<typeof setIsFollowInProc> | ReturnType<typeof setUsers>
+
 
 export const usersReducer = (state = initialState, action: ActionUsersType): UsersType => {
     switch (action.type) {

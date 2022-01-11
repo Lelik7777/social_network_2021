@@ -1,3 +1,6 @@
+import {ThunkType} from '../store';
+import {userAPI} from '../../api/api';
+
 export type PostType = {
     id: number;
     message: string;
@@ -43,56 +46,49 @@ let initialState: DataProfileType = {
 
 }
 
-enum ProfileActions {
-    ADD_POST = 'profileReducer/ADD_POST',
-    UPDATE_NEW_TEXT = 'profileReducer/UPDATE_NEW_TEXT',
-    SET_USER_PROFILE = 'profileReducer/SET_USER_PROFILE',
-}
 
-type AddPostType = {
-    type: ProfileActions.ADD_POST;
-}
-type UpdateNewTextType = {
-    type: ProfileActions.UPDATE_NEW_TEXT;
-    payload: {
-        text: string;
-    };
-}
-type SetUserProfileType = {
-    type: ProfileActions.SET_USER_PROFILE;
-    payload: { profile: ProfileType; };
-
-}
-export type ActionProfileType = AddPostType | UpdateNewTextType | SetUserProfileType;
+export type ActionProfileType =
+    ReturnType<typeof addPost>
+    | ReturnType<typeof updateNewText>
+    | ReturnType<typeof setUserProfile>
 export const profileReducer = (state = initialState, action: ActionProfileType): DataProfileType => {
     switch (action.type) {
-        case ProfileActions.ADD_POST:
+        case 'ADD_POST':
             let newPost = {id: 4, message: state.newText, like: 9};
             return {...state, posts: [...state.posts, newPost], newText: ''};
-        case ProfileActions.UPDATE_NEW_TEXT:
+        case 'UPDATE_NEW_TEXT':
             //debugger
             return {...state, newText: action.payload.text};
-        case ProfileActions.SET_USER_PROFILE:
+        case 'SET_USER_PROFILE':
             return {...state, profile: action.payload.profile}
         default:
             return state;
     }
 }
-export const addPost = () => (
-    {
-        type: ProfileActions.ADD_POST,
-    }
-);
+export const addPost = () => {
+    return {
+        type: 'ADD_POST',
+    } as const;
+};
+
 
 export const updateNewText = (text: string) => (
     {
-        type: ProfileActions.UPDATE_NEW_TEXT,
+        type: 'UPDATE_NEW_TEXT',
         payload: {text},
-    });
+    }) as const;
 export const setUserProfile = (profile: ProfileType) => {
     return {
-        type: ProfileActions.SET_USER_PROFILE,
+        type: 'SET_USER_PROFILE',
         payload: {profile},
-    };
+    } as const
 };
+
+export const getProfile = (id: string): ThunkType => {
+    return (dispatch) => {
+        userAPI.getProfile(id).then(res => {
+            dispatch(setUserProfile(res.data));
+        })
+    }
+}
 

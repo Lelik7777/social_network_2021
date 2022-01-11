@@ -3,23 +3,25 @@ import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
 import {Dialogs} from './Dialogs';
 
-export type MstpType = {
+export type MSTPType = {
     data: DataDialogsType;
+    isAuth:boolean;
 }
-export type Mdtptype = {
-    addMessage: () => void
-    updateNewMessage: (e: string) => void
+export type MDTPType = {
+    addMessage: () => void;
+    updateNewMessage: (e: string) => void;
 }
 //always accept global state
-const mapStateToProps = (state: RootStateType): MstpType => {
+const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         data: state.dataDialogs,
+        isAuth:state.dataAuth.isAuth,
     }
 }
 //accept dispatch for branch
 
 export const DialogsContainer =
-    connect<MstpType, Mdtptype, any, RootStateType>
+    connect<MSTPType, MDTPType, any, RootStateType>
     (mapStateToProps, {addMessage,updateNewMessage})(Dialogs);
 // этот вариант меннее предпочтителен
 /* const DialogsContainer =connect(mapStateToProps,mapDispatchToProps);
