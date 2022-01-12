@@ -3,15 +3,17 @@ import {Profile} from './Profile';
 import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
 import {getProfile, ProfileType} from '../../../redux/profileReducer/profileReducer';
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
-import {withAuthRedirect} from '../../../hoc/withAuthRedirect';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import { withAuthRedirectMy } from '../../../hoc/withAuthRedirectMy';
+import {compose} from 'redux';
+
 
 type PropsType = MDTPType & MSTPType & RouteComponentProps<{ userId: string }>
 
 class ProfileAPIClass extends React.Component<PropsType> {
 
     componentDidMount() {
-        // debugger
+        //debugger
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = '21240';
@@ -20,7 +22,7 @@ class ProfileAPIClass extends React.Component<PropsType> {
     }
 
     render() {
-
+        debugger
         return <Profile profile={this.props.profile}/>;
 
     }
@@ -28,7 +30,6 @@ class ProfileAPIClass extends React.Component<PropsType> {
 
 type MSTPType = {
     profile: ProfileType;
-    isAuth: boolean;
 }
 type MDTPType = {
     getProfile: (id: string) => void;
@@ -36,14 +37,21 @@ type MDTPType = {
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         profile: state.dataProfile.profile,
-        isAuth: state.dataAuth.isAuth,
     }
 }
 
 /*const ProfileWithDateURL = withRouter(ProfileAPIClass);
 export const ProfileContainer =
     connect<MSTPType, MDTPType, any, RootStateType>(mapStateToProps, {setUserProfile})(ProfileWithDateURL);*/
+/*
 export const ProfileContainerWithAPI =
-   withAuthRedirect(withRouter(connect<MSTPType, MDTPType, any, RootStateType>
+    withAuthRedirectMy(withRouter(connect<MSTPType, MDTPType, any, RootStateType>
     (mapStateToProps, {getProfile})
     (ProfileAPIClass)));
+*/
+export const ProfileContainerWithAPI = compose<React.ComponentType>(
+        connect<MSTPType, MDTPType, any, RootStateType>
+        (mapStateToProps, {getProfile}),
+        withRouter,
+        withAuthRedirectMy
+    )(ProfileAPIClass)

@@ -3,11 +3,10 @@ import o from './Dialogs.module.css';
 import {Dialog} from './dialog/Dialog';
 import {Message} from './message/Message';
 import {MDTPType, MSTPType} from './DialogsContainer';
-import {Redirect} from 'react-router-dom';
 
 type PropsType = MSTPType & MDTPType
 
-export function Dialogs({data, updateNewMessage, addMessage, isAuth}: PropsType) {
+export function Dialogs({data, updateNewMessage, addMessage}: PropsType) {
 
     const mappedDialogs = data.dialogs.map((d) => {
         return (
@@ -22,7 +21,6 @@ export function Dialogs({data, updateNewMessage, addMessage, isAuth}: PropsType)
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         updateNewMessage(e.currentTarget.value);
     };
-   if (!isAuth) return <Redirect to={'/Login'}/>
     return (
         <div className={o.dialogs}>
             <div className={o.dialogs_items}>

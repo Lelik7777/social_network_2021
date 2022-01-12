@@ -1,27 +1,20 @@
-import {Redirect} from 'react-router-dom';
-import React from 'react';
+import React, {Component} from 'react';
 import {RootStateType} from '../redux/store';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-
-
-type MapStatePropsType = {
-    isAuth: boolean
+type MSTPType = {
+    isAuth: boolean;
 }
-
-const mapStateToProps = (state: RootStateType): MapStatePropsType => {
-    return {
-        isAuth: state.dataAuth.isAuth,
-    }
-}
+const mapStateToProps = (state: RootStateType) => {
+    return {isAuth: state.dataAuth.isAuth,};
+};
 
 export function withAuthRedirect<T>(Component: React.ComponentType<T>) {
-
-    function RedirectComponent(props: MapStatePropsType) {
-        const {isAuth, ...restProps} = props;
-        return isAuth ? <Component {...restProps as T} /> : <Redirect to={'/login'}/>
+    function redirectComponent(props: MSTPType) {
+        const {isAuth, ...rest} = props;
+        return isAuth ? <Component {...rest as T} /> : <Redirect to={'/Login'}/>
     }
 
-    return connect<MapStatePropsType, {}, {}, RootStateType>(mapStateToProps)
-    (RedirectComponent);
+    return connect<MSTPType, {}, {}, RootStateType>(mapStateToProps)(redirectComponent);
 }

@@ -2,10 +2,12 @@ import {addMessage, DataDialogsType, updateNewMessage} from '../../../redux/dial
 import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
 import {Dialogs} from './Dialogs';
+import {withAuthRedirectMy} from '../../../hoc/withAuthRedirectMy';
+import {compose} from 'redux';
+import React from 'react';
 
 export type MSTPType = {
     data: DataDialogsType;
-    isAuth:boolean;
 }
 export type MDTPType = {
     addMessage: () => void;
@@ -15,14 +17,17 @@ export type MDTPType = {
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
         data: state.dataDialogs,
-        isAuth:state.dataAuth.isAuth,
     }
 }
 //accept dispatch for branch
 
-export const DialogsContainer =
+export const DialogsContainer = compose<React.ComponentType>(
     connect<MSTPType, MDTPType, any, RootStateType>
-    (mapStateToProps, {addMessage,updateNewMessage})(Dialogs);
+    (mapStateToProps, {addMessage, updateNewMessage}),
+    withAuthRedirectMy,
+)(Dialogs);
+/* export const DialogsContainer= withAuthRedirectMy( connect<MSTPType, MDTPType, any, RootStateType>
+   (mapStateToProps, {addMessage,updateNewMessage})(Dialogs));*/
 // этот вариант меннее предпочтителен
 /* const DialogsContainer =connect(mapStateToProps,mapDispatchToProps);
 export type TProps=ConnectedProps<typeof DialogsContainer>
