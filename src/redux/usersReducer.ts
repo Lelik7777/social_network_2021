@@ -1,6 +1,7 @@
 import {userAPI} from '../api/api';
 import {ThunkDispatch} from 'redux-thunk';
 import {ActionType, RootStateType, ThunkType} from './store';
+import {Dispatch} from 'redux';
 
 
 export type UserType = {
@@ -145,7 +146,7 @@ export const getUsers2 = (page: number, count: number) => {
 }*/
 
 export const getCurPage = (page: number, count: number) => {
-    return (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
+    return (dispatch: Dispatch/*ThunkDispatch<RootStateType, unknown, ActionType>*/) => {
         dispatch(checkIsFetching(true));
         dispatch(getCurrentPage(page));
 

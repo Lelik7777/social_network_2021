@@ -7,9 +7,9 @@ import {ActionAuthType, authReducer} from './authReducer';
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 
 
-export type ActionType = ActionProfileType | ActionDialogsType | ActionUsersType|ActionAuthType;
+export type ActionType = ActionProfileType | ActionDialogsType | ActionUsersType | ActionAuthType;
 //void - это то,что возвращает санка, unknown можно заменить {},
-export type ThunkType = ThunkAction<void,RootStateType, unknown, ActionType>
+export type ThunkType<ReturnType = void> = ThunkAction<void, RootStateType, unknown, ActionType>
 
 let rootReducer = combineReducers({
     dataProfile: profileReducer,
@@ -20,6 +20,6 @@ let rootReducer = combineReducers({
 });
 export type RootStateType = ReturnType<typeof rootReducer>
 
-export let store: Store<RootStateType> = createStore(rootReducer,applyMiddleware(thunkMiddleware));
+export let store: Store<RootStateType> = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 
