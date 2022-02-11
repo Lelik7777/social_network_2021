@@ -4,7 +4,7 @@ import {ActionDialogsType, dialogsReducer} from './dialogsReducer';
 import {navReducer} from './navReducer';
 import {ActionUsersType, usersReducer} from './usersReducer';
 import {ActionAuthType, authReducer} from './authReducer';
-import thunkMiddleware, {ThunkAction} from 'redux-thunk';
+import thunk, {ThunkAction} from 'redux-thunk';
 
 
 export type ActionType = ActionProfileType | ActionDialogsType | ActionUsersType | ActionAuthType;
@@ -20,6 +20,6 @@ let rootReducer = combineReducers({
 });
 export type RootStateType = ReturnType<typeof rootReducer>
 
-export let store: Store<RootStateType> = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+export let store: Store<RootStateType> = createStore(rootReducer, applyMiddleware(thunk));
 
 

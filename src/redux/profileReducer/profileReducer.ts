@@ -1,5 +1,6 @@
 import {ThunkType} from '../store';
 import {userAPI} from '../../api/api';
+import {Dispatch} from 'redux';
 
 export type PostType = {
     id: number;
@@ -84,11 +85,10 @@ export const setUserProfile = (profile: ProfileType) => {
     } as const
 };
 
-export const getProfile = (id: string): ThunkType => {
-    return (dispatch) => {
-        userAPI.getProfile(id).then(res => {
-            dispatch(setUserProfile(res.data));
-        })
+export const getProfile = (id: string) =>
+    async (dispatch: Dispatch<ActionProfileType>) => {
+        const res = await userAPI.getProfile(id);
+        dispatch(setUserProfile(res.data));
     }
-}
+
 

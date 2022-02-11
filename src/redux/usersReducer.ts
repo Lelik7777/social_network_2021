@@ -111,24 +111,20 @@ export const setIsFollowInProc = (isFet: boolean, id: number) => {
     } as const;
 };
 
-export const getUsers = (page: number, count: number): ThunkType => {
+export const getUsers = (page: number, count: number): ThunkType =>
 // можно типизировать через ThunkType,который в  store
 //можно вместо
     //внутренняя ф-ция принимает два параметра: первый это dispatch,a second - state across getState
     // через который можно достать любое значение из общего стейта
-    return (dispatch, getState: () => RootStateType) => {
-
+    async (dispatch, getState: () => RootStateType) => {
         dispatch(checkIsFetching(true));
-        userAPI.getUsers(page, count)
-            .then((res) => {
-                dispatch(setUsers(res.items));
-                dispatch(setTotalUsersCount(res.totalCount));
-                dispatch(checkIsFetching(false));
-            }).catch(error => {
-            console.warn(error)
-        });
+        const res = await userAPI.getUsers(page, count);
+        dispatch(setUsers(res.items));
+        dispatch(setTotalUsersCount(res.totalCount));
+        dispatch(checkIsFetching(false));
+
     }
-}
+
 //second variant of typing
 /*
 export const getUsers2 = (page: number, count: number) => {
@@ -145,19 +141,16 @@ export const getUsers2 = (page: number, count: number) => {
     }
 }*/
 
-export const getCurPage = (page: number, count: number) => {
-    return (dispatch: Dispatch/*ThunkDispatch<RootStateType, unknown, ActionType>*/) => {
+export const getCurPage = (page: number, count: number) =>
+    async (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
         dispatch(checkIsFetching(true));
         dispatch(getCurrentPage(page));
 
-        userAPI.getUsers(page, count)
-            .then((res) => {
+        const res=await userAPI.getUsers(page, count);
                 dispatch(setUsers(res.items));
                 dispatch(checkIsFetching(false));
-            });
-    }
+    };
 
-};
 export const setPageAtBegin = (page: number, count: number) => {
     return (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
         dispatch(checkIsFetching(true));
@@ -178,6 +171,8 @@ export const setFollow = (id: number) => {
         userAPI.postFollow(id).then(() => {
             dispatch(follow(id));
             dispatch(setIsFollowInProc(false, id));
+        }).catch((er)=>{
+            console.log(er)
         })
     }
 };
