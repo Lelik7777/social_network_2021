@@ -20,9 +20,9 @@ class ProfileAPIClass extends React.Component<PropsType> {
         }
         this.props.getProfile(userId);
     }
-
     render() {
-        debugger
+       // debugger
+        console.log(this.props.profile)
         return <Profile profile={this.props.profile}/>;
 
     }
