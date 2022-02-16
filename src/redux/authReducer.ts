@@ -1,5 +1,5 @@
 import {ThunkType} from './store';
-import {userAPI} from '../api/api';
+import {authAPI, userAPI} from '../api/api';
 import {ThunkDispatch} from 'redux-thunk';
 import {Dispatch} from 'redux';
 
@@ -39,7 +39,7 @@ export const setDataAuth = (data: DataForAuthType, isAuth: boolean) => {
 };
 export const getAuthMe = (): ThunkType =>
     async (dispatch:Dispatch<ActionAuthType>) => {
-      const res=await userAPI.getAuthMe();
+      const res=await authAPI.getAuthMe();
             if (res.resultCode===0) {
                 dispatch(setDataAuth(res.data, true));
             }

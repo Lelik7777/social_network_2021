@@ -5,7 +5,7 @@ import img_big from './img/300px-IMG_1639.jpg';
 import {ProfileType} from '../../../../redux/profileReducer/profileReducer';
 import {PictureForProfile} from './pictureForProfile/PictureForProfile';
 import {BlogInfo} from './blogInfo/BlogInfo';
-import {ProfileStatus} from './profileStatus/ProfileStatus';
+import ProfileStatus from './profileStatus/ProfileStatus';
 
 export function ProfileInfo({profile}: { profile: ProfileType }) {
     const [toggle, setToggle] = useState(true);
@@ -22,12 +22,12 @@ export function ProfileInfo({profile}: { profile: ProfileType }) {
                     <br/>
                     <button
                         onClick={onClick}>{toggle
-                        ? 'toggle to big pic'
-                        : 'toggle to small pic'}
+                        ? 'toggle to big'
+                        : 'toggle to small'}
                     </button>
                     <br/>
                     <span style={{color:'darkblue',marginLeft:'10%',fontSize:'1.3rem'}}>{profile.fullName}</span>
-                    <ProfileStatus status={'status'}/>
+                    <ProfileStatus/>
                 </div>
                 <BlogInfo profile={profile}/>
             </div>

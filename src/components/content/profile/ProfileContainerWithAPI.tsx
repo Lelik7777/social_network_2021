@@ -2,7 +2,7 @@ import React from 'react';
 import {Profile} from './Profile';
 import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
-import {getProfile, ProfileType} from '../../../redux/profileReducer/profileReducer';
+import {getProfile, getStatus, ProfileType} from '../../../redux/profileReducer/profileReducer';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import { withAuthRedirectMy } from '../../../hoc/withAuthRedirectMy';
 import {compose} from 'redux';
@@ -19,6 +19,7 @@ class ProfileAPIClass extends React.Component<PropsType> {
             userId = '21240';
         }
         this.props.getProfile(userId);
+
     }
     render() {
        // debugger
@@ -33,6 +34,7 @@ type MSTPType = {
 }
 type MDTPType = {
     getProfile: (id: string) => void;
+    getStatus:(id:string)=>void;
 }
 const mapStateToProps = (state: RootStateType): MSTPType => {
     return {
@@ -51,7 +53,7 @@ export const ProfileContainerWithAPI =
 */
 export const ProfileContainerWithAPI = compose<React.ComponentType>(
         connect<MSTPType, MDTPType, any, RootStateType>
-        (mapStateToProps, {getProfile}),
+        (mapStateToProps, {getProfile,getStatus}),
         withRouter,
         withAuthRedirectMy
     )(ProfileAPIClass)

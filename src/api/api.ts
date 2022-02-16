@@ -2,16 +2,7 @@ import axios from 'axios';
 import {UserType} from '../redux/usersReducer';
 import {ProfileType} from '../redux/profileReducer/profileReducer';
 
-type ResponseGetUsersType = {
-    items: UserType[];
-    totalCount: number;
-    error: string | null;
-}
-type ResponseGeneralType<T = {}> = {
-    resultCode: number;
-    messages: string[];
-    data: T;
-}
+
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0`,
     withCredentials: true,
@@ -32,11 +23,28 @@ export const userAPI = {
         return instance.delete<ResponseGeneralType>(`/follow/${id}`);
 
     },
+}
+export const authAPI = {
     getAuthMe: () => {
         return instance.get<ResponseGeneralType<{ id: number; email: string; login: string }>>(`/auth/me`)
             .then(res => res.data);
     },
-    getProfile: (id: string)=>{
-        return  instance.get<ProfileType>(`/profile/${id}`);
-    }
+}
+
+export const profileAPI = {
+    getProfile: (id: string) =>
+        instance.get<ProfileType>(`/profile/${id}`),
+    getStatus: (id: string) =>
+        instance.get<string>(`/profile/status/${id}`),
+
+}
+type ResponseGetUsersType = {
+    items: UserType[];
+    totalCount: number;
+    error: string | null;
+}
+type ResponseGeneralType<T = {}> = {
+    resultCode: number;
+    messages: string[];
+    data: T;
 }
