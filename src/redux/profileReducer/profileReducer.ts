@@ -1,6 +1,7 @@
 import {ThunkType} from '../store';
 import {profileAPI, userAPI} from '../../api/api';
 import {Dispatch} from 'redux';
+import {setRequestStatus} from '../appReducer';
 
 export type PostType = {
     id: number;
@@ -45,7 +46,7 @@ let initialState: DataProfileType = {
     newText: '',
 
     profile: {} as ProfileType,
-    status: 'status',
+    status: 'status in none',
 }
 
 
@@ -54,6 +55,7 @@ export type ActionProfileType =
     | ReturnType<typeof updateNewText>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof setRequestStatus>
 export const profileReducer = (state = initialState, action: ActionProfileType): DataProfileType => {
     switch (action.type) {
         case 'ADD_POST':
@@ -92,15 +94,32 @@ export const setStatus = (status: string) =>
 
 export const getProfile = (id: string) =>
     async (dispatch: Dispatch<ActionProfileType>) => {
+    dispatch(setRequestStatus('loaded'));
         const res = await profileAPI.getProfile(id);
-        dispatch(setUserProfile(res.data));
+        if(res.status===200){
+            dispatch(setUserProfile(res.data));
+            dispatch(setRequestStatus('successful'))
+        }
+
     };
 export const getStatus = (id: string) =>
     async (dispatch: Dispatch<ActionProfileType>) => {
+        dispatch(setRequestStatus('loaded'))
         const res = await profileAPI.getStatus(id);
         if (res) {
-            console.log(res)
             dispatch(setStatus(res.data));
+            dispatch(setRequestStatus('successful'));
+        }
+    };
+export const updateStatus = (status: string) =>
+
+    async (dispatch: Dispatch<ActionProfileType>) => {
+        dispatch(setRequestStatus('loaded'));
+        const res = await profileAPI.updateStatus(status);
+        if (res.data.resultCode === 0) {
+            if (status)
+                dispatch(setStatus(status));
+            dispatch(setRequestStatus('successful'));
         }
     }
 

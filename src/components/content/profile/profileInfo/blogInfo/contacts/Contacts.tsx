@@ -14,12 +14,14 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
         {/* block 1*/}
         <div className={o.block1}>
             <div>
-                <img src={img_vk} alt="vk"/>
-                <a href={profile.contacts.vk
-                    ? profile.contacts.vk
-                    : 'https://vk.com/'}
-                   target="_blank" rel={'noreferrer'}>
-                    {profile.contacts.vk ? profile.contacts.vk : 'vk'}</a>
+                <img src={img_git} alt="github"/>
+                <a href={profile.contacts.github
+                    ? profile.contacts.github
+                    : 'https://github.com/'}
+                   target={'_blank'}
+                   rel={'noreferrer'}>
+                    {profile.contacts.github
+                        ? profile.contacts.github : 'github'}</a>
             </div>
             <div>
                 <img src={img_yout} alt="youtube"/>
@@ -54,15 +56,14 @@ export const Contacts = ({profile}: { profile: ProfileType }) => {
         {/* //block 2*/}
         <div className={o.block2} style={{overflow: 'auto'}}>
             <div>
-                <img src={img_git} alt="github"/>
-                <a href={profile.contacts.github
-                    ? profile.contacts.github
-                    : 'https://github.com/'}
-                   target={'_blank'}
-                   rel={'noreferrer'}>
-                    {profile.contacts.github
-                        ? profile.contacts.github : 'github'}</a>
+                <img src={img_vk} alt="vk"/>
+                <a href={profile.contacts.vk
+                    ? profile.contacts.vk
+                    : 'https://vk.com/'}
+                   target="_blank" rel={'noreferrer'}>
+                    {profile.contacts.vk ? profile.contacts.vk : 'vk'}</a>
             </div>
+
             <div>
                 <img src={img_face} alt="facebook"/>
                 <a href={profile.contacts.facebook

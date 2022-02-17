@@ -36,15 +36,15 @@ export const profileAPI = {
         instance.get<ProfileType>(`/profile/${id}`),
     getStatus: (id: string) =>
         instance.get<string>(`/profile/status/${id}`),
-
+    updateStatus: (status: string) => instance.put<ResponseGeneralType>(`/profile/status`, {status}),
 }
-type ResponseGetUsersType = {
-    items: UserType[];
-    totalCount: number;
-    error: string | null;
-}
-type ResponseGeneralType<T = {}> = {
-    resultCode: number;
-    messages: string[];
-    data: T;
-}
+    type ResponseGetUsersType = {
+        items: UserType[];
+        totalCount: number;
+        error: string | null;
+    }
+    type ResponseGeneralType < T = {} > = {
+        resultCode: number;
+        messages: string[];
+        data: T;
+    }

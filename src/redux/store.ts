@@ -5,6 +5,7 @@ import {navReducer} from './navReducer';
 import {ActionUsersType, usersReducer} from './usersReducer';
 import {ActionAuthType, authReducer} from './authReducer';
 import thunk, {ThunkAction} from 'redux-thunk';
+import {appReducer} from './appReducer';
 
 
 export type ActionType = ActionProfileType | ActionDialogsType | ActionUsersType | ActionAuthType;
@@ -17,6 +18,7 @@ let rootReducer = combineReducers({
     dataNav: navReducer,
     dataUsers: usersReducer,
     dataAuth: authReducer,
+    dataApp:appReducer,
 });
 export type RootStateType = ReturnType<typeof rootReducer>
 
