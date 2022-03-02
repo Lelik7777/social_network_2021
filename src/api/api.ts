@@ -29,7 +29,12 @@ export const authAPI = {
         return instance.get<ResponseGeneralType<{ id: number; email: string; login: string }>>(`/auth/me`)
             .then(res => res.data);
     },
+    login: (data: RequestLoginType) => {
+        return instance.post<ResponseGeneralType<{ userId: number }>>('/auth/login', data);
+    },
+    logout: () => instance.delete<ResponseGeneralType>('/auth/login'),
 }
+
 
 export const profileAPI = {
     getProfile: (id: string) =>
@@ -38,13 +43,23 @@ export const profileAPI = {
         instance.get<string>(`/profile/status/${id}`),
     updateStatus: (status: string) => instance.put<ResponseGeneralType>(`/profile/status`, {status}),
 }
-    type ResponseGetUsersType = {
-        items: UserType[];
-        totalCount: number;
-        error: string | null;
-    }
-    type ResponseGeneralType < T = {} > = {
-        resultCode: number;
-        messages: string[];
-        data: T;
-    }
+type ResponseGetUsersType = {
+    items: UserType[];
+    totalCount: number;
+    error: string | null;
+}
+type ResponseGeneralType<T = {}> = {
+    resultCode: number;
+    messages: string[];
+    data: T;
+}
+export type RequestLoginType = {
+    email: string;
+    password: string;
+    rememberMe: boolean;
+    captcha?: string;
+}
+export enum ResultCode{
+    success=0,
+    error=1
+}

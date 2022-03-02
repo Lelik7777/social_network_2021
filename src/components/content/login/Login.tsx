@@ -2,8 +2,15 @@ import React from 'react';
 import {useFormik} from 'formik';
 import o from './Login.module.css';
 import * as Yup from 'yup';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootStateType} from '../../../redux/store';
+import {NavLink, Redirect} from 'react-router-dom';
+import {postLogin} from '../../../redux/authReducer';
 
 export const Login = () => {
+    debugger
+    const isAuth = useSelector<RootStateType, boolean>((state) => state.dataAuth.isAuth);
+    const dispatch=useDispatch();
     const formik = useFormik({
         initialValues: {
             password: '',
@@ -17,60 +24,55 @@ export const Login = () => {
             email: Yup.string().email('Invalid email address').required('Required'),
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+           // alert(JSON.stringify(values, null, 2));
+            dispatch(postLogin(values))
         },
     });
+    if (isAuth) return <Redirect to={'/Profile'}/>
     return (
         <div className={o.wrapper}>
 
-                <div className={o.sign_in}><span>Sign In</span></div>
-                <div>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div>
-                            <label htmlFor="email">Email Address</label>
-                            <input
-                                style={{marginLeft:'3%'}}
-                                id="email"
-                                name="email"
-                                type="email"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.email}
-                            />
-                            {formik.touched.email && formik.errors.email ? (
-                                <div style={{color:'red',fontSize:'0.8rem'}}>{formik.errors.email}</div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <label htmlFor="email">Password</label>
-                            <input
-                                style={{marginLeft:'11%'}}
-                                id="password"
-                                name="password"
-                                type="password"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.password}
-                            />
-                            {formik.touched.password && formik.errors.password ? (
-                                <div style={{color:'red',fontSize:'0.8rem'}}>{formik.errors.password}</div>
-                            ) : null}
-                        </div>
+            <div className={o.sign_in}><span>Sign In</span></div>
+            <div>
+                <form onSubmit={formik.handleSubmit}>
+                    <div>
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                            style={{marginLeft: '3%'}}
+                            id="email"
+                            type="email"
+                            {...formik.getFieldProps('email')}
+                        />
+                        {formik.touched.email && formik.errors.email ? (
+                            <div style={{color: 'red', fontSize: '0.8rem'}}>{formik.errors.email}</div>
+                        ) : null}
+                    </div>
+                    <div>
+                        <label htmlFor="email">Password</label>
+                        <input
+                            style={{marginLeft: '11%'}}
+                            id="password"
+                            type="password"
+                            {...formik.getFieldProps('password')}
+                        />
+                        {formik.touched.password && formik.errors.password ? (
+                            <div style={{color: 'red', fontSize: '0.8rem'}}>{formik.errors.password}</div>
+                        ) : null}
+                    </div>
 
-                        <div>
-                            <label htmlFor="rememberMe">Remember me</label>
-                            <input
-                                id="rememberMe"
-                                name="rememberMe"
-                                type="checkbox"
-                                onChange={formik.handleChange}
-                            />
-                            <button style={{marginLeft:'32%'}}
-                                    type="submit">Submit
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    <div>
+                        <label htmlFor="rememberMe">Remember me</label>
+                        <input
+                            id="rememberMe"
+                            type="checkbox"
+                            {...formik.getFieldProps('rememberMe')}
+                        />
+                        <button style={{marginLeft: '32%'}}
+                                type="submit">Sign In
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
