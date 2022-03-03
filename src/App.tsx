@@ -1,6 +1,6 @@
 import React from 'react';
 import o from './App.module.css';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {News} from './components/content/news/News';
 import {Settings} from './components/content/settings/Settings'
 import {NavContainer} from './components/nav/NavContainer';
@@ -13,7 +13,7 @@ import {Login} from './components/content/login/Login';
 
 function App() {
     return (
-        <BrowserRouter>
+
             <div className={o.AppWrapper}>
                 <HeaderContainerWithAPI/>
                 <NavContainer/>
@@ -26,7 +26,7 @@ function App() {
                     <Route path={'/Login'} render={()=><Login/>}/>
                 </div>
             </div>
-        </BrowserRouter>
+
     );
 }
 

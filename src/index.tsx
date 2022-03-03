@@ -1,17 +1,19 @@
 import React from 'react';
 import './index.css';
-//import reportWebVitals from './reportWebVitals';
 import 'typeface-roboto';
 
 import ReactDOM from 'react-dom';
 import {store} from './redux/store';
 import {Provider} from 'react-redux';
 import App from './App';
+import {BrowserRouter} from 'react-router-dom';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function
