@@ -4,11 +4,11 @@ import o from './Login.module.css';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootStateType} from '../../../redux/store';
-import {NavLink, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {postLogin} from '../../../redux/authReducer';
 
 export const Login = () => {
-    debugger
+
     const isAuth = useSelector<RootStateType, boolean>((state) => state.dataAuth.isAuth);
     const dispatch=useDispatch();
     const formik = useFormik({

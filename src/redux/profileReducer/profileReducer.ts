@@ -33,7 +33,6 @@ export type ProfileType = {
 }
 export type DataProfileType = {
     posts: PostType[];
-    newText: string;
     profile: ProfileType;
     status: string;
 }
@@ -43,8 +42,6 @@ let initialState: DataProfileType = {
         {id: 1, message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius!', like: 10},
         {id: 3, message: 'Lorem ipsum dolor sit amet,', like: 7},
     ],
-    newText: '',
-
     profile: {} as ProfileType,
     status: 'status in none',
 }
@@ -52,18 +49,13 @@ let initialState: DataProfileType = {
 
 export type ActionProfileType =
     ReturnType<typeof addPost>
-    | ReturnType<typeof updateNewText>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof setRequestStatus>
 export const profileReducer = (state = initialState, action: ActionProfileType): DataProfileType => {
     switch (action.type) {
         case 'ADD_POST':
-            let newPost = {id: 4, message: state.newText, like: 9};
-            return {...state, posts: [...state.posts, newPost], newText: ''};
-        case 'UPDATE_NEW_TEXT':
-            //debugger
-            return {...state, newText: action.payload.text};
+            return {...state,posts:[...state.posts,{id:4,message:action.text,like:0}]}
         case 'SET_USER_PROFILE':
             return {...state, profile: action.payload.profile}
         case 'SET_STATUS':
@@ -72,17 +64,15 @@ export const profileReducer = (state = initialState, action: ActionProfileType):
             return state;
     }
 }
-export const addPost = () =>
-    ({
-        type: 'ADD_POST',
-    } as const);
+export const addPost = (text: string) =>
+    ({type: 'ADD_POST', text} as const);
 
 
-export const updateNewText = (text: string) => (
+/*export const updateNewText = (text: string) => (
     {
         type: 'UPDATE_NEW_TEXT',
         payload: {text},
-    } as const);
+    } as const);*/
 export const setUserProfile = (profile: ProfileType) =>
     ({
         type: 'SET_USER_PROFILE',
@@ -94,9 +84,9 @@ export const setStatus = (status: string) =>
 
 export const getProfile = (id: string) =>
     async (dispatch: Dispatch<ActionProfileType>) => {
-    dispatch(setRequestStatus('loaded'));
+        dispatch(setRequestStatus('loaded'));
         const res = await profileAPI.getProfile(id);
-        if(res.status===200){
+        if (res.status === 200) {
             dispatch(setUserProfile(res.data));
             dispatch(setRequestStatus('successful'))
         }

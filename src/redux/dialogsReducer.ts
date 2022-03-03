@@ -1,10 +1,7 @@
 import img_b from './img/ava_boy.jpeg';
 import img_g from './img/ava_girl.jpeg';
 
-enum ACTIONS_TYPE {
-    ADD_MESSAGE = 'DataDialogs/ADD_MESSAGE',
-    UPDATE_NEW_MESSAGE = 'DataDialogs/UPDATE_NEW_MESSAGE',
-}
+
 
 export type DialogType = {
     id: number;
@@ -18,7 +15,6 @@ export type MessageType = {
 export type DataDialogsType = {
     dialogs: DialogType[];
     messages: MessageType[];
-    newMessage: string;
 }
 let initialState: DataDialogsType = {
     dialogs: [
@@ -39,45 +35,16 @@ let initialState: DataDialogsType = {
             text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consequatur explicabo natus!'
         },
     ],
-    newMessage: '',
 }
 export const dialogsReducer = (state = initialState, action: ActionDialogsType): DataDialogsType => {
     switch (action.type) {
-        case ACTIONS_TYPE.ADD_MESSAGE:
-            const newMessage = {id: 6, text: state.newMessage}
-
-            return {
-                ...state,
-                messages: [...state.messages, newMessage],
-                newMessage: ''
-            }
-
-        case ACTIONS_TYPE.UPDATE_NEW_MESSAGE:
-            return {
-                ...state,
-                newMessage: action.payload.text
-                //...action.payload,
-            }
+        case 'DIALOGS_REDUCER/ADD_MESSAGE':
+            return {...state,messages:[...state.messages,{id:6,text:action.text}]};
         default:
             return state;
     }
 }
 
-export type ActionDialogsType =AddMessageType|UpdateNewMessageType;
+export type ActionDialogsType =ReturnType<typeof addMessage>
 
-type AddMessageType = {
-    type: ACTIONS_TYPE.ADD_MESSAGE;
-}
-type UpdateNewMessageType = {
-    type: ACTIONS_TYPE.UPDATE_NEW_MESSAGE;
-    payload: {
-        text: string;
-    }
-}
-
-export const addMessage = (): AddMessageType => ({type: ACTIONS_TYPE.ADD_MESSAGE,});
-
-export const updateNewMessage = (text: string): UpdateNewMessageType => ({
-    type: ACTIONS_TYPE.UPDATE_NEW_MESSAGE,
-    payload: {text},
-});
+export const addMessage = (text:string) => ({type:'DIALOGS_REDUCER/ADD_MESSAGE',text}as const);

@@ -7,9 +7,10 @@ import img_inst from './img/instagram.jpeg';
 import img_git from './img/github (1) (1).png';
 import {ProfileType} from '../../../../../../redux/profileReducer/profileReducer';
 import o from '../../ProfileInfo.module.css';
+import {Preloader2} from '../../../../../../common components/preloader/Preloader2';
 
 export const Contacts = ({profile}: { profile: ProfileType }) => {
-    //console.log(profile.contacts.website)
+    if(!profile.contacts) return <Preloader2/>
     return <div className={o.right}>
         {/* block 1*/}
         <div className={o.block1}>

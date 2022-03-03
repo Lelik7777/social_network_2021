@@ -12,12 +12,10 @@ export type AuthType = {
     isAuth: boolean;
 }
 export type ActionAuthType =
-    { type: ActionType.SET_DATA_AUTH, payload: { data: DataForAuthType; isAuth: boolean; } }
+   ReturnType<typeof setDataAuth>
     | ReturnType<typeof setLogin>
 
-enum ActionType {
-    SET_DATA_AUTH = 'authReducer/SET_DATA_AUTH',
-}
+
 
 const initialState: AuthType = {
     data: {} as DataForAuthType,
@@ -26,7 +24,7 @@ const initialState: AuthType = {
 
 export const authReducer = (state = initialState, action: ActionAuthType): AuthType => {
     switch (action.type) {
-        case ActionType.SET_DATA_AUTH:
+        case 'SET_DATA_AUTH':
             return {...state, data: action.payload.data, isAuth: action.payload.isAuth};
         case 'SET_LOGIN':
             return {...state, isAuth: action.isAuth};
@@ -36,9 +34,9 @@ export const authReducer = (state = initialState, action: ActionAuthType): AuthT
 };
 export const setDataAuth = (data: DataForAuthType, isAuth: boolean) => {
     return {
-        type: ActionType.SET_DATA_AUTH,
-        payload: {data, isAuth},
-    };
+        type: 'SET_DATA_AUTH',
+        payload: {data, isAuth}
+    }as const;
 };
 export const setLogin = (isAuth: boolean) => ({type: 'SET_LOGIN', isAuth} as const);
 

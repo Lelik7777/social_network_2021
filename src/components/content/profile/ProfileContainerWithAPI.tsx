@@ -15,7 +15,7 @@ type PropsType = MDTPType & MSTPType & RouteComponentProps<{ userId: string }>
 class ProfileAPIClass extends React.Component<PropsType> {
 
     componentDidMount() {
-        //debugger
+
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = '21240';

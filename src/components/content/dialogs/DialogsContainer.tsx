@@ -1,4 +1,4 @@
-import {addMessage, DataDialogsType, updateNewMessage} from '../../../redux/dialogsReducer';
+import {DataDialogsType} from '../../../redux/dialogsReducer';
 import {RootStateType} from '../../../redux/store';
 import {connect} from 'react-redux';
 import {Dialogs} from './Dialogs';
@@ -10,8 +10,7 @@ export type MSTPType = {
     data: DataDialogsType;
 }
 export type MDTPType = {
-    addMessage: () => void;
-    updateNewMessage: (e: string) => void;
+
 }
 //always accept global state
 const mapStateToProps = (state: RootStateType): MSTPType => {
@@ -23,7 +22,7 @@ const mapStateToProps = (state: RootStateType): MSTPType => {
 
 export const DialogsContainer = compose<React.ComponentType>(
     connect<MSTPType, MDTPType, any, RootStateType>
-    (mapStateToProps, {addMessage, updateNewMessage}),
+    (mapStateToProps, {}),
     withAuthRedirectMy,
 )(Dialogs);
 /* export const DialogsContainer= withAuthRedirectMy( connect<MSTPType, MDTPType, any, RootStateType>

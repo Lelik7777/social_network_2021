@@ -2,6 +2,7 @@ import React from 'react';
 import {ProfileInfo} from './profileInfo/ProfileInfo';
 import {PostsContainer} from './posts/PostsContainer';
 import {ProfileType} from '../../../redux/profileReducer/profileReducer';
+import {Preloader2} from '../../../common components/preloader/Preloader2';
 
 type PropsType={
     profile:ProfileType;

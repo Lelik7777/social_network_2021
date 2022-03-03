@@ -16,7 +16,7 @@
 .sign_in span{
     margin-left: 5%;
 }
-form{
+.wrapper form{
     display: flex;
     flex-direction: column;
     justify-content: center;
