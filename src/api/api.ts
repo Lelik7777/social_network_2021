@@ -8,7 +8,9 @@ const instance = axios.create({
     withCredentials: true,
     headers: {
         'API-KEY': 'd159ee21-92e5-491f-8ae2-2ba43dfb0380',
+        'Access-Control-Allow-Origin':'*',
     },
+
 });
 export const userAPI = {
     getUsers: (page: number, count: number) => {
