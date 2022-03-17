@@ -32,6 +32,7 @@ export const authReducer = (state = initialState, action: ActionAuthType): AuthT
             return state;
     }
 };
+//action creators
 export const setDataAuth = (data: DataForAuthType, isAuth: boolean) => {
     return {
         type: 'SET_DATA_AUTH',
