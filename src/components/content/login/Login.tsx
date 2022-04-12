@@ -73,6 +73,8 @@ export const Login = () => {
                     </div>
                 </form>
             </div>
+            <div style={{width:'50%'}}><span style={{marginRight:'10%'}}>email</span>lelik21212121@gmail.com</div>
+            <div style={{width:'50%'}}><span style={{marginRight:'10%'}}>password:</span>enter_free</div>
         </div>
     );
 }

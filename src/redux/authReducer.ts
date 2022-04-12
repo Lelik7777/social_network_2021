@@ -43,7 +43,6 @@ export const setLogin = (isAuth: boolean) => ({type: 'SET_LOGIN', isAuth} as con
 
 export const getAuthMe = (): ThunkType =>
     async (dispatch: Dispatch<ActionAuthType>) => {
-        debugger
         const res = await authAPI.getAuthMe();
         if (res.resultCode === 0) {
             dispatch(setDataAuth(res.data, true));
