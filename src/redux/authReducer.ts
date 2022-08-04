@@ -50,10 +50,19 @@ export const getAuthMe = (): ThunkType =>
     };
 export const postLogin = (data: RequestLoginType) =>
     async (dispatch: Dispatch<ActionAuthType>) => {
-        const res = await authAPI.login(data);
-        if (res.data.resultCode === ResultCode.success) {
+//здесь я заменил запрос на fetch для практики,закомментив запрос через axios
+        //смотри api.ts
+        //const res = await authAPI.login(data);
+        const res=await authAPI.loginFetch(data);
+        const json=await res.json();
+        console.log(json)
+        if(json.resultCode===ResultCode.success){
             dispatch(setLogin(true));
         }
+        //поскольку запрос через fetch,то res не используется, а вместо него json
+        // if (res.data.resultCode: === ResultCode.success) {
+        //     dispatch(setLogin(true));
+        // }
     }
 export const setLogout = () =>
     async (dispatch: Dispatch<ActionAuthType>) => {

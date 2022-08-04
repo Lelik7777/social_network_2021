@@ -33,6 +33,17 @@ export const authAPI = {
     login: (data: RequestLoginType) => {
         return instance.post<ResponseGeneralType<{ userId: number }>>('/auth/login', data);
     },
+    //дублирует метод login, но не через axios, а через fetch
+    loginFetch:(data:RequestLoginType)=>{
+        return fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`,{
+            method:'POST',
+            headers:{
+                'API-KEY': '418ccc24-66fd-40f8-b071-9bde653329c9',
+                'Content-Type':'application/json;charset=utf-8'
+            },
+            body:JSON.stringify(data)
+        })
+    },
     logout: () => instance.delete<ResponseGeneralType>('/auth/login'),
 }
 

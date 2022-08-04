@@ -55,7 +55,7 @@ export type ActionProfileType =
 export const profileReducer = (state = initialState, action: ActionProfileType): DataProfileType => {
     switch (action.type) {
         case 'ADD_POST':
-            return {...state,posts:[...state.posts,{id:4,message:action.text,like:0}]}
+            return {...state, posts: [...state.posts, {id: 4, message: action.text, like: 0}]}
         case 'SET_USER_PROFILE':
             return {...state, profile: action.payload.profile}
         case 'SET_STATUS':
